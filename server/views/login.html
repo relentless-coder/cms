@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="cms">
+  <head>
+    <meta charset="utf-8">
+    <base href="/">
+    <title>Blog Admin | Ayush Bahuguna</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <style media="screen">
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60%;
+      }
+
+      .email, .password, .submit {
+        width: 80%;
+        font-size: 1.57rem;
+        padding: 1rem 0.5rem;
+      }
+
+      .login-header {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .signup {
+        font-size: 1.42rem;
+        font-weight: 800;
+      }
+
+      .signup .signup-link {
+        font-size: 1.42rem;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <h1 class="login-header">Login</h1>
+      <form action="/admin/login" method="post">
+        <input type="text" name="email" placeholder="email" class="email">
+        <input type="password" name="password" placeholder="password" class="password">
+        <input type="submit" class="submit">
+      </form>
+      <p class="signup">Don't have an account? <a class="signup-link" href="/signup.html">Signup</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<div class="sidebar" ng-if="ctrl.isLoggedIn">
+  <h4>This is sidebar component</h4>
+  <ul class="sidebar-items">
+    <li ng-repeat="item in ctrl.items"><i class="material-icons">{{item.icon}}</i>&nbsp;<a ui-sref="{{item.status}}" ui-sref-active="active">{{item.name}}</a></li>
+    <li ng-click="ctrl.logout()"><i class="material-icons">exit_to_app</i>&nbsp;Logout</li>
+  </ul>
+</div>
