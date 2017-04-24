@@ -21,8 +21,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + '.png')
   }
-})
-
+});
 const upload = multer({storage: storage});
 // Home page route
 
@@ -50,8 +49,6 @@ router.post('/post', (req, res)=>{
     });
   });
 });
-
-
 
 // Get route for showing the full blog post
 router.get('/post/:url', (req, res)=>{
