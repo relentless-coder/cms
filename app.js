@@ -10,6 +10,7 @@ import passportLocalMongoose from 'passport-local-mongoose';
 import postRoutes from './server/routes/posts.routes';
 import commentRoutes from './server/routes/comments.routes';
 import authRoutes from './server/routes/auth.routes';
+import userRoutes from './server/routes/users.routes';
 import seedDb from './seed';
 import {passportConfig} from './server/config/passport.config';
 import path from 'path';
@@ -46,6 +47,7 @@ passportConfig(app);
 app.use(postRoutes);
 app.use(commentRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
 app.use(express.static(path.join(__dirname, '/client')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
 app.use(express.static(path.join(__dirname, 'uploads')))
@@ -60,7 +62,7 @@ const port = 6655;
   })
 })
 
-app.get('/blog', (req, res)=>{
+app.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
 })
 
