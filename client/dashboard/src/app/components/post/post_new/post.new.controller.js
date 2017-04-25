@@ -27,18 +27,19 @@ function postNewController(thisPost, $http){
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
 
-    // Note: In modern browsers input[type="file"] is functional without
-    // even adding it to the DOM, but that might not be the case in some older
-    // or quirky browsers like IE, so you might want to add it to the DOM
-    // just in case, and visually hide it. And do not forget do remove it
-    // once you do not need it anymore.
-
+    /* Note: In modern browsers input[type="file"] is functional without
+       even adding it to the DOM, but that might not be the case in some older
+       or quirky browsers like IE, so you might want to add it to the DOM
+       just in case, and visually hide it. And do not forget do remove it
+       once you do not need it anymore.
+    */
     input.onchange = function() {
       var file = this.files[0];
 
-      // Note: Now we need to register the blob in TinyMCEs image blob
-      // registry. In the next release this part hopefully won't be
-      // necessary, as we are looking to handle it internally.
+      /*
+      Note: Now we need to register the blob in TinyMCEs image blob
+      registry.
+      */
       var id = 'blobid' + (new Date()).getTime();
       var blobCache = tinymce.activeEditor.editorUpload.blobCache;
       var blobInfo = blobCache.create(id, file);
