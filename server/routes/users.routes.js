@@ -38,6 +38,37 @@ router.post('/user/picture', upload.single('file'), (req, res, next)=>{
 			}
 		})
 	}
+})
+
+router.get('/user', (req, res)=>{
+	if(!req.headers.authorization){
+		res.status(401).json({message: "You are not logged in"})
+	}
+	const token = req.headers.authorization.split(' ')[1];
+	const payload = decode(token, 'inav');
+	if(payload._id){
+		User.findById(payload._id, (err, foundUser)=>{
+			res.status(200).json({user: foundUser})
+		})
+	}
+})
+
+router.put('/user', (req, res)=>{
+	if(!req.headers.authorization){
+		res.status(401).json({message: "You are not logged in"})
+	}
+	const token = req.headers.authorization.split(' ')[1];
+	const payload = decode(token, 'inav');
+	if(payload._id){
+		User.update({_id: payload._id}, req.body, (err, success)=>{
+			err ? res.status(422).json({message: err}) : User.findById(payload._id, (err, foundUser)=>{
+				res.status(200).json({message: "User updated successfully", user: foundUser})
+			})
+		})
+	}
 
 })
+
+
+
 export default router;
