@@ -1,6 +1,6 @@
 function sidebarController(tokenFactory, $state, $rootScope){
   var ctrl = this;
-  ctrl.items = [{name: 'Home', icon: 'home', status: 'home'}, {name: 'New Post', icon: 'note_add', status: 'new'}];
+  ctrl.items = [{name: 'Home', icon: 'home', status: 'home'}, {name: 'New Post', icon: 'note_add', status: 'new'}, {name: 'Profile', icon: 'person', status: 'profile'}];
   ctrl.logout = function(){
     tokenFactory.deleteToken();
     ctrl.isLoggedIn = tokenFactory.findToken();
