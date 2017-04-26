@@ -45,7 +45,10 @@ router.post('/post', (req, res)=>{
   req.body.url = req.body.title.replace(/ /g, "-");
   Post.create(req.body, (err, data)=>{
     err ? console.log(err) : Post.find({url: req.body.url}, (err, foundPost)=>{
-      res.json({id: foundPost._id})
+      User.findById(payload._id, (err, user)=>{
+        user.posts.push(foundPost._id);
+      })
+      return res.json({message: "Post created successfully"})
     });
   });
 });
