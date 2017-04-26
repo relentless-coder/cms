@@ -1,0 +1,10 @@
+<label for="name">Name</label>
+<input type="text" ng-model="ctrl.user.name" value="" id="name">
+<button ngf-select="ctrl.upload($file)">Upload Image</button>
+<label for="editorContent">About You</label>
+<textarea ui-tinymce="ctrl.tinymceOptions" rows="5" id="editorContent" ng-model="ctrl.user.about" cols="80">{{ctrl.user.about}}</textarea>
+<label for="git">Github Username</label>
+<input type="text" ng-model="ctrl.user.github" id="git">
+<label for="twitter">Twitter Username</label>
+<input type="text" ng-model="ctrl.user.twitter" id="twitter">
+<button ng-click="ctrl.editUser()">Save</button>
