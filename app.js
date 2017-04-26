@@ -23,7 +23,7 @@ const sanitizer = require('sanitize-html');
 
 // Add headers
 const app = express();
-seedDb();
+// seedDb();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
