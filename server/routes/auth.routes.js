@@ -33,15 +33,10 @@ router.post('/admin/new',  (req, res, next)=>{
     }else if (!user) {
       return res.json({message: info.message});
     } else {
-      res.json(user);
-      res.redirect('/admin/home')
+      return res.json(user);
+
     }
   })(req, res, next);
-})
-
-router.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/admin/login');
 })
 
 export default router
