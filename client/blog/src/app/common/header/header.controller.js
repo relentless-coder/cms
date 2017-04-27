@@ -2,7 +2,8 @@ function headerController(userFactory){
   const ctrl = this;
   ctrl.$onInit = function(){
     userFactory.getUserInfo().then((data)=>{
-      ctrl.user = data.data;
+      console.log(data);
+      ctrl.user = data.data.user;
     })
   }
 }
