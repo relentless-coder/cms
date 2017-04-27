@@ -40,7 +40,7 @@ router.post('/user/picture', upload.single('file'), (req, res, next)=>{
 	}
 })
 
-router.get('/user', (req, res)=>{
+router.get('/admin/user', (req, res)=>{
 	if(!req.headers.authorization){
 		res.status(401).json({message: "You are not logged in"})
 	}
@@ -51,6 +51,14 @@ router.get('/user', (req, res)=>{
 			res.status(200).json({user: foundUser})
 		})
 	}
+})
+
+router.get('/user', (req, res)=>{
+		User.find({}, (err, foundUser)=>{
+			const modUser = foundUser[0].toObject();
+			delete modUser.password
+			res.status(200).json({user: modUser})
+		})
 })
 
 router.put('/user', (req, res)=>{
