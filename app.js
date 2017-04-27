@@ -55,9 +55,8 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 
 const port = 6655;
 
-['/admin/login', '/admin/new', '/admin/', '/admin/post/new', '/admin/home', '/admin/edit/:url'].forEach(function(url){
+['/admin/login', '/admin/new', '/admin/', '/admin', '/admin/post/new', '/admin/home', '/admin/edit/:url'].forEach(function(url){
   app.get(url, (req, res)=>{
-    console.log(path.join(__dirname, '/client', '/dashboard', '/index.html'));
     res.sendFile(path.join(__dirname, '/client', '/dashboard', '/index.html'));
   })
 })
