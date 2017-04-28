@@ -1,0 +1,12 @@
+<div class="contact-wrapper">
+  <h2>Feel free to ask your question or if you just want to say hi</h2>
+  <div class="contact-form">
+    <label for="name">Name</label>
+    <input type="text" id="name" ng-model="ctrl.user.name">
+    <label for="email">Email</label>
+    <input type="text" id="email" ng-model="ctrl.user.email">
+    <label for="message"></label>
+    <textarea name="" id="message" cols="8" rows="5" ng-model="ctrl.user.message"></textarea>
+    <button type="button" name="button" ng-click="ctrl.contact()">Submit</button>
+  </div>
+</div>
