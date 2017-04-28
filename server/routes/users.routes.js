@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 	filename: function(req, file, cb){
 		cb(null, file.fieldname + '-' + Date.now() + '.png')
 	}
-})
+});
 
 const upload = multer({storage: storage})
 
@@ -36,9 +36,9 @@ router.post('/user/picture', upload.single('file'), (req, res, next)=>{
 				foundUser.save();
 				res.status(200).json({message: "Profile Image Uploaded"})
 			}
-		})
+		});
 	}
-})
+});
 
 router.get('/admin/user', (req, res)=>{
 	if(!req.headers.authorization){
@@ -49,19 +49,19 @@ router.get('/admin/user', (req, res)=>{
 	if(payload._id){
 		User.findById(payload._id, (err, foundUser)=>{
 			res.status(200).json({user: foundUser})
-		})
+		});
 	}
-})
+});
 
 router.get('/user', (req, res)=>{
 		User.find({}, (err, foundUser)=>{
 			const modUser = foundUser[0].toObject();
-			delete modUser.password
-			res.status(200).json({user: modUser})
-		})
-})
+			delete modUser.password;
+			res.status(200).json({user: modUser});
+		});
+});
 
-router.put('/user', (req, res)=>{
+router.put('/admin/user', (req, res)=>{
 	if(!req.headers.authorization){
 		res.status(401).json({message: "You are not logged in"})
 	}
@@ -71,10 +71,19 @@ router.put('/user', (req, res)=>{
 		User.update({_id: payload._id}, req.body, (err, success)=>{
 			err ? res.status(422).json({message: err}) : User.findById(payload._id, (err, foundUser)=>{
 				res.status(200).json({message: "User updated successfully", user: foundUser})
-			})
-		})
+			});
+		});
 	}
+});
 
+router.post('/contact', (req, res)=>{
+	User.find({}, (err, users)=>{
+		const user = users[0];
+		user.queries.push(req.body)
+		user.save()
+		console.log(user);
+		res.status(200).json({message: "Query submitted"})
+	})
 })
 
 
