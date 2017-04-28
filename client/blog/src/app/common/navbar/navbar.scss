@@ -1,0 +1,26 @@
+.nav-wrapper {
+    display: flex;
+    max-width: 70%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .nav {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        list-style-type: none;
+        justify-content: space-between;
+        & .nav-item {
+            font: {
+                size: 1.28rem;
+                weight: 700;
+            }
+        }
+        & .nav-item:first-child {
+            margin-left: 5px;
+        }
+        & .nav-item:last-child {
+            margin-right: 5px;
+        }
+    }
+}

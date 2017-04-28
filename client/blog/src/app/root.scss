@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+}
+
+.root {
+    display: flex;
+    border: 0px 1px 0px 1px solid #9b9b9b;
+    max-width: 60%;
+    background: white;
+    margin: 0 auto;
+    flex-direction: column;
+    h1 {
+      color: blue;  
+    }
+}
