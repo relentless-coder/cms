@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const extractTextPlugin = require('extract-text-webpack-plugin');
 
 const cmsConfiguration = {
     entry: {
@@ -10,16 +11,23 @@ const cmsConfiguration = {
         loaders: [{
             test: path.join(__dirname, '/client', '/dashboard', '/src', '/app'),
             loader: 'babel-loader'
+        },
+        {
+            test: /\.scss$/,
+            exclude: /node_modules/,
+            loader: extractTextPlugin.extract({fallback: 'style-loader', use: [{loader: 'css-loader'}, {loader: 'css-loader'}]}) 
+
         }]
     },
     output: {
-        filename: '[name].js',
-        path: path.join(__dirname, '/client', '/dashboard', '/dist', '/js')
+        filename: 'js/[name].js',
+        path: path.join(__dirname, '/client', '/dashboard', '/dist')
     },
     plugins: [
-       new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})
+       new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
+       new extractTextPlugin("css/styles.css")
     ]
-}
+};
 
 const blogConfiguration = {
   entry: {
@@ -30,15 +38,21 @@ const blogConfiguration = {
       loaders: [{
           test: path.join(__dirname, '/client', '/blog', '/src', '/app'),
           loader: 'babel-loader'
+      },
+      {
+          test: /\.scss$/,
+          exclude: /node_modules/,
+          loader: extractTextPlugin.extract({fallback: 'style-loader', use: [{loader: 'css-loader'}, {loader: 'sass-loader'}]})
       }]
   },
   output: {
-      filename: '[name].js',
-      path: path.join(__dirname, '/client', '/blog', '/dist', '/js')
+      filename: 'js/[name].js',
+      path: path.join(__dirname, '/client', '/blog', '/dist')
   },
   plugins: [
-     new webpack.optimize.CommonsChunkPlugin({name: 'vendor'})
+     new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
+     new extractTextPlugin('css/styles.css')
   ]
-}
+};
 
-module.exports = [cmsConfiguration, blogConfiguration]
+module.exports = [cmsConfiguration, blogConfiguration];
