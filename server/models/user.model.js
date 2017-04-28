@@ -13,6 +13,8 @@ const userSchema = new Schema({
 	about: String,
 	github: String,
 	twitter: String,
+	profession: String,
+	navs: Array,
 	profileImage: String,
 	posts: [
 	{
@@ -23,8 +25,15 @@ const userSchema = new Schema({
 	{
 		type: Schema.Types.ObjectId,
 		ref: 'Comment'
-	}]
-})
+	}],
+	queries: [
+		{
+			name: String,
+			email: String,
+			message: String
+		}
+	]
+});
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
