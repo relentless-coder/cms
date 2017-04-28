@@ -11,7 +11,7 @@ function userController(Upload, userFactory, $localStorage){
     toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
     toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
 
-  }
+  };
   ctrl.upload = function upload($file) {
     Upload.upload({
       url: '/user/picture',
@@ -20,14 +20,16 @@ function userController(Upload, userFactory, $localStorage){
       console.log(data);
     }, (err)=>{
       console.log(err);
-    })
-  }
+    });
+  };
 
   ctrl.editUser = function(){
+    const arr = ctrl.user.navs.split(',');
+    ctrl.user.navs = arr;
     userFactory.editUser(ctrl.user).then((data)=>{
       console.log(data);
-    })
-  }
+    });
+  };
 
   ctrl.$onInit = function init() {
     if($localStorage.user){
