@@ -9346,6 +9346,8 @@ function userController(Upload, userFactory, $localStorage) {
   };
 
   ctrl.editUser = function () {
+    const arr = ctrl.user.navs.split(',');
+    ctrl.user.navs = arr;
     userFactory.editUser(ctrl.user).then(data => {
       console.log(data);
     });
