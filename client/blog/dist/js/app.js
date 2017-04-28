@@ -7637,28 +7637,326 @@ return /******/ (function(modules) { // webpackBootstrap
 //# sourceMappingURL=angular-ui-router.js.map
 
 /***/ }),
-/* 2 */,
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+  'use strict';
+
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (root.hasOwnProperty('angular')) {
+    // Browser globals (root is window), we don't register it.
+    factory(root.angular);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('angular'));
+  }
+}(this , function (angular) {
+    'use strict';
+
+    // In cases where Angular does not get passed or angular is a truthy value
+    // but misses .module we can fall back to using window.
+    angular = (angular && angular.module ) ? angular : window.angular;
+
+
+    function isStorageSupported($window, storageType) {
+
+      // Some installations of IE, for an unknown reason, throw "SCRIPT5: Error: Access is denied"
+      // when accessing window.localStorage. This happens before you try to do anything with it. Catch
+      // that error and allow execution to continue.
+
+      // fix 'SecurityError: DOM Exception 18' exception in Desktop Safari, Mobile Safari
+      // when "Block cookies": "Always block" is turned on
+      var supported;
+      try {
+        supported = $window[storageType];
+      }
+      catch(err) {
+        supported = false;
+      }
+
+      // When Safari (OS X or iOS) is in private browsing mode, it appears as though localStorage and sessionStorage
+      // is available, but trying to call .setItem throws an exception below:
+      // "QUOTA_EXCEEDED_ERR: DOM Exception 22: An attempt was made to add something to storage that exceeded the quota."
+      if(supported) {
+        var key = '__' + Math.round(Math.random() * 1e7);
+        try {
+          $window[storageType].setItem(key, key);
+          $window[storageType].removeItem(key, key);
+        }
+        catch(err) {
+          supported = false;
+        }
+      }
+
+      return supported;
+    }
+
+    /**
+     * @ngdoc overview
+     * @name ngStorage
+     */
+
+    return angular.module('ngStorage', [])
+
+    /**
+     * @ngdoc object
+     * @name ngStorage.$localStorage
+     * @requires $rootScope
+     * @requires $window
+     */
+
+    .provider('$localStorage', _storageProvider('localStorage'))
+
+    /**
+     * @ngdoc object
+     * @name ngStorage.$sessionStorage
+     * @requires $rootScope
+     * @requires $window
+     */
+
+    .provider('$sessionStorage', _storageProvider('sessionStorage'));
+
+    function _storageProvider(storageType) {
+        var providerWebStorage = isStorageSupported(window, storageType);
+
+        return function () {
+          var storageKeyPrefix = 'ngStorage-';
+
+          this.setKeyPrefix = function (prefix) {
+            if (typeof prefix !== 'string') {
+              throw new TypeError('[ngStorage] - ' + storageType + 'Provider.setKeyPrefix() expects a String.');
+            }
+            storageKeyPrefix = prefix;
+          };
+
+          var serializer = angular.toJson;
+          var deserializer = angular.fromJson;
+
+          this.setSerializer = function (s) {
+            if (typeof s !== 'function') {
+              throw new TypeError('[ngStorage] - ' + storageType + 'Provider.setSerializer expects a function.');
+            }
+
+            serializer = s;
+          };
+
+          this.setDeserializer = function (d) {
+            if (typeof d !== 'function') {
+              throw new TypeError('[ngStorage] - ' + storageType + 'Provider.setDeserializer expects a function.');
+            }
+
+            deserializer = d;
+          };
+
+          this.supported = function() {
+            return !!providerWebStorage;
+          };
+
+          // Note: This is not very elegant at all.
+          this.get = function (key) {
+            return providerWebStorage && deserializer(providerWebStorage.getItem(storageKeyPrefix + key));
+          };
+
+          // Note: This is not very elegant at all.
+          this.set = function (key, value) {
+            return providerWebStorage && providerWebStorage.setItem(storageKeyPrefix + key, serializer(value));
+          };
+
+          this.remove = function (key) {
+            providerWebStorage && providerWebStorage.removeItem(storageKeyPrefix + key);
+          }
+
+          this.$get = [
+              '$rootScope',
+              '$window',
+              '$log',
+              '$timeout',
+              '$document',
+
+              function(
+                  $rootScope,
+                  $window,
+                  $log,
+                  $timeout,
+                  $document
+              ){
+
+                // The magic number 10 is used which only works for some keyPrefixes...
+                // See https://github.com/gsklee/ngStorage/issues/137
+                var prefixLength = storageKeyPrefix.length;
+
+                // #9: Assign a placeholder object if Web Storage is unavailable to prevent breaking the entire AngularJS app
+                // Note: recheck mainly for testing (so we can use $window[storageType] rather than window[storageType])
+                var isSupported = isStorageSupported($window, storageType),
+                    webStorage = isSupported || ($log.warn('This browser does not support Web Storage!'), {setItem: angular.noop, getItem: angular.noop, removeItem: angular.noop}),
+                    $storage = {
+                        $default: function(items) {
+                            for (var k in items) {
+                                angular.isDefined($storage[k]) || ($storage[k] = angular.copy(items[k]) );
+                            }
+
+                            $storage.$sync();
+                            return $storage;
+                        },
+                        $reset: function(items) {
+                            for (var k in $storage) {
+                                '$' === k[0] || (delete $storage[k] && webStorage.removeItem(storageKeyPrefix + k));
+                            }
+
+                            return $storage.$default(items);
+                        },
+                        $sync: function () {
+                            for (var i = 0, l = webStorage.length, k; i < l; i++) {
+                                // #8, #10: `webStorage.key(i)` may be an empty string (or throw an exception in IE9 if `webStorage` is empty)
+                                (k = webStorage.key(i)) && storageKeyPrefix === k.slice(0, prefixLength) && ($storage[k.slice(prefixLength)] = deserializer(webStorage.getItem(k)));
+                            }
+                        },
+                        $apply: function() {
+                            var temp$storage;
+
+                            _debounce = null;
+
+                            if (!angular.equals($storage, _last$storage)) {
+                                temp$storage = angular.copy(_last$storage);
+                                angular.forEach($storage, function(v, k) {
+                                    if (angular.isDefined(v) && '$' !== k[0]) {
+                                        webStorage.setItem(storageKeyPrefix + k, serializer(v));
+                                        delete temp$storage[k];
+                                    }
+                                });
+
+                                for (var k in temp$storage) {
+                                    webStorage.removeItem(storageKeyPrefix + k);
+                                }
+
+                                _last$storage = angular.copy($storage);
+                            }
+                        },
+                        $supported: function() {
+                            return !!isSupported;
+                        }
+                    },
+                    _last$storage,
+                    _debounce;
+
+                $storage.$sync();
+
+                _last$storage = angular.copy($storage);
+
+                $rootScope.$watch(function() {
+                    _debounce || (_debounce = $timeout($storage.$apply, 100, false));
+                });
+
+                // #6: Use `$window.addEventListener` instead of `angular.element` to avoid the jQuery-specific `event.originalEvent`
+                $window.addEventListener && $window.addEventListener('storage', function(event) {
+                    if (!event.key) {
+                      return;
+                    }
+
+                    // Reference doc.
+                    var doc = $document[0];
+
+                    if ( (!doc.hasFocus || !doc.hasFocus()) && storageKeyPrefix === event.key.slice(0, prefixLength) ) {
+                        event.newValue ? $storage[event.key.slice(prefixLength)] = deserializer(event.newValue) : delete $storage[event.key.slice(prefixLength)];
+
+                        _last$storage = angular.copy($storage);
+
+                        $rootScope.$apply();
+                    }
+                });
+
+                $window.addEventListener && $window.addEventListener('beforeunload', function() {
+                    $storage.$apply();
+                });
+
+                return $storage;
+              }
+          ];
+      };
+    }
+
+}));
+
+
+/***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(10);
+module.exports = 'ngSanitize';
+
+
+/***/ }),
+/* 4 */,
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_sanitize__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_sanitize__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_sanitize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_sanitize__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_factory__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__header_component_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ngstorage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_factory__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__header_component_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__header_scss__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__header_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__header_scss__);
 
 
 
 
 
-const header = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('header', [__WEBPACK_IMPORTED_MODULE_1_angular_sanitize___default.a]).component(__WEBPACK_IMPORTED_MODULE_3__header_component_js__["a" /* headerComponentName */], __WEBPACK_IMPORTED_MODULE_3__header_component_js__["b" /* headerComponentOptions */]).factory(__WEBPACK_IMPORTED_MODULE_2__user_factory__["a" /* userFactory */], ['$http', __WEBPACK_IMPORTED_MODULE_2__user_factory__["b" /* userFactoryFunc */]]).name;
+
+
+const header = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('header', [__WEBPACK_IMPORTED_MODULE_1_angular_sanitize___default.a, 'ngStorage']).component(__WEBPACK_IMPORTED_MODULE_4__header_component_js__["a" /* headerComponentName */], __WEBPACK_IMPORTED_MODULE_4__header_component_js__["b" /* headerComponentOptions */]).factory(__WEBPACK_IMPORTED_MODULE_3__user_factory__["a" /* userFactory */], ['$http', __WEBPACK_IMPORTED_MODULE_3__user_factory__["b" /* userFactoryFunc */]]).name;
 /* harmony export (immutable) */ __webpack_exports__["a"] = header;
 
 
 /***/ }),
-/* 4 */
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngstorage__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ngstorage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__navbar_component__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_scss__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__navbar_scss__);
+
+
+
+
+
+const navbar = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('navbar', ['ngStorage']).component(__WEBPACK_IMPORTED_MODULE_2__navbar_component__["a" /* navComponent */], __WEBPACK_IMPORTED_MODULE_2__navbar_component__["b" /* navComponentOptions */]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = navbar;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home_module__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contact_contact_module__ = __webpack_require__(19);
+
+
+
+
+const components = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('components', [__WEBPACK_IMPORTED_MODULE_1__home_home_module__["a" /* home */], __WEBPACK_IMPORTED_MODULE_2__contact_contact_module__["a" /* contact */]]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = components;
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7672,7 +7970,13 @@ const rootComponent = {
 
 
 /***/ }),
-/* 5 */
+/* 9 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports) {
 
 /**
@@ -8434,19 +8738,11 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(5);
-module.exports = 'ngSanitize';
-
-
-/***/ }),
-/* 7 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__header_controller_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__header_controller_js__ = __webpack_require__(12);
 
 
 const headerComponentName = 'headerComponent';
@@ -8454,32 +8750,37 @@ const headerComponentName = 'headerComponent';
 
 const headerComponentOptions = {
   templateUrl: 'blog/src/app/common/header/header.html',
-  controller: ['userFactory', __WEBPACK_IMPORTED_MODULE_0__header_controller_js__["a" /* headerController */]],
+  controller: ['userFactory', '$localStorage', __WEBPACK_IMPORTED_MODULE_0__header_controller_js__["a" /* headerController */]],
   controllerAs: 'ctrl'
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = headerComponentOptions;
 
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return headerController; });
-function headerController(userFactory) {
+function headerController(userFactory, $localStorage) {
   const ctrl = this;
   ctrl.$onInit = function () {
-    userFactory.getUserInfo().then(data => {
-      console.log(data);
-      ctrl.user = data.data.user;
-    });
+    if ($localStorage.user) {
+      ctrl.user = $localStorage.user;
+    } else {
+      userFactory.getUserInfo().then(data => {
+        console.log(data);
+        ctrl.user = data.data.user;
+        $localStorage.user = data.data.user;
+      });
+    }
   };
 }
 
 
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8497,7 +8798,196 @@ const userFactoryFunc = function ($http) {
 
 
 /***/ }),
-/* 10 */
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__navbar_controller_js__ = __webpack_require__(15);
+
+
+const navComponent = 'navComponent';
+/* harmony export (immutable) */ __webpack_exports__["a"] = navComponent;
+
+const navComponentOptions = {
+    templateUrl: 'blog/src/app/common/navbar/navbar.html',
+    controller: ['$localStorage', __WEBPACK_IMPORTED_MODULE_0__navbar_controller_js__["a" /* navbarController */]],
+    controllerAs: 'ctrl'
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = navComponentOptions;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return navbarController; });
+function navbarController($localStorage) {
+    const ctrl = this;
+    ctrl.navs = [];
+    ctrl.$onInit = function () {
+        if ($localStorage.user) {
+            $localStorage.user.navs.forEach(el => ctrl.navs.push({
+                name: el,
+                status: el.toLowerCase()
+            }));
+        }
+    };
+}
+
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__contact_controller__ = __webpack_require__(17);
+
+
+const contactComponent = 'contactComponent';
+/* harmony export (immutable) */ __webpack_exports__["a"] = contactComponent;
+
+const contactComponentOptions = {
+  templateUrl: 'blog/src/app/components/contact/contact.html',
+  controller: ['contactFactory', __WEBPACK_IMPORTED_MODULE_0__contact_controller__["a" /* contactController */]],
+  controllerAs: 'ctrl'
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = contactComponentOptions;
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return contactController; });
+function contactController(contactFactory) {
+  const ctrl = this;
+  ctrl.contact = function () {
+    contactFactory.contact(ctrl.user).then(data => {
+      console.log(data);
+    });
+  };
+}
+
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const contactFactory = 'contactFactory';
+/* harmony export (immutable) */ __webpack_exports__["a"] = contactFactory;
+
+const contactFactoryFunc = function ($http) {
+  return {
+    contact: function (value) {
+      return $http.post('/contact', value);
+    }
+  };
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = contactFactoryFunc;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contact_factory__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contact_component__ = __webpack_require__(16);
+
+
+
+
+
+const contact = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('contact', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a]).config(['$stateProvider', $stateProvider => {
+  const contactState = {
+    name: 'contact',
+    url: '/contact',
+    component: __WEBPACK_IMPORTED_MODULE_3__contact_component__["a" /* contactComponent */]
+  };
+  $stateProvider.state(contactState);
+}]).component(__WEBPACK_IMPORTED_MODULE_3__contact_component__["a" /* contactComponent */], __WEBPACK_IMPORTED_MODULE_3__contact_component__["b" /* contactComponentOptions */]).factory(__WEBPACK_IMPORTED_MODULE_2__contact_factory__["a" /* contactFactory */], ['$http', __WEBPACK_IMPORTED_MODULE_2__contact_factory__["b" /* contactFactoryFunc */]]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = contact;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_controller__ = __webpack_require__(21);
+
+
+const homeComponent = 'homeComponent';
+/* harmony export (immutable) */ __webpack_exports__["a"] = homeComponent;
+
+const homeComponentOptions = {
+  templateUrl: 'blog/src/app/components/home/home.html',
+  controller: ['$localStorage', __WEBPACK_IMPORTED_MODULE_0__home_controller__["a" /* homeController */]],
+  controllerAs: 'ctrl'
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = homeComponentOptions;
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return homeController; });
+function homeController($localStorage) {
+  const ctrl = this;
+  ctrl.$onInit = function () {
+    if ($localStorage.user) {
+      ctrl.about = $localStorage.user.about;
+    }
+  };
+}
+
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ngstorage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular_sanitize__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular_sanitize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular_sanitize__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_component__ = __webpack_require__(20);
+
+
+
+
+
+
+const home = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('home', ['ngStorage', __WEBPACK_IMPORTED_MODULE_3_angular_sanitize___default.a, __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a]).config(['$stateProvider', $stateProvider => {
+  const homeState = {
+    name: 'home',
+    url: '/',
+    component: __WEBPACK_IMPORTED_MODULE_4__home_component__["a" /* homeComponent */]
+  };
+
+  $stateProvider.state(homeState);
+}]).component(__WEBPACK_IMPORTED_MODULE_4__home_component__["a" /* homeComponent */], __WEBPACK_IMPORTED_MODULE_4__home_component__["b" /* homeComponentOptions */]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = home;
+
+
+/***/ }),
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8506,16 +8996,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_header_header_module_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__root_component__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_header_header_module_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__common_navbar_navbar_module_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__root_component__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__root_scss__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__root_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__root_scss__);
 
 
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('blog', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a, __WEBPACK_IMPORTED_MODULE_2__common_header_header_module_js__["a" /* header */]]).component(__WEBPACK_IMPORTED_MODULE_3__root_component__["a" /* rootComponentName */], __WEBPACK_IMPORTED_MODULE_3__root_component__["b" /* rootComponent */]).config(['$stateProvider', '$locationProvider', ($stateProvider, $locationProvider) => {
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('blog', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a, __WEBPACK_IMPORTED_MODULE_2__common_header_header_module_js__["a" /* header */], __WEBPACK_IMPORTED_MODULE_3__common_navbar_navbar_module_js__["a" /* navbar */], __WEBPACK_IMPORTED_MODULE_4__components_components_module_js__["a" /* components */]]).component(__WEBPACK_IMPORTED_MODULE_5__root_component__["a" /* rootComponentName */], __WEBPACK_IMPORTED_MODULE_5__root_component__["b" /* rootComponent */]).config(['$stateProvider', '$locationProvider', ($stateProvider, $locationProvider) => {
   $locationProvider.html5Mode(true);
 }]).name;
 
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
 /***/ })
-],[10]);
+],[23]);
