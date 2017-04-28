@@ -55,13 +55,17 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 
 const port = 6655;
 
-['/admin/login', '/admin/new', '/admin/', '/admin', '/admin/post/new', '/admin/home', '/admin/edit/:url'].forEach(function(url){
+['/admin', '/admin/:var', '/admin/edit/:var'].forEach(function(url){
   app.get(url, (req, res)=>{
     res.sendFile(path.join(__dirname, '/client', '/dashboard', '/index.html'));
   })
 })
 
 app.get('/', (req, res)=>{
+  res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
+})
+
+app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
 })
 
