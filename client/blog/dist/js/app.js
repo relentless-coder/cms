@@ -7640,6 +7640,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(10);
+module.exports = 'ngSanitize';
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
   'use strict';
 
@@ -7883,14 +7891,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(10);
-module.exports = 'ngSanitize';
-
-
-/***/ }),
 /* 4 */,
 /* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -7898,13 +7898,13 @@ module.exports = 'ngSanitize';
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_sanitize__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_sanitize__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_sanitize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_sanitize__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ngstorage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_factory__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__header_component_js__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__header_scss__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__header_scss__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__header_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__header_scss__);
 
 
@@ -7924,10 +7924,10 @@ const header = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('header', 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngstorage__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngstorage__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ngstorage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__navbar_component__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_scss__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_scss__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__navbar_scss__);
 
 
@@ -7947,11 +7947,13 @@ const navbar = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('navbar', 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home_module__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contact_contact_module__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_post_module__ = __webpack_require__(28);
 
 
 
 
-const components = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('components', [__WEBPACK_IMPORTED_MODULE_1__home_home_module__["a" /* home */], __WEBPACK_IMPORTED_MODULE_2__contact_contact_module__["a" /* contact */]]).name;
+
+const components = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('components', [__WEBPACK_IMPORTED_MODULE_1__home_home_module__["a" /* home */], __WEBPACK_IMPORTED_MODULE_2__contact_contact_module__["a" /* contact */], __WEBPACK_IMPORTED_MODULE_3__post_post_module__["a" /* post */]]).name;
 /* harmony export (immutable) */ __webpack_exports__["a"] = components;
 
 
@@ -8963,9 +8965,9 @@ function homeController($localStorage) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ngstorage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular_sanitize__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular_sanitize__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular_sanitize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular_sanitize__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_component__ = __webpack_require__(20);
 
@@ -8988,6 +8990,342 @@ const home = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('home', ['ng
 
 /***/ }),
 /* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__comment_controller__ = __webpack_require__(24);
+
+
+const commentComponent = 'commentComponent';
+/* harmony export (immutable) */ __webpack_exports__["a"] = commentComponent;
+
+const commentComponentOptions = {
+  bindings: {
+    post: '<'
+  },
+  templateUrl: 'blog/src/app/components/post/comment/comment.html',
+  controller: ['$stateParams', 'commentFactory', '$rootScope', __WEBPACK_IMPORTED_MODULE_0__comment_controller__["a" /* commentController */]],
+  controllerAs: 'cm'
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = commentComponentOptions;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return commentController; });
+function commentController($stateParams, commentFactory, $rootScope) {
+  const ctrl = this;
+  ctrl.comment = {};
+  ctrl.reply = {};
+  ctrl.decision = {};
+  ctrl.$onInit = function () {
+    ctrl.decision = {
+      replyVisible: false
+    };
+  };
+
+  ctrl.showReply = function () {
+    ctrl.replyVisible = true;
+  };
+
+  ctrl.logReply = () => {
+    console.log(ctrl.decision.replyVisible);
+  };
+
+  ctrl.cancelReply = function () {
+    ctrl.comment = {};
+    ctrl.replyVisible = false;
+  };
+  ctrl.postComment = function () {
+    commentFactory.postComment($stateParams.url, ctrl.comment).then(data => {
+      ctrl.comment = {};
+      $rootScope.$emit('commented');
+    });
+  };
+
+  ctrl.re = function (value) {
+    commentFactory.reply($stateParams.url, value, ctrl.reply).then(data => {
+      ctrl.reply = {};
+      $rootScope.$emit('commented');
+    });
+  };
+}
+
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return showReply; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hideReply; });
+function showReply() {
+  return {
+    restrict: 'A',
+    scope: {
+      collapsed: '='
+    },
+    link: function (scope, element, attrs) {
+      element.on('click', () => {
+        console.log(`Show reply scope.replyVisible is ${scope.collapsed}`);
+        console.log(typeof scope.collapsed);
+        scope.collapsed = true;
+        console.log(`Show reply scope.replyVisible is after ${scope.collapsed}`);
+        scope.$apply();
+      });
+    }
+  };
+}
+
+function hideReply() {
+  return {
+    restrict: 'A',
+    scope: {
+      collapsed: '='
+    },
+    link: function (scope, element, attrs) {
+      element.on('click', () => {
+        console.log(`Hide reply scope.replyVisible is ${scope.collapsed}`);
+        scope.collapsed = false;
+        console.log(`Hide reply scope.replyVisible is ${scope.collapsed}`);
+        scope.$apply();
+      });
+    }
+  };
+}
+
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const commentFactory = 'commentFactory';
+/* harmony export (immutable) */ __webpack_exports__["a"] = commentFactory;
+
+const commentFactoryFunc = function ($http) {
+  return {
+    postComment: function (url, value) {
+      return $http.post(`/${url}/comment`, value);
+    },
+    reply: function (url, id, value) {
+      return $http.post(`/${url}/comment/${id}`, value);
+    }
+  };
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = commentFactoryFunc;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__comment_directive__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__comment_factory__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__comment_component__ = __webpack_require__(23);
+
+
+
+
+
+
+const comment = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('comment', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a]).factory(__WEBPACK_IMPORTED_MODULE_3__comment_factory__["a" /* commentFactory */], ['$http', __WEBPACK_IMPORTED_MODULE_3__comment_factory__["b" /* commentFactoryFunc */]]).component(__WEBPACK_IMPORTED_MODULE_4__comment_component__["a" /* commentComponent */], __WEBPACK_IMPORTED_MODULE_4__comment_component__["b" /* commentComponentOptions */]).directive('showReply', __WEBPACK_IMPORTED_MODULE_2__comment_directive__["a" /* showReply */]).directive('hideReply', __WEBPACK_IMPORTED_MODULE_2__comment_directive__["b" /* hideReply */]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = comment;
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__posts_posts_module_js__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__post_single_post_single_module__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__comment_comment_module__ = __webpack_require__(27);
+
+
+
+
+
+const post = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('post', [__WEBPACK_IMPORTED_MODULE_1__posts_posts_module_js__["a" /* posts */], __WEBPACK_IMPORTED_MODULE_2__post_single_post_single_module__["a" /* post_single */], __WEBPACK_IMPORTED_MODULE_3__comment_comment_module__["a" /* comment */]]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = post;
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__post_single_controller__ = __webpack_require__(30);
+
+
+const postSingleComponent = 'postSingleComponent';
+/* harmony export (immutable) */ __webpack_exports__["a"] = postSingleComponent;
+
+const postSingleComponentOptions = {
+  templateUrl: 'blog/src/app/components/post/post_single/post.single.html',
+  controller: ['postSingleFactory', '$stateParams', '$rootScope', __WEBPACK_IMPORTED_MODULE_0__post_single_controller__["a" /* postSingleController */]],
+  controllerAs: 'sm'
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = postSingleComponentOptions;
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return postSingleController; });
+function postSingleController(postSingleFactory, $stateParams, $rootScope) {
+  const ctrl = this;
+  ctrl.$onInit = function () {
+    postSingleFactory.getPost($stateParams.url).then(data => {
+      console.log(data);
+      ctrl.post = data.data.post;
+      ctrl.post.comments.forEach(el => el.replyVisible = false);
+    });
+  };
+
+  $rootScope.$on('commented', () => {
+    postSingleFactory.getPost($stateParams.url).then(data => {
+      console.log(data);
+      ctrl.post = data.data.post;
+    });
+  });
+}
+
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const postSingleFactory = 'postSingleFactory';
+/* harmony export (immutable) */ __webpack_exports__["a"] = postSingleFactory;
+
+const postSingleFactoryFunc = function ($http) {
+  return {
+    getPost: function (value) {
+      return $http.get(`/post/${value}`);
+    }
+  };
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = postSingleFactoryFunc;
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_sanitize__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_sanitize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular_sanitize__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_single_factory__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__post_single_component__ = __webpack_require__(29);
+
+
+
+
+
+
+const post_single = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('postSingle', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a, __WEBPACK_IMPORTED_MODULE_2_angular_sanitize___default.a]).config(['$stateProvider', $stateProvider => {
+  const singlePostState = {
+    name: 'single',
+    url: '/articles/:url',
+    component: __WEBPACK_IMPORTED_MODULE_4__post_single_component__["a" /* postSingleComponent */]
+  };
+
+  $stateProvider.state(singlePostState);
+}]).component(__WEBPACK_IMPORTED_MODULE_4__post_single_component__["a" /* postSingleComponent */], __WEBPACK_IMPORTED_MODULE_4__post_single_component__["b" /* postSingleComponentOptions */]).factory(__WEBPACK_IMPORTED_MODULE_3__post_single_factory__["a" /* postSingleFactory */], ['$http', __WEBPACK_IMPORTED_MODULE_3__post_single_factory__["b" /* postSingleFactoryFunc */]]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = post_single;
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__posts_controller__ = __webpack_require__(34);
+
+
+const postsComponent = 'postsComponent';
+/* harmony export (immutable) */ __webpack_exports__["a"] = postsComponent;
+
+const postsComponentOptions = {
+  templateUrl: 'blog/src/app/components/post/posts/posts.html',
+  controller: ['$localStorage', __WEBPACK_IMPORTED_MODULE_0__posts_controller__["a" /* postsController */]],
+  controllerAs: 'ctrl'
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = postsComponentOptions;
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return postsController; });
+function postsController($localStorage) {
+  const ctrl = this;
+  ctrl.$onInit = function () {
+    if ($localStorage.user) {
+      ctrl.posts = $localStorage.user.posts;
+    }
+  };
+}
+
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_sanitize__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_sanitize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular_sanitize__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngstorage__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ngstorage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__posts_component__ = __webpack_require__(33);
+
+
+
+
+
+
+const posts = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('posts', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a, __WEBPACK_IMPORTED_MODULE_2_angular_sanitize___default.a, 'ngStorage']).config(['$stateProvider', $stateProvider => {
+  const postsState = {
+    name: 'articles',
+    url: '/articles',
+    component: __WEBPACK_IMPORTED_MODULE_4__posts_component__["a" /* postsComponent */]
+  };
+
+  $stateProvider.state(postsState);
+}]).component(__WEBPACK_IMPORTED_MODULE_4__posts_component__["a" /* postsComponent */], __WEBPACK_IMPORTED_MODULE_4__posts_component__["b" /* postsComponentOptions */]).name;
+/* harmony export (immutable) */ __webpack_exports__["a"] = posts;
+
+
+/***/ }),
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9015,16 +9353,16 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('blog', [__WEBPACK_IMPORT
 }]).name;
 
 /***/ }),
-/* 24 */
+/* 37 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 25 */
+/* 38 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
-],[23]);
+],[36]);
