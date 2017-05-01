@@ -9,12 +9,6 @@ const sanitizer = require('sanitize-html');
 const app = express();
 const router = express.Router();
 
-router.get('/:url/comment', (req, res)=>{
-	Comment.find({}, (err, comments)=>{
-		err ? res.json({error: 'message'}) : res.json(comments);
-	})
-})
-
 router.post('/:url/comment', (req, res)=>{
   req.body.comment = sanitizer(req.body.comment);
   Comment.create(req.body, (err, createdCom)=>{
