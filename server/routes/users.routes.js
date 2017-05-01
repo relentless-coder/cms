@@ -47,18 +47,19 @@ router.get('/admin/user', (req, res)=>{
 	const token = req.headers.authorization.split(' ')[1];
 	const payload = decode(token, 'inav');
 	if(payload._id){
-		User.findById(payload._id, (err, foundUser)=>{
-			res.status(200).json({user: foundUser})
-		});
+		User.findById(payload._id)
+		.populate({path: 'posts', model: 'Post'})
+		.exec((err, user)=>{
+			err ? console.log(err) : res.status(200).json({user: user})
+		})
 	}
 });
 
 router.get('/user', (req, res)=>{
-		User.find({}, (err, foundUser)=>{
-			const modUser = foundUser[0].toObject();
-			delete modUser.password;
-			res.status(200).json({user: modUser});
-		});
+		User.find({})
+		.populate({path: 'posts', model: 'Post'}).exec((err, user)=>{
+				err ? console.log(err) : res.status(200).json({user: user[0]});
+			})
 });
 
 router.put('/admin/user', (req, res)=>{
