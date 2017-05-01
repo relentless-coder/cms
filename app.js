@@ -77,6 +77,6 @@ function isLoggedIn(req, res, next) {
   res.redirect('/admin/login');
 }
 
-app.listen(port, 'localhost', ()=>{
-  console.log(`Express server listening on port ${port}`);
+app.listen(process.env.PORT, process.env.IP, ()=>{
+  console.log(`Express server listening on port ${process.env.PORT} and IP ${process.env.IP}`);
 });
