@@ -1,0 +1,32 @@
+<div class="new_comment_wrapper">
+  <label for="name">Name</label>
+  <input type="text" id="name" ng-model="cm.comment.author.name">
+  <label for="email">Email</label>
+  <input type="text" id="email" ng-model="cm.comment.author.email">
+  <label for="comment">Comment</label>
+  <textarea name="" id="comment" cols="10" rows="5" ng-model="cm.comment.comment"></textarea>
+  <button ng-click="cm.postComment()">Submit</button>
+</div>
+
+<div class="comment_wrapper">
+  <div class="comment" ng-repeat="comment in cm.post.comments">
+    <h3>{{comment.author.name}}</h3>
+    <a href="" ng-hre="mailto:{{comment.author.email}}"></a>
+    <p ng-bind-html="comment.comment"></p>
+    <div ng-repeat="ab in comment.comments" class="reply">
+      <h3>{{ab.author.name}}</h3>
+      <a href="" ng-hre="mailto:{{ab.author.email}}"></a>
+      <p ng-bind-html="ab.comment"></p>
+    </div>
+    <button show-reply collapsed="comment.replyVisible">Reply</button>
+    <div class="reply_wrapper" ng-show="comment.replyVisible">
+      <label for="name">Name</label>
+      <input type="text" id="name" ng-model="cm.reply.author.name">
+      <label for="email">Email</label>
+      <input type="text" id="email" ng-model="cm.reply.author.email">
+      <label for="comment">Comment</label>
+      <textarea name="" id="comment" cols="10" rows="5" ng-model="cm.reply.comment"></textarea>
+      <button ng-click="cm.re(comment._id)">Submit</button> <button hide-reply collapsed="comment.replyVisible">Cancel</button>
+    </div>
+  </div>
+</div>
