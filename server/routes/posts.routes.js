@@ -44,9 +44,10 @@ router.post('/post', (req, res)=>{
   req.body.content = sanitizer(req.body.content, sanitizeOpt);
   req.body.url = req.body.title.replace(/ /g, "-");
   Post.create(req.body, (err, data)=>{
-    err ? console.log(err) : Post.find({url: req.body.url}, (err, foundPost)=>{
+    err ? console.log(err) : Post.findOne({url: req.body.url}, (err, foundPost)=>{
       User.findById(payload._id, (err, user)=>{
         user.posts.push(foundPost._id);
+        user.save();
       })
       return res.json({message: "Post created successfully"})
     });
@@ -55,10 +56,13 @@ router.post('/post', (req, res)=>{
 
 // Get route for showing the full blog post
 router.get('/post/:url', (req, res)=>{
-  Post.find({url: req.params.url}, (err, foundPost)=>{
-    console.log(foundPost);
-      err ? res.json({error: 'message'}) : res.json({post: foundPost});
-  });
+  Post.findOne({url: req.params.url}).populate({path: 'comments', model: 'Comment', populate: {
+    path: 'comments',
+    model: 'Comment'
+  }}).exec((err, foundPost)=>{
+      console.log(foundPost);
+        err ? res.json({error: 'message'}) : res.json({post: foundPost});
+    }) 
 });
 
 router.put('/post/:url', (req, res)=>{
