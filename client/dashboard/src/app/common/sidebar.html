@@ -3,5 +3,6 @@
   <ul class="sidebar-items">
     <li ng-repeat="item in ctrl.items"><i class="material-icons">{{item.icon}}</i>&nbsp;<a ui-sref="{{item.status}}" ui-sref-active="active">{{item.name}}</a></li>
     <li ng-click="ctrl.logout()"><i class="material-icons">exit_to_app</i>&nbsp;Logout</li>
+    <li id="comments">Comments</li>
   </ul>
 </div>
