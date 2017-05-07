@@ -3,7 +3,7 @@ function showReply(){
     restrict: 'A',
     scope: {
       collapsed: '='
-    },
+  },
     link: function(scope, element, attrs){
       element.on('click', ()=>{
         console.log(`Show reply scope.replyVisible is ${scope.collapsed}`);
