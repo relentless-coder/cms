@@ -9018,29 +9018,17 @@ const commentComponentOptions = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return commentController; });
 function commentController($stateParams, commentFactory, $rootScope) {
   const ctrl = this;
+  const host = window.location.href;
+  const socket = io(host);
   ctrl.comment = {};
   ctrl.reply = {};
-  ctrl.decision = {};
-  ctrl.$onInit = function () {
-    ctrl.decision = {
-      replyVisible: false
-    };
-  };
 
-  ctrl.showReply = function () {
-    ctrl.replyVisible = true;
-  };
-
-  ctrl.logReply = () => {
-    console.log(ctrl.decision.replyVisible);
-  };
-
-  ctrl.cancelReply = function () {
-    ctrl.comment = {};
-    ctrl.replyVisible = false;
-  };
   ctrl.postComment = function () {
     commentFactory.postComment($stateParams.url, ctrl.comment).then(data => {
+      socket.emit('comment', {
+        name: ctrl.comment.author.name,
+        comment: ctrl.comment.comment
+      });
       ctrl.comment = {};
       $rootScope.$emit('commented');
     });
@@ -9286,6 +9274,11 @@ function postsController($localStorage) {
   ctrl.$onInit = function () {
     if ($localStorage.user) {
       ctrl.posts = $localStorage.user.posts;
+      ctrl.posts.forEach(el => {
+        el.comments.forEach(comment => {
+          comment.replyVisible = false;
+        });
+      });
     }
   };
 }

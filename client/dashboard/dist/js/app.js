@@ -7937,7 +7937,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sidebarController; });
 function sidebarController(tokenFactory, $state, $rootScope) {
-  var ctrl = this;
+  const ctrl = this;
+  const host = window.location.href;
+  const socket = io(host);
+  socket.on('blog-comment', msg => {
+    console.log(msg);
+    const span = document.createElement('span');
+    const text = document.createTextNode(`${msg.name} commented`);
+    span.appendChild(text);
+    document.getElementById('comments').appendChild(span);
+  });
   ctrl.items = [{ name: 'Home', icon: 'home', status: 'home' }, { name: 'New Post', icon: 'note_add', status: 'new' }, { name: 'Profile', icon: 'person', status: 'profile' }];
   ctrl.logout = function () {
     tokenFactory.deleteToken();
