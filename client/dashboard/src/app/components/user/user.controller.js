@@ -12,22 +12,18 @@ function userController(Upload, userFactory, $localStorage){
     toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
 
   };
-  ctrl.upload = function upload($file) {
-    Upload.upload({
-      url: '/user/picture',
-      file: $file
-    }).then((data)=>{
-      console.log(data);
-    }, (err)=>{
-      console.log(err);
-    });
-  };
 
   ctrl.editUser = function(){
     const arr = ctrl.user.navs.split(',');
     ctrl.user.navs = arr;
-    userFactory.editUser(ctrl.user).then((data)=>{
+    Upload.upload({
+      url: '/admin/user',
+      data: {file: ctrl.profile, user: ctrl.user},
+      method: 'PUT'
+    }).then((data)=>{
       console.log(data);
+    }, (err)=>{
+      console.log(err);
     });
   };
 
