@@ -1,6 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import http from 'http';
+import event from 'events';
+import io from 'socket.io';
 import session from 'express-session';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
@@ -13,17 +16,22 @@ import authRoutes from './server/routes/auth.routes';
 import userRoutes from './server/routes/users.routes';
 import seedDb from './seed';
 import {passportConfig} from './server/config/passport.config';
+import {socketFunction} from './server/config/socket.io.config';
 import path from 'path';
 
 mongoose.connect('mongodb://localhost/blog');
 
 const sanitizer = require('sanitize-html');
 
-
-
 // Add headers
 const app = express();
 // seedDb();
+const server = http.Server(app);
+const socket = io(server);
+
+
+const localEvent = event.EventEmitter;
+const myEvent = new localEvent();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -55,28 +63,25 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 
 const port = 6655;
 
-['/admin', '/admin/:var', '/admin/edit/:var'].forEach(function(url){
+['/admin/', '/admin/:var', '/admin/edit/:var'].forEach(function(url){
   app.get(url, (req, res)=>{
     res.sendFile(path.join(__dirname, '/client', '/dashboard', '/index.html'));
   })
 })
 
-app.get('/', (req, res)=>{
-  res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
+const blogRoutes = ['/', '/articles', '/articles/:url', '/contact'];
+
+blogRoutes.forEach(el=>{
+  app.get(el, (req, res)=>{
+    if(el === '/articles/:url'){
+      socketFunction(socket, req.params.url, myEvent)
+    }
+    res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html')); 
+  })
 })
 
-app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
-})
-
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()){
-    return next();
-  }
-
-  res.redirect('/admin/login');
-}
-
-app.listen(process.env.PORT, process.env.IP, ()=>{
+server.listen(process.env.PORT, ()=>{
   console.log(`Express server listening on port ${process.env.PORT} and IP ${process.env.IP}`);
 });
+
+
