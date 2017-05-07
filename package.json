@@ -37,6 +37,7 @@
     "sanitize-html": "^1.14.1",
     "sanitizer": "^0.1.3",
     "sass-loader": "^6.0.3",
+    "socket.io": "^1.7.3",
     "style-loader": "^0.16.1",
     "trix": "^0.10.1"
   },
