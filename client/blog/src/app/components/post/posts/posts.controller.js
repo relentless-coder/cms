@@ -3,6 +3,11 @@ function postsController($localStorage){
   ctrl.$onInit = function(){
     if($localStorage.user){
       ctrl.posts = $localStorage.user.posts;
+      ctrl.posts.forEach((el)=>{
+        el.comments.forEach((comment)=>{
+          comment.replyVisible = false;
+        })
+      })
     }
   }
 }
