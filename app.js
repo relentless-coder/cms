@@ -26,9 +26,6 @@ const sanitizer = require('sanitize-html');
 // Add headers
 const app = express();
 // seedDb();
-const server = http.Server(app);
-const socket = io(server);
-
 
 const localEvent = event.EventEmitter;
 const myEvent = new localEvent();
@@ -63,7 +60,9 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 
 const port = 6655;
 
-['/admin/', '/admin/:var', '/admin/edit/:var'].forEach(function(url){
+const adminRoutes = ['/admin/', '/admin/:var', '/admin/edit/:var'];
+
+adminRoutes.forEach(function(url){
   app.get(url, (req, res)=>{
     res.sendFile(path.join(__dirname, '/client', '/dashboard', '/index.html'));
   })
@@ -80,8 +79,10 @@ blogRoutes.forEach(el=>{
   })
 })
 
-server.listen(process.env.PORT, ()=>{
+const server = app.listen(process.env.PORT, process.env.IP, ()=>{
   console.log(`Express server listening on port ${process.env.PORT} and IP ${process.env.IP}`);
 });
+
+var socket = io(server)
 
 
