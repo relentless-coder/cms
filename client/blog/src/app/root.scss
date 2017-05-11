@@ -1,17 +1,31 @@
 body {
   margin: 0;
   padding: 0;
-  background: #f4f4f4;
+  color: black;
+  background: #2a3d5b;
+  font-family: Helvetica;
+}
+
+.zero_height {
+  margin-top: -20rem;
+}
+
+.fixed_nav {
+  background: #2a3d5b;
+  position: fixed;
+  top: 0;
+  right: 20%;
+  left: 20%;
 }
 
 .root {
     display: flex;
-    border: 0px 1px 0px 1px solid #9b9b9b;
     max-width: 60%;
-    background: white;
+    background: #2a3d5b;
     margin: 0 auto;
+    padding: 0.5rem;
     flex-direction: column;
     h1 {
-      color: blue;  
+      color: #21201f;  
     }
 }
