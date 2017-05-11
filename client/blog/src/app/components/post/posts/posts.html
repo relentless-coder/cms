@@ -2,6 +2,6 @@
   <div class="post" ng-repeat="post in ctrl.posts">
     <h1 ng-bind-html="post.title"></h1>
     <p ng-bind-html="post.content | limitTo: 400"></p>
-    <a ui-sref="single({url: post.url})">Read More</a>
+    <a hide-header ui-sref="single({url: post.url})">Read More</a>
   </div>
 </div>
