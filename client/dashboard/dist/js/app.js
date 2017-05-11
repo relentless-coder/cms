@@ -9304,7 +9304,7 @@ const posts = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('post.posts
     component: __WEBPACK_IMPORTED_MODULE_4__post_posts_component__["a" /* allPostsComponent */]
   };
   $stateProvider.state(homeState);
-  $urlRouterProvider.when('/admin', '/admin/home');
+  $urlRouterProvider.when('/admin/', '/admin/home');
 }).factory(__WEBPACK_IMPORTED_MODULE_3__post_posts_factory__["a" /* getPosts */], ['$http', __WEBPACK_IMPORTED_MODULE_3__post_posts_factory__["b" /* getPostsFunc */]]).name;
 /* harmony export (immutable) */ __webpack_exports__["a"] = posts;
 
