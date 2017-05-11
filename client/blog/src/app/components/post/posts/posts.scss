@@ -1,0 +1,15 @@
+.posts {
+    display: flex;
+    justify-content: space-between;
+    & .post {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+        & a {
+            color: #77a0d6;
+        }
+        & h1 {
+            color: black;
+        }
+    }
+}
