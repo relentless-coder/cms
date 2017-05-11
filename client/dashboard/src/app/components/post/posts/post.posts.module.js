@@ -13,7 +13,7 @@ export const posts = angular.module('post.posts', [uiRouter, ngSanitize])
     component: allPostsComponent
   }
   $stateProvider.state(homeState);
-  $urlRouterProvider.when('/admin', '/admin/home')
+  $urlRouterProvider.when('/admin/', '/admin/home')
 })
 .factory(getPosts, ['$http', getPostsFunc])
 .name
