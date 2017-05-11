@@ -1,8 +1,10 @@
 .header {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    margin-bottom: 2rem;
+    top: 0;
+    transition: margin-top 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    justify-content: space-around;
     .profile-wrapper {
         width: 150px;
         height: 150px;
@@ -14,7 +16,44 @@
     .name-wrapper {
         display: flex;
         flex-direction: column;
+        color: #000;
         align-items: center;
         justify-content: center;
+        & .name {
+            font-size: 2.5rem;
+            color: #adadad;
+        }
+
+        & .job {
+            font-size: 1.5rem;
+            color: #adadad;
+            margin-top: 0;
+        }
+    }
+
+    .social-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        & a {
+            color: #77a0d6;
+            display: flex;
+            width: 64px;
+            height: 64px;
+            align-self: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            & svg {
+                fill: #adadad;
+                transition: all 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+                &:hover {
+                    fill: #77a0d6;
+                    transform: scale(1.5);
+
+                }
+            }
+        }
     }
 }
