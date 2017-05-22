@@ -1,0 +1,24 @@
+@import '../_colors';
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    & ul {
+        padding-left: 0;
+        & li {
+            color: $third-color;
+            margin: 1rem 0;
+            font: {
+                size: 1.1rem;
+                weight: 600;
+            }
+            & a {
+                color: $third-color;
+            }
+
+            & a:hover {
+                color: $second-color;
+            }
+        }
+    }
+}
