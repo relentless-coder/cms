@@ -1,17 +1,27 @@
+@import "./_base";
+
 body {
   margin: 0;
   padding: 0;
   color: black;
-  background: #2a3d5b;
+  background: $first-color;
   font-family: Helvetica;
+}
+
+*{
+  box-sizing: border-box;
 }
 
 .zero_height {
   margin-top: -20rem;
 }
 
+.hide {
+  display: none;
+}
+
 .fixed_nav {
-  background: #2a3d5b;
+  background: $first-color;
   position: fixed;
   top: 0;
   right: 20%;
@@ -21,11 +31,28 @@ body {
 .root {
     display: flex;
     max-width: 60%;
-    background: #2a3d5b;
+    background: $first-color;
     margin: 0 auto;
     padding: 0.5rem;
     flex-direction: column;
     h1 {
-      color: #21201f;  
+      color: #21201f;
     }
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+  font-weight: 500;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+  font-weight: 500;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+  font-weight: 500;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: black;
+  font-weight: 500;
 }
