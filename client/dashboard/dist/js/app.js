@@ -7936,11 +7936,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sidebarController; });
-function sidebarController(tokenFactory, $state, $rootScope) {
+function sidebarController(tokenFactory, $state, $rootScope, notifsFactory) {
   const ctrl = this;
-  const host = window.location.href;
-  const socket = io(host);
-  socket.on('blog-comment', msg => {
+  const host = window.location.host;
+  const path = window.location.pathname;
+  const socket = io(host, {
+    query: path
+  });
+
+  socket.on('comment-posted', msg => {
     console.log(msg);
     const span = document.createElement('span');
     const text = document.createTextNode(`${msg.name} commented`);
@@ -7956,6 +7960,9 @@ function sidebarController(tokenFactory, $state, $rootScope) {
 
   ctrl.$onInit = function () {
     ctrl.isLoggedIn = tokenFactory.findToken();
+    notifsFactory.getNotifs().then(data => {
+      console.log(data);
+    });
   };
 
   $rootScope.$on('userLoggedIn', function () {
@@ -7998,8 +8005,11 @@ const thisPostFunc = function ($http) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ngstorage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_login_token_factory_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sidebar_component__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__sidebar_controller__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__notifs_factory__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__sidebar_component__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__sidebar_controller__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sidebar_scss__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sidebar_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__sidebar_scss__);
 
 
 
@@ -8007,7 +8017,9 @@ const thisPostFunc = function ($http) {
 
 
 
-const sidebar = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('sidebar', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a, 'ngStorage']).component(__WEBPACK_IMPORTED_MODULE_4__sidebar_component__["a" /* sidebarComponentName */], __WEBPACK_IMPORTED_MODULE_4__sidebar_component__["b" /* sidebarComponent */]).factory(__WEBPACK_IMPORTED_MODULE_3__components_login_token_factory_js__["a" /* tokenFactory */], ['$localStorage', __WEBPACK_IMPORTED_MODULE_3__components_login_token_factory_js__["b" /* tokenFactoryFunc */]]).name;
+
+
+const sidebar = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('sidebar', [__WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default.a, 'ngStorage']).component(__WEBPACK_IMPORTED_MODULE_5__sidebar_component__["a" /* sidebarComponentName */], __WEBPACK_IMPORTED_MODULE_5__sidebar_component__["b" /* sidebarComponent */]).factory(__WEBPACK_IMPORTED_MODULE_3__components_login_token_factory_js__["a" /* tokenFactory */], ['$localStorage', __WEBPACK_IMPORTED_MODULE_3__components_login_token_factory_js__["b" /* tokenFactoryFunc */]]).factory(__WEBPACK_IMPORTED_MODULE_4__notifs_factory__["a" /* notifsFactory */], ['$http', __WEBPACK_IMPORTED_MODULE_4__notifs_factory__["b" /* notifsFactoryFunc */]]).name;
 /* harmony export (immutable) */ __webpack_exports__["a"] = sidebar;
 
 
@@ -8018,9 +8030,9 @@ const sidebar = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('sidebar'
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_post_module__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login_module_js__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_user_module_js__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_post_module__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login_module_js__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_user_module_js__ = __webpack_require__(35);
 
 
 
@@ -8047,6 +8059,12 @@ const rootComponent = {
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 /**
@@ -8808,15 +8826,33 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(11);
+__webpack_require__(12);
 module.exports = 'ngSanitize';
 
 
 /***/ }),
-/* 13 */
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const notifsFactory = 'notifsFactory';
+/* harmony export (immutable) */ __webpack_exports__["a"] = notifsFactory;
+
+const notifsFactoryFunc = function ($http) {
+    return {
+        getNotifs: function () {
+            return $http.get('/notifs');
+        }
+    };
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = notifsFactoryFunc;
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8831,18 +8867,18 @@ const sidebarComponentName = 'sidebar';
 
 const sidebarComponent = {
   templateUrl: '/dashboard/src/app/common/sidebar.html',
-  controller: ['tokenFactory', '$state', '$rootScope', __WEBPACK_IMPORTED_MODULE_1__sidebar_controller__["a" /* sidebarController */]],
+  controller: ['tokenFactory', '$state', '$rootScope', 'notifsFactory', __WEBPACK_IMPORTED_MODULE_1__sidebar_controller__["a" /* sidebarController */]],
   controllerAs: 'ctrl'
 };
 /* harmony export (immutable) */ __webpack_exports__["b"] = sidebarComponent;
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__login_controller__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__login_controller__ = __webpack_require__(17);
 
 
 const loginComponent = 'loginComponent';
@@ -8857,7 +8893,7 @@ const loginOptions = {
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8881,7 +8917,7 @@ function loginController(loginFactory, tokenFactory, $state, $rootScope) {
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8900,7 +8936,7 @@ const loginFactoryFunc = function ($http) {
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8910,9 +8946,9 @@ const loginFactoryFunc = function ($http) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ngstorage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_factory__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_factory__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__token_factory__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_component__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_component__ = __webpack_require__(16);
 
 
 
@@ -8933,15 +8969,15 @@ const login = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('login', [_
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_new_post_new_module_js__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__posts_post_posts_module_js__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_single_post_single_module_js__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_new_post_new_module_js__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__posts_post_posts_module_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_single_post_single_module_js__ = __webpack_require__(27);
 
 
 
@@ -8952,13 +8988,13 @@ const post = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('post', [__W
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_new_controller__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_new_controller__ = __webpack_require__(22);
 
 
 
@@ -8975,7 +9011,7 @@ const postNewComponent = 'postNew';
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9046,7 +9082,7 @@ function postNewController(thisPost, $http) {
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9055,7 +9091,7 @@ function postNewController(thisPost, $http) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__post_new_factory__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_new_component__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_new_component__ = __webpack_require__(21);
 
 
 
@@ -9074,13 +9110,13 @@ const newPost = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('post.new
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_single_controller__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_single_controller__ = __webpack_require__(25);
 
 
 
@@ -9096,7 +9132,7 @@ const postSingleOptions = {
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9109,7 +9145,8 @@ function postSingleController(postSingleFactory, postUpdateFactory, $stateParams
   const ctrl = this;
   ctrl.$onInit = function () {
     postSingleFactory.getSinglePost($stateParams.url).then(data => {
-      ctrl.post = data.data.post[0];
+      console.log(data);
+      ctrl.post = data.data.post;
     }, err => {
       console.log(err);
     });
@@ -9172,7 +9209,7 @@ function postSingleController(postSingleFactory, postUpdateFactory, $stateParams
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9190,7 +9227,7 @@ const postSingleFactoryFunc = function ($http, $stateParams) {
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9198,9 +9235,9 @@ const postSingleFactoryFunc = function ($http, $stateParams) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__post_single_component__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_single_factory__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__post_update_factory__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__post_single_component__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_single_factory__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__post_update_factory__ = __webpack_require__(28);
 
 
 
@@ -9219,7 +9256,7 @@ const postSingle = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('postS
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9237,12 +9274,12 @@ const postUpdateFactoryFunc = function ($http) {
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__post_posts_factory__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_posts_controller__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_posts_controller__ = __webpack_require__(30);
 
 
 
@@ -9258,7 +9295,7 @@ const allPostsOptions = {
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9279,7 +9316,7 @@ function allPostsController(getPosts, $state) {
 }
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9287,10 +9324,10 @@ function allPostsController(getPosts, $state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_sanitize__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_sanitize__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_sanitize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular_sanitize__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_posts_factory__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__post_posts_component__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__post_posts_component__ = __webpack_require__(29);
 
 
 
@@ -9310,11 +9347,11 @@ const posts = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('post.posts
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_controller__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_controller__ = __webpack_require__(33);
 
 
 const userComponent = 'userComponent';
@@ -9329,7 +9366,7 @@ const userComponentOptions = {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9345,8 +9382,10 @@ function userController(Upload, userFactory, $localStorage) {
   };
 
   ctrl.editUser = function () {
-    const arr = ctrl.user.navs.split(',');
-    ctrl.user.navs = arr;
+    if (typeof ctrl.user.navs === String) {
+      const arr = ctrl.user.navs.split(',');
+      ctrl.user.navs = arr;
+    }
     Upload.upload({
       url: '/admin/user',
       data: { file: ctrl.profile, user: ctrl.user },
@@ -9372,7 +9411,7 @@ function userController(Upload, userFactory, $localStorage) {
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9396,7 +9435,7 @@ const userFactoryFunc = function ($http, $localStorage) {
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9404,12 +9443,12 @@ const userFactoryFunc = function ($http, $localStorage) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular_ui_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular_ui_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng_file_upload__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng_file_upload__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng_file_upload__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngstorage__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngstorage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ngstorage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_factory_js__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user_component_js__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_factory_js__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user_component_js__ = __webpack_require__(32);
 
 
 
@@ -9429,7 +9468,7 @@ const user = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('user', [__W
 
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9442,6 +9481,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_component_module__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__root_component__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_login_token_factory_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__root_scss__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__root_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__root_scss__);
+
 
 
 
@@ -9459,7 +9501,13 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('cms', [__WEBPACK_IMPORTE
 }]).name;
 
 /***/ }),
-/* 35 */
+/* 37 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports) {
 
 /**!
@@ -12363,11 +12411,11 @@ ngFileUpload.service('UploadExif', ['UploadResize', '$q', function (UploadResize
 
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(35);
+__webpack_require__(38);
 module.exports = 'ngFileUpload';
 
 /***/ })
-],[34]);
+],[36]);

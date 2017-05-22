@@ -1,0 +1,27 @@
+.sidebar {
+  display: flex;
+  flex-direction: column; }
+  .sidebar ul {
+    padding-left: 0; }
+    .sidebar ul li {
+      color: #adadad;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+      font-weight: 600; }
+      .sidebar ul li a {
+        color: #adadad; }
+      .sidebar ul li a:hover {
+        color: #77a0d6; }
+* {
+  box-sizing: border-box; }
+
+body {
+  background: #2a3d5b; }
+
+.root {
+  display: flex;
+  justify-content: space-between; }
+
+.sidebar-wrapper {
+  width: 25%;
+  display: flex; }

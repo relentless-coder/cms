@@ -1,8 +1,12 @@
-function sidebarController(tokenFactory, $state, $rootScope){
+function sidebarController(tokenFactory, $state, $rootScope, notifsFactory){
   const ctrl = this;
-  const host = window.location.href;
-  const socket = io(host);
-  socket.on('blog-comment', (msg)=>{
+    const host = window.location.host;
+  const path = window.location.pathname;
+       const socket = io(host, {
+       query: path
+     });
+ 
+  socket.on('comment-posted', (msg)=>{
     console.log(msg);
     const span = document.createElement('span');
     const text = document.createTextNode(`${msg.name} commented`)
@@ -18,6 +22,9 @@ function sidebarController(tokenFactory, $state, $rootScope){
 
   ctrl.$onInit = function(){
     ctrl.isLoggedIn = tokenFactory.findToken();
+    notifsFactory.getNotifs().then((data)=>{
+      console.log(data);
+    })
   }
 
   $rootScope.$on('userLoggedIn', function(){
