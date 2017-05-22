@@ -1,18 +1,25 @@
-function socketFunction(io, url, event){
-    const blog = io.of(`/articles/${url}`)
-    const admin = io.of('/admin/home')
-    blog.on('connection', (fromBlog)=>{
-        console.log("Connection made on blog");
-        fromBlog.on('comment', (msg)=>{
-            event.emit('comment-posted', msg)
-        })
-    })
-    admin.on('connection', (toAdmin)=>{
-        console.log("Connection made on admin");        
-        event.on('comment-posted', (msg)=>{
-            toAdmin.emit('blog-comment', msg)
+import {returnNotifs} from '../routes/users.routes.js'
+
+function socketFunction(io, notifs) {
+    io.on('connection', (localSocket) => {
+        const blogRoom = localSocket.handshake['query']['articles/']
+        const adminRoom = localSocket.handshake['query']['admin/']
+        localSocket.join(blogRoom);
+        localSocket.join(adminRoom);
+        const inAdmin = io.sockets.adapter.rooms[adminRoom];
+        localSocket.on('blog-comment', (msg) => {
+            console.log('Someone commented on your blog');
+            if (inAdmin.length > 0) {
+                localSocket.to(adminRoom).emit('comment-posted', {
+                    msg: msg
+                })
+                returnNotifs(msg)
+            } else {
+                console.log('No admin yet');
+                returnNotifs(msg)
+            }
         })
     })
 }
 
-export {socketFunction}
+export { socketFunction }
