@@ -1,0 +1,19 @@
+@import './_colors';
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background: $first-color;
+}
+
+.root {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar-wrapper {
+    width: 25%;
+    display: flex;
+}
