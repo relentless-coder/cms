@@ -15,7 +15,7 @@ const cmsConfiguration = {
         {
             test: /\.scss$/,
             exclude: /node_modules/,
-            loader: extractTextPlugin.extract({fallback: 'style-loader', use: [{loader: 'css-loader'}, {loader: 'css-loader'}]}) 
+            loader: extractTextPlugin.extract({fallback: 'style-loader', use: [{loader: 'css-loader'}, {loader: 'sass-loader'}]}) 
 
         }]
     },
