@@ -19,9 +19,12 @@ import {passportConfig} from './server/config/passport.config';
 import {socketFunction} from './server/config/socket.io.config';
 import path from 'path';
 
+const notifs = [];
+
 mongoose.connect('mongodb://localhost/blog');
 
 const sanitizer = require('sanitize-html');
+
 
 // Add headers
 const app = express();
@@ -72,9 +75,6 @@ const blogRoutes = ['/', '/articles', '/articles/:url', '/contact'];
 
 blogRoutes.forEach(el=>{
   app.get(el, (req, res)=>{
-    if(el === '/articles/:url'){
-      socketFunction(socket, req.params.url, myEvent)
-    }
     res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html')); 
   })
 })
@@ -84,5 +84,6 @@ const server = app.listen(process.env.PORT, process.env.IP, ()=>{
 });
 
 var socket = io(server)
+socketFunction(socket, notifs)
 
 
