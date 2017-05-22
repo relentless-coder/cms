@@ -3,7 +3,8 @@ import uiRouter from 'angular-ui-router';
 import {sidebar} from './common/sidebar.module';
 import {components} from './components/component.module';
 import {rootComponentName, rootComponent} from './root.component';
-import {tokenFactory, tokenFactoryFunc} from './components/login/token.factory.js'
+import {tokenFactory, tokenFactoryFunc} from './components/login/token.factory.js';
+import './root.scss'
 
 angular.module('cms', [sidebar, components, uiRouter, 'ngStorage'])
 .component(rootComponentName, rootComponent)
