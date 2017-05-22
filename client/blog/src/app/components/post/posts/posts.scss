@@ -1,12 +1,20 @@
+@import "../../../_base";
+
 .posts {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     & .post {
         display: flex;
         flex-direction: column;
+        margin: 1.5rem auto;
         width: 45%;
         & a {
-            color: #77a0d6;
+            color: $second-color;
+            font-size: 1.57rem;
+            font-weight: bold;
+            text-align: center;
         }
         & h1 {
             color: black;

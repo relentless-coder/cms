@@ -1,7 +1,7 @@
 <div class="single_post_wrapper">
   <div class="single_post">
-    <h1 ng-bind-html="sm.post.title"></h1>
-    <p ng-bind-html="sm.post.content"></p>
+    <h1 class="single_post_heading" ng-bind-html="sm.post.title"></h1>
+    <p class="single_post_content" ng-bind-html="sm.post.content"></p>
   </div>
 </div>
-<comment-component post="sm.post"></comment-component>
+<comment-component post="sm.post" ng-if="sm.post"></comment-component>

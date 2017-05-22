@@ -8,8 +8,8 @@ import './post.single.scss'
 export const post_single = angular.module('postSingle', [uiRouter, ngSanitize])
 .config(['$stateProvider', ($stateProvider)=>{
   const singlePostState = {
-    name: 'single',
-    url: '/articles/:url',
+    name: 'articles.single',
+    url: '/:url',
     component: postSingleComponent
   }
 

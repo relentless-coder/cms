@@ -1,13 +1,17 @@
 function commentController($stateParams, commentFactory, $rootScope){
   const ctrl = this;
-  const host = window.location.href;
-  const socket = io(host);
+  const host = window.location.host;
+  const path = window.location.pathname;
+  const socket = io(host, {
+      query: path
+    });
+  
   ctrl.comment = {};
   ctrl.reply = {};
 
   ctrl.postComment = function(){
     commentFactory.postComment($stateParams.url, ctrl.comment).then((data)=>{
-      socket.emit('comment', {
+      socket.emit('blog-comment', {
         name: ctrl.comment.author.name,
         comment: ctrl.comment.comment  
       })
