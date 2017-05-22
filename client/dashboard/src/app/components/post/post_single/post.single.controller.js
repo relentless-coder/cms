@@ -4,7 +4,7 @@ function postSingleController(postSingleFactory, postUpdateFactory, $stateParams
   const ctrl = this;
     ctrl.$onInit = function(){
       postSingleFactory.getSinglePost($stateParams.url).then((data)=>{
-        ctrl.post = data.data.post[0];
+        ctrl.post = data.data.post;
       }, (err)=>{
         console.log(err);
     })
