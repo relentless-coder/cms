@@ -14,8 +14,10 @@ function userController(Upload, userFactory, $localStorage){
   };
 
   ctrl.editUser = function(){
-    const arr = ctrl.user.navs.split(',');
-    ctrl.user.navs = arr;
+    if(typeof ctrl.user.navs === String){
+      const arr = ctrl.user.navs.split(',');
+      ctrl.user.navs = arr;
+    }
     Upload.upload({
       url: '/admin/user',
       data: {file: ctrl.profile, user: ctrl.user},
