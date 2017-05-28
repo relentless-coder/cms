@@ -13,7 +13,7 @@ router.post('/admin/login', (req, res, next)=>{
     if (err) {
       return next(err);
     }else if (!user) {
-      return res.json(info)
+      return res.status(404).json(info)
 
     }else {
       const userObj = user.toObject();
