@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import http from 'http';
+import morgan from 'morgan';
 import event from 'events';
 import io from 'socket.io';
 import session from 'express-session';
@@ -19,9 +20,21 @@ import {passportConfig} from './server/config/passport.config';
 import {socketFunction} from './server/config/socket.io.config';
 import path from 'path';
 
+const logger = morgan(':method :url :status - :response-time ms')
+
 const notifs = [];
 
-mongoose.connect('mongodb://localhost/blog');
+const environment = process.env.NODE_ENV || 'development';
+
+let url;
+
+if(environment === 'test'){
+  url = 'mongodb://localhost/blog-test'
+} else if(environment === 'development') {
+  url = 'mongodb://localhost/blog';
+}
+
+mongoose.connect(url);
 
 const sanitizer = require('sanitize-html');
 
@@ -41,7 +54,7 @@ app.use(function(req, res, next) {
   next();
  });
 
-
+app.use(logger);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(session({
@@ -80,7 +93,7 @@ blogRoutes.forEach(el=>{
 })
 
 const server = app.listen(process.env.PORT, process.env.IP, ()=>{
-  console.log(`Express server listening on port ${process.env.PORT} and IP ${process.env.IP}`);
+  console.log(`Express server listening on port ${process.env.PORT} and IP ${process.env.IP} and running in ${environment} mode`);
 });
 
 var socket = io(server)
