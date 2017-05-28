@@ -14,7 +14,9 @@ export const encode = function(payload, secret){
 }
 
 export const decode = function(token){
-  console.log(token);
+  if(!token){
+    throw new Error('No token received')
+  }
   const segments = token.split('.')
   if(segments.length !== 3){
     throw new Error("Invalid token");
