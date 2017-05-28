@@ -49,7 +49,7 @@ router.post('/post', (req, res)=>{
         user.posts.push(foundPost._id);
         user.save();
       })
-      return res.json({message: "Post created successfully"})
+      return res.status(200).json({message: "Post created successfully", post: foundPost})
     });
   });
 });
@@ -61,7 +61,7 @@ router.get('/post/:url', (req, res)=>{
     model: 'Comment'
   }}).exec((err, foundPost)=>{
       console.log(foundPost);
-        err ? res.json({error: 'message'}) : res.json({post: foundPost});
+        err ? res.status(200).json({error: 'message'}) : res.json({post: foundPost});
     }) 
 });
 
@@ -69,10 +69,11 @@ router.put('/post/:url', (req, res)=>{
   console.log(req.body);
   Post.update({url: req.params.url}, req.body, (err, foundPost)=>{
     if(err){
-      res.json({message: err});
+      res.status(422).json({message: err});
     }
-    Post.find({url: req.params.url}, (err, updatedPost)=>{
-      res.json({post: updatedPost});
+    Post.findOne({url: req.params.url}, (err, updatedPost)=>{
+      console.log(updatedPost);
+      res.status(200).json({post: updatedPost});
     })
   });
 });
