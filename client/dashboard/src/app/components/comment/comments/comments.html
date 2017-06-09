@@ -1,0 +1,11 @@
+<div class="comments">
+    <div class="comment_in_comments" ng-repeat="cm in ctrl.comments">
+        <h2 class="comment_on_post">{{cm.author.name}} commented on {{cmt.post.title}}</h2>
+        <h5>{{cm._id}}</h5>
+        <div><button class="admin_reply_comment" ui-sref="comments.comment({id: cm._id})">Show</button><button class="delete_comment" ng-click="$ctrl.deleteComment(cm._id)">Delete</button></div>
+    </div>
+</div>
+
+<div ui-view>
+  
+</div>
