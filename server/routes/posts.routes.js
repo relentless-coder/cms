@@ -67,6 +67,9 @@ router.get('/post/:url', (req, res)=>{
 
 router.put('/post/:url', (req, res)=>{
   console.log(req.body);
+  if(!req.headers.authorization){
+    return res.status(401).json({message: 'You are not logged in'})
+  }
   Post.update({url: req.params.url}, req.body, (err, foundPost)=>{
     if(err){
       res.status(422).json({message: err});
