@@ -20,7 +20,7 @@ router.get('/admin/comment', (req, res) => {
 		Comment.find({}).populate({path: 'post', model: 'Post', select: 'title'}).exec((err, comments) => {
 			if (err || !comments) {
 				console.log(err);
-				res.status(404).json({ msg: err })
+				res.status(404).json({ message: err })
 			} else {
 				console.log(comments)
 				res.status(200).json({ data: comments });
@@ -30,6 +30,44 @@ router.get('/admin/comment', (req, res) => {
 		console.log("Did not find the payload")
 		res.status(404).json({ message: 'User not found' })
 	}
+})
+
+router.get('/admin/comment/:id', (req, res)=>{
+	if(!req.headers.authorization){
+		res.status(401).json({message: "You are not logged in"})
+	}
+
+	const token = req.headers.authorization.split(' ')[1];
+	const payload = decode(token, 'inav');
+	if(payload._id){
+		Comment.findOne({_id: req.params.id}).populate({path: 'post', model: 'Post', select: 'title'}).exec((err, foundComment)=>{
+			if(err || !foundComment){
+				res.status(404).json({message: err})
+			} else {
+				res.status(200).json({data: foundComment});
+			}
+		})
+	} else {
+		res.status(404).json({message: "User not found"});
+	}
+})
+
+router.delete('/admin/comment/:id', (req, res)=>{
+	if(!req.headers.authorization){
+    	return res.status(401).json({message: 'You are not logged in'})
+  	}
+	Post.findOne({'comments._id': req.params.id}, (err, foundPost)=>{
+		if(err){
+			res.status(404).json(err);
+		}
+		const index = foundPost.comments.indexOf(req.params.id);
+		foundPost.comments.splice(index, 1);
+		foundPost.save((err, data)=>{
+			Comment.remove({_id: req.params.id}, (err, result)=>{
+				res.status(200).json({message: "Comment deleted"})
+			})
+		})
+	})
 })
 
 router.post('/:url/comment', (req, res) => {
@@ -48,7 +86,7 @@ router.post('/:url/comment', (req, res) => {
 	})
 })
 
-router.post('/:url/comment/:commentId', (req, res) => {
+router.post('/comment/:commentId', (req, res) => {
 	req.body.comment = sanitizer(req.body.comment);
 	Comment.create(req.body, (err, createdCom) => {
 		err ? res.json({ error: 'message' }) : Comment.findById(req.params.commentId, (err, foundComment) => {
