@@ -17,7 +17,8 @@ const cmsConfiguration = {
             exclude: /node_modules/,
             loader: extractTextPlugin.extract({fallback: 'style-loader', use: [{loader: 'css-loader'}, {loader: 'sass-loader'}]}) 
 
-        }]
+        }
+        ]
     },
     output: {
         filename: 'js/[name].js',
@@ -25,7 +26,11 @@ const cmsConfiguration = {
     },
     plugins: [
        new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
-       new extractTextPlugin("css/styles.css")
+       new extractTextPlugin("css/styles.css"),
+       new webpack.ProvidePlugin({
+           $: 'jquery',
+           jQuery: 'jquery'
+       })
     ]
 };
 
