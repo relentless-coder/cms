@@ -32,6 +32,8 @@ if(environment === 'test'){
   url = 'mongodb://localhost/blog-test'
 } else if(environment === 'development') {
   url = 'mongodb://localhost/blog';
+} else if(environment === 'production') {
+  url = process.env.DATABASE_URL
 }
 
 mongoose.connect(url);
