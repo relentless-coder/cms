@@ -1,0 +1,7 @@
+<div class="single_comment">
+  <h4>{{$ctrl.comment.author.name}}</h2>
+  <h6>On {{$ctrl.comment.post.title}}</h6>
+
+  <p>{{$ctrl.comment.comment}}</p>
+  <div class="reply_box"><textarea name="" id="" cols="30" rows="10"></textarea> <button ng-click="$ctrl.replyComment($ctrl.comment._id)"></button></div>
+</div>
