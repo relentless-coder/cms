@@ -1,4 +1,4 @@
-<div class="all-posts">
+<div class="all-posts" ng-if="ctrl.isLoggedIn">
   <div class="post-item" ng-repeat="post in ctrl.posts">
     <h2 class="post-item-title">{{post.title}}</h2>
     <p class="post-item-content" ng-bind-html="post.content"></p>

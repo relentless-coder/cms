@@ -14,5 +14,5 @@ export const sidebar = angular.module('sidebar', [uiRouter, 'ngStorage'])
 .directive('removeNotifs', removeNotifs)
 .factory(tokenFactory, ['$localStorage', tokenFactoryFunc])
 .factory(notifsFactory, ['$http', notifsFactoryFunc])
-.directive('showComments', show)
+.directive('showComments', showComments)
 .name;
