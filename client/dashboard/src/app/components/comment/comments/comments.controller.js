@@ -3,6 +3,7 @@ function commentsController(commentsFactory) {
     ctrl.$onInit = () => {
         commentsFactory.getComments().then((el) => {
             ctrl.comments = el.data.data;
+            $('.comments').removeClass('hide');
             console.log(ctrl.comments);
         })
     }
