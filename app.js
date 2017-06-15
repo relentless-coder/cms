@@ -78,7 +78,7 @@ app.use(lusca({
     xssProtection: true,
     nosniff: true
 }));
-const port = 6655;
+
 const adminRoutes = ['/admin/', '/admin/:var', '/admin/edit/:var'];
 adminRoutes.forEach(function(url) {
     app.get(url, (req, res) => {
@@ -91,6 +91,10 @@ blogRoutes.forEach(el => {
         res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
     })
 })
+
+const port = process.env.PORT || 6655;
+const ip = process.env.IP || 'localhost';
+
 const server = app.listen(process.env.PORT, process.env.IP, () => {
     console.log(`Express server listening on port ${process.env.PORT} and IP ${process.env.IP} and running in ${environment} mode`);
 });
