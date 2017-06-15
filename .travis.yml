@@ -4,8 +4,6 @@ node_js:
 services:
  - mongodb
 env:
- - PORT=6655
- - IP="localhost"
- - NODE_ENV="test"
+ - PORT=6655 IP="localhost" NODE_ENV="test"
 before_script: 
  - npm start
