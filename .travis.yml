@@ -3,3 +3,6 @@ node_js:
  - "7.10.0"
 services:
  - mongodb
+before_script:
+ - export process.env.PORT=6655 prcoess.env.IP='localhost' process.env.NODE_ENV='test'
+ - npm start
