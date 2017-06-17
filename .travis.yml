@@ -5,5 +5,5 @@ services:
  - mongodb
 env:
  - PORT=6655 IP="localhost" NODE_ENV="test"
-script: 
- - npm start && npm test
+before_script: 
+ - npm start &
