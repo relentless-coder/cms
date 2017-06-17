@@ -95,8 +95,8 @@ blogRoutes.forEach(el => {
 const port = process.env.PORT || 6655;
 const ip = process.env.IP || 'localhost';
 
-const server = app.listen(port, () => {
-    console.log(`Express server listening on port ${process.env.PORT} and IP ${process.env.IP} and running in ${environment} mode`);
+const server = app.listen(port, ip, () => {
+    console.log(`Express server listening on port ${port} and IP ${ip} and running in ${environment} mode`);
 });
 var socket = io(server)
 socketFunction(socket, notifs)
