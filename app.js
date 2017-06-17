@@ -92,7 +92,7 @@ blogRoutes.forEach(el => {
     })
 })
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 6655;
 const ip = process.env.IP || 'localhost';
 
 const server = app.listen(port, () => {
