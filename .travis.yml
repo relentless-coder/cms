@@ -7,5 +7,5 @@ env:
  - PORT=6655 IP="localhost" NODE_ENV="test"
 script: 
  - npm start &
- - sleep 15
+ - sleep 25
  - npm test
