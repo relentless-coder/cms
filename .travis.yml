@@ -9,5 +9,4 @@ script:
  - npm start &
  - sleep 25
  - npm test
-after_script:
  - npm stop
