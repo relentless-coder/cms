@@ -31,6 +31,6 @@ You'd be directed to the admin page. There you can create/edit post. Set up your
 
 **Here PORT represents the PORT value that you'd set in the 4th step
 
-If you have any questions feel free to email me at contact@ayushdevelops.com
+If you have any questions feel free to email me at contact@ayushbahuguna.com
 
 
