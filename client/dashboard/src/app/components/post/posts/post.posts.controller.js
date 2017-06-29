@@ -5,9 +5,12 @@ export function allPostsController(getPosts, $state, tokenFactory){
   console.log(ctrl);
   console.log(this);
   ctrl.$onInit = function(){
-   if(!tokenFactory.findToken()){
-     $state.go('login')
+   if(tokenFactory.findToken()){
+     ctrl.isLoggedIn = true;
    }
+   if(!tokenFactory.findToken()){
+      $state.go('login');
+    };
     getPosts.allPosts().then((data)=>{
       ctrl.posts = data.data.posts;
       console.log(ctrl.posts);

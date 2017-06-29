@@ -24,6 +24,9 @@ function sidebarController(tokenFactory, $state, $rootScope, notifsFactory) {
     if(!tokenFactory.findToken()){
       $state.go('login');
     };
+    if(tokenFactory.findToken()){
+      ctrl.isLoggedIn = true;
+    }
     notifsFactory.getNotifs().then((data) => {
       ctrl.trivial.count = data.data.notifs.length;
       if (ctrl.trivial.count > 0) {
