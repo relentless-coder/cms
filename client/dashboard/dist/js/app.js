@@ -19330,6 +19330,9 @@ function sidebarController(tokenFactory, $state, $rootScope, notifsFactory) {
     if (!tokenFactory.findToken()) {
       $state.go('login');
     };
+    if (tokenFactory.findToken()) {
+      ctrl.isLoggedIn = true;
+    }
     notifsFactory.getNotifs().then(function (data) {
       ctrl.trivial.count = data.data.notifs.length;
       if (ctrl.trivial.count > 0) {
@@ -23315,9 +23318,12 @@ function allPostsController(getPosts, $state, tokenFactory) {
   console.log(ctrl);
   console.log(this);
   ctrl.$onInit = function () {
+    if (tokenFactory.findToken()) {
+      ctrl.isLoggedIn = true;
+    }
     if (!tokenFactory.findToken()) {
       $state.go('login');
-    }
+    };
     getPosts.allPosts().then(function (data) {
       ctrl.posts = data.data.posts;
       console.log(ctrl.posts);
