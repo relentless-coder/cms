@@ -9,4 +9,3 @@ script:
  - npm start &
  - sleep 25
  - npm test
- - pkill node
