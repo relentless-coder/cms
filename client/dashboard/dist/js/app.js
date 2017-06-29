@@ -23408,9 +23408,6 @@ var userComponentOptions = exports.userComponentOptions = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 function userController(Upload, userFactory, $localStorage) {
   var ctrl = this;
   ctrl.tinymceOptions = {
@@ -23422,10 +23419,6 @@ function userController(Upload, userFactory, $localStorage) {
   };
 
   ctrl.editUser = function () {
-    if (_typeof(ctrl.user.navs) === String) {
-      var arr = ctrl.user.navs.split(',');
-      ctrl.user.navs = arr;
-    }
     Upload.upload({
       url: '/admin/user',
       data: { file: ctrl.profile, user: ctrl.user },
