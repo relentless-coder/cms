@@ -1,4 +1,4 @@
-## SPA CMS
+## SPA CMS [![Build Status](https://travis-ci.org/relentless-coder/cms.svg?branch=master)](https://travis-ci.org/relentless-coder/cms)
 
 ---
 
