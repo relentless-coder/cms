@@ -46,6 +46,9 @@ router.post('/post', (req, res)=>{
   Post.create(req.body, (err, data)=>{
     err ? console.log(err) : Post.findOne({url: req.body.url}, (err, foundPost)=>{
       User.findById(payload._id, (err, user)=>{
+        if(err || !user){
+          res.status(500).json({message: err})
+        }
         user.posts.push(foundPost._id);
         user.save();
       })
