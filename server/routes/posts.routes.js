@@ -48,11 +48,14 @@ router.post('/post', (req, res)=>{
       User.findById(payload._id, (err, user)=>{
         if(err || !user){
           res.status(500).json({message: err})
-        }
-        user.posts.push(foundPost._id);
+        } else {
+          user.posts.push(foundPost._id);
         user.save();
+          res.status(200).json({message: "Post created successfully", post: foundPost})
+          
+        }
+        
       })
-      return res.status(200).json({message: "Post created successfully", post: foundPost})
     });
   });
 });
