@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build-js": "webpack --config webpack.config.js",
-    "test": "node node_modules/.bin/mocha ./server/test  --require ./server/test/testHelper.js --watch  --reporter spec --timeout 10000 --compilers js:babel-core/register",
+    "test": "node node_modules/.bin/mocha ./server/test  --require ./server/test/testHelper.js --reporter spec --timeout 10000 --compilers js:babel-core/register",
     "start": "npm run build-js && babel-node app.js myApp --presets es2015,stage-2 && nodemon --watch cms/client",
     "stop": "pkill --signal SIGNIT myApp"
   },
