@@ -23488,7 +23488,7 @@ var _angularUiRouter = __webpack_require__(6);
 
 var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 
-var _ngFileUpload = __webpack_require__(137);
+var _ngFileUpload = __webpack_require__(138);
 
 var _ngFileUpload2 = _interopRequireDefault(_ngFileUpload);
 
@@ -23497,6 +23497,8 @@ __webpack_require__(26);
 var _userFactory = __webpack_require__(131);
 
 var _userComponent = __webpack_require__(129);
+
+__webpack_require__(136);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23563,6 +23565,14 @@ _angular2.default.module('cms', [_sidebar.sidebar, _component.components, _angul
 
 /***/ }),
 /* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// removed by extract-text-webpack-plugin
+
+
+/***/ }),
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/**!
@@ -26467,10 +26477,10 @@ ngFileUpload.service('UploadExif', ['UploadResize', '$q', function (UploadResize
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(136);
+__webpack_require__(137);
 module.exports = 'ngFileUpload';
 
 /***/ })

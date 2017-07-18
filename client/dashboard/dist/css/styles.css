@@ -1,17 +1,31 @@
 .sidebar {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  align-self: stretch; }
   .sidebar ul {
-    padding-left: 0; }
+    padding-left: 0;
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    justify-content: space-around; }
     .sidebar ul li {
       color: #adadad;
-      margin: 1rem 0;
-      font-size: 1.1rem;
+      cursor: pointer;
+      margin: 3rem 0;
+      transition: all 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+      padding: 0.5rem 0.25rem;
+      font-size: 2rem;
       font-weight: 600; }
+      .sidebar ul li:first-child {
+        margin-top: 0rem; }
+      .sidebar ul li .material-icons {
+        font-size: inherit;
+        font-weight: 700; }
       .sidebar ul li a {
-        color: #adadad; }
-      .sidebar ul li a:hover {
-        color: #77a0d6; }
+        color: inherit; }
+      .sidebar ul li:hover {
+        color: black;
+        background: #adadad; }
     .sidebar ul li.you_got_mail {
       animation: got_mail 1s cubic-bezier(0.77, 0, 0.175, 1) infinite; }
       .sidebar ul li.you_got_mail span {
@@ -35,6 +49,81 @@
     transform: rotatez(-5deg); }
   to {
     transform: rotatez(0); } }
+.profile {
+  display: flex;
+  flex-direction: column; }
+  .profile .name_profession {
+    display: flex;
+    margin: 0.5rem 0;
+    justify-content: space-between; }
+    .profile .name_profession .name, .profile .name_profession .profession {
+      display: flex;
+      flex-direction: column; }
+      .profile .name_profession .name label, .profile .name_profession .profession label {
+        color: #adadad;
+        font-size: 2rem;
+        font-weight: 700; }
+      .profile .name_profession .name input[type="text"], .profile .name_profession .profession input[type="text"] {
+        margin-top: 0.5rem;
+        padding: 0.2rem 0.1rem;
+        font-size: 1.5rem; }
+  .profile .profile_image {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    justify-content: center; }
+    .profile .profile_image label {
+      color: #adadad;
+      font-size: 2rem;
+      font-weight: 700; }
+    .profile .profile_image input[type="file"] {
+      padding: 1rem 0.5rem;
+      margin-top: 0.5rem;
+      background: #adadad;
+      font-size: 1.2rem; }
+  .profile .about_you {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0rem; }
+    .profile .about_you label {
+      color: #adadad;
+      font-size: 2rem;
+      font-weight: 700; }
+    .profile .about_you textarea {
+      font-size: 1.2rem; }
+  .profile .social_profiles {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem; }
+    .profile .social_profiles .github, .profile .social_profiles .twitter {
+      display: flex;
+      flex-direction: column; }
+      .profile .social_profiles .github label, .profile .social_profiles .twitter label {
+        color: #adadad;
+        font-size: 2rem;
+        font-weight: 700; }
+      .profile .social_profiles .github input[type="text"], .profile .social_profiles .twitter input[type="text"] {
+        margin-top: 0.5rem;
+        padding: 0.2rem 0.1rem;
+        font-size: 1.2rem; }
+  .profile .save_profile {
+    display: flex;
+    margin-top: 5rem;
+    justify-content: center; }
+    .profile .save_profile button {
+      padding: 1rem 0.5rem;
+      cursor: pointer;
+      width: 15rem;
+      border: 4px solid black;
+      background: #2a3d5b;
+      transition: all 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+      border-radius: 10px;
+      color: #77a0d6;
+      font-size: 1.5rem;
+      font-weight: 700; }
+      .profile .save_profile button:hover {
+        background: #77a0d6;
+        color: black; }
 .single_comment {
   display: flex;
   flex-direction: column; }
@@ -92,7 +181,8 @@ root {
 .root {
   display: flex;
   width: 70%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  justify-content: space-around; }
 
 .sidebar-wrapper {
   width: 25%;
