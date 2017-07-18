@@ -20,7 +20,7 @@ export const decode = function(token){
   }
   const segments = token.split('.')
   if(segments.length !== 3){
-    throw new Error("Invalid token");
+    throw new Error('Invalid token');
   }
   const header = JSON.parse(base64decode(segments[0]));
   const payload = JSON.parse(base64decode(segments[1]));
