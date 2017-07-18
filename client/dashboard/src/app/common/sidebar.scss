@@ -3,21 +3,42 @@
 .sidebar {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
     & ul {
         padding-left: 0;
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        justify-content: space-around;
         & li {
             color: $third-color;
-            margin: 1rem 0;
+            cursor: pointer;
+            margin: 3rem 0;
+            transition: all 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+            padding: 0.5rem 0.25rem;
             font: {
-                size: 1.1rem;
+                size: 2rem;
                 weight: 600;
             }
-            & a {
-                color: $third-color;
+
+            &:first-child {
+                margin-top: 0rem;
             }
 
-            & a:hover {
-                color: $second-color;
+            & .material-icons {
+                font: {
+                    size: inherit;
+                    weight: 700;
+                }
+            }
+
+            & a {
+                color: inherit;
+            }
+
+            &:hover {
+                color: black;
+                background: $third-color;
             }
         }
         & li.you_got_mail {
