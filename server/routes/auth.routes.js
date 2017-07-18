@@ -13,18 +13,18 @@ router.post('/admin/login', (req, res, next)=>{
     if (err) {
       return next(err);
     }else if (!user) {
-      return res.status(404).json(info)
+      return res.status(404).json(info);
 
     }else {
       const userObj = user.toObject();
       delete userObj.password;
       console.log(`User is ${userObj}`);
       let token = encode(userObj, 'inav');
-      return res.status(200).json({token: token, user: userObj})
+      return res.status(200).json({token: token, user: userObj});
     }
 
   })(req, res, next);
-})
+});
 
 router.post('/admin/new',  (req, res, next)=>{
   passport.authenticate('local-signup', (err, user, info)=> {
@@ -37,6 +37,6 @@ router.post('/admin/new',  (req, res, next)=>{
 
     }
   })(req, res, next);
-})
+});
 
 export default router
