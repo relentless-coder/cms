@@ -13,7 +13,9 @@ const sanitizeOpt = {
 }
 
 const app = express();
+
 const router = express.Router();
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads')
@@ -22,6 +24,7 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + '-' + Date.now() + '.png')
   }
 });
+
 const upload = multer({storage: storage});
 // Home page route
 
@@ -42,7 +45,7 @@ router.post('/post', (req, res)=>{
   const payload = decode(token, 'inav');
   console.log(`Payload is ${payload}`);
   req.body.content = sanitizer(req.body.content, sanitizeOpt);
-  req.body.url = req.body.title.replace(/ /g, "-");
+  req.body.url = req.body.title.replace(/ /g, '-');
   Post.create(req.body, (err, data)=>{
     err ? console.log(err) : Post.findOne({url: req.body.url}, (err, foundPost)=>{
       User.findById(payload._id, (err, user)=>{
@@ -51,7 +54,7 @@ router.post('/post', (req, res)=>{
         } else {
           user.posts.push(foundPost._id);
         user.save();
-          res.status(200).json({message: "Post created successfully", post: foundPost})
+          res.status(200).json({message: 'Post created successfully', post: foundPost})
           
         }
         
@@ -88,10 +91,8 @@ router.put('/post/:url', (req, res)=>{
 });
 
 router.post('/post/images/', upload.single('file'), (req, res, next)=>{
-  console.log("Image api hit");
   const location = req.file.path.replace(/uploads/, '');
   res.json({'location': location});
-  console.log(`image saved to location`);
 })
 
 
