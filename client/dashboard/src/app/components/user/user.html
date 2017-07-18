@@ -1,12 +1,33 @@
-<label for="name">Name</label>
-<input type="text" ng-model="ctrl.user.name" value="" id="name">
-<input ngf-select  typ="file" ng-model="ctrl.profile" placeholder="Profile Image"/>
-<label for="profession">Profession</label>
-<input type="text" ng-model="ctrl.user.profession" id="profession">
-<label for="editorContent">About You</label>
-<textarea ui-tinymce="ctrl.tinymceOptions" rows="5" id="editorContent" ng-model="ctrl.user.about" cols="80">{{ctrl.user.about}}</textarea>
-<label for="git">Github Username</label>
-<input type="text" ng-model="ctrl.user.github" id="git">
-<label for="twitter">Twitter Username</label>
-<input type="text" ng-model="ctrl.user.twitter" id="twitter">
-<button ng-click="ctrl.editUser()">Save</button>
+<div class="profile">
+	<div class="name_profession">
+		<div class="name">
+			<label for="name">Name</label>
+			<input type="text" ng-model="ctrl.user.name" value="" id="name">
+		</div>
+		<div class="profession">
+			<label for="profession">Profession</label>
+			<input type="text" ng-model="ctrl.user.profession" id="profession">
+		</div>
+	</div>
+	<div class="profile_image">
+		<label for="profile_image">Profile Image</label>
+		<input ngf-select  type="file" name="profile_image" ng-model="ctrl.profile" placeholder="Profile Image"/>
+	</div>
+	<div class="about_you">
+		<label for="editorContent">About You</label>
+		<textarea ui-tinymce="ctrl.tinymceOptions" rows="10" id="editorContent" ng-model="ctrl.user.about" cols="80">{{ctrl.user.about}}</textarea>
+	</div>
+	<div class="social_profiles">
+		<div class="github">
+			<label for="git">Github Username</label>
+			<input type="text" ng-model="ctrl.user.github" id="git">
+		</div>
+		<div class="twitter">
+			<label for="twitter">Twitter Username</label>
+			<input type="text" ng-model="ctrl.user.twitter" id="twitter">
+		</div>
+	</div>
+	<div class="save_profile">
+		<button ng-click="ctrl.editUser()">Save</button>
+	</div>
+</div>
