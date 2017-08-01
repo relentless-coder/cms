@@ -2,14 +2,17 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import fs from 'fs';
+import nodemailer from 'nodemailer';
 import Post from '../models/post.model';
 import User from '../models/user.model'
-import {decode} from '../config/jwt.token.js';
+import { decode } from '../config/jwt.token.js';
+import {config} from '../config/package-config';
+
 
 const sanitizer = require('sanitize-html');
 const sanitizeOpt = {
-    allowedTags: [ 'img', 'p' ],
-    allowedSchemes: [ 'data', 'http' ]
+  allowedTags: ['img', 'p', 'pre', 'code'],
+  allowedSchemes: ['data', 'http']
 }
 
 const app = express();
@@ -25,11 +28,11 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({storage: storage});
+const upload = multer({ storage: storage });
 // Home page route
 
-router.get('/post', (req, res)=>{
-    Post.find({}, (err, allPosts)=>{
+router.get('/post', (req, res) => {
+  Post.find({}, (err, allPosts) => {
     err ? res.json(null) : res.json({
       posts: allPosts
     });
@@ -37,62 +40,62 @@ router.get('/post', (req, res)=>{
 });
 
 // Post route to submit new posts
-router.post('/post', (req, res)=>{
-  if(!req.headers.authorization){
-    return res.status(401).json({message: 'You are not logged in'})
+router.post('/post', (req, res) => {
+  if (!req.headers.authorization) {
+    res.status(401).json({ message: 'You are not logged in' })
   }
-  const token = req.headers.authorization.split(' ')[1];
-  const payload = decode(token, 'inav');
-  console.log(`Payload is ${payload}`);
+  const payload = decode(req);
   req.body.content = sanitizer(req.body.content, sanitizeOpt);
   req.body.url = req.body.title.replace(/ /g, '-');
-  Post.create(req.body, (err, data)=>{
-    err ? console.log(err) : Post.findOne({url: req.body.url}, (err, foundPost)=>{
-      User.findById(payload._id, (err, user)=>{
-        if(err || !user){
-          res.status(500).json({message: err})
+  Post.create(req.body, (err, data) => {
+    err ? console.log(err) : Post.findOne({ url: req.body.url }, (err, foundPost) => {
+      User.findById(payload._id, (err, user) => {
+        if (err || !user) {
+          res.status(500).json({ message: err })
         } else {
           user.posts.push(foundPost._id);
-        user.save();
-          res.status(200).json({message: 'Post created successfully', post: foundPost})
-          
+          user.save();
+          res.status(200).json({ message: 'Post created successfully', post: foundPost })
+
         }
-        
+
       })
     });
   });
 });
 
 // Get route for showing the full blog post
-router.get('/post/:url', (req, res)=>{
-  Post.findOne({url: req.params.url}).populate({path: 'comments', model: 'Comment', populate: {
-    path: 'comments',
-    model: 'Comment'
-  }}).exec((err, foundPost)=>{
-      console.log(foundPost);
-        err ? res.status(200).json({error: 'message'}) : res.json({post: foundPost});
-    }) 
+router.get('/post/:url', (req, res) => {
+  Post.findOne({ url: req.params.url }).populate({
+    path: 'comments', model: 'Comment', populate: {
+      path: 'comments',
+      model: 'Comment'
+    }
+  }).exec((err, foundPost) => {
+    console.log(foundPost);
+    err ? res.status(200).json({ error: 'message' }) : res.json({ post: foundPost });
+  })
 });
 
-router.put('/post/:url', (req, res)=>{
-  console.log(req.body);
-  if(!req.headers.authorization){
-    return res.status(401).json({message: 'You are not logged in'})
+router.put('/post/:url', (req, res) => {
+  if (!req.headers.authorization) {
+    res.status(401).json({ message: 'You are not logged in' })
   }
-  Post.update({url: req.params.url}, req.body, (err, foundPost)=>{
-    if(err){
-      res.status(422).json({message: err});
+  const payload = decode(req);
+  Post.update({ url: req.params.url }, req.body, (err, foundPost) => {
+    if (err) {
+      res.status(422).json({ message: err });
     }
-    Post.findOne({url: req.params.url}, (err, updatedPost)=>{
+    Post.findOne({ url: req.params.url }, (err, updatedPost) => {
       console.log(updatedPost);
-      res.status(200).json({post: updatedPost});
+      res.status(200).json({ post: updatedPost });
     })
   });
 });
 
-router.post('/post/images/', upload.single('file'), (req, res, next)=>{
+router.post('/post/images/', upload.single('file'), (req, res, next) => {
   const location = req.file.path.replace(/uploads/, '');
-  res.json({'location': location});
+  res.json({ 'location': location });
 })
 
 
