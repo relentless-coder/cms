@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import {passportConfig} from '../config/passport.config';
+import {config} from '../config/package-config';
 import {encode} from '../config/jwt.token.js';
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
@@ -19,7 +20,7 @@ router.post('/admin/login', (req, res, next)=>{
       const userObj = user.toObject();
       delete userObj.password;
       console.log(`User is ${userObj}`);
-      let token = encode(userObj, 'inav');
+      let token = encode(userObj);
       return res.status(200).json({token: token, user: userObj});
     }
 
