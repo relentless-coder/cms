@@ -1,0 +1,12 @@
+<div class="optin_wrapper">
+	<div class="intro_wrapper">
+		<p>{{ctrl.info.message}}</p>
+	</div>
+	<div class="form">
+		<div class="optin_name"><input type="text" class="input_optin_name" ng-model="ctrl.subscriber.name" placeholder="Your Name"></div>
+		<div class="optin_email"><input type="email" class="input_optin_email" ng-model="ctrl.subscriber.email" placeholder="Your Email"></div>
+	</div>
+	<div class="submit_optin_wrapper">
+		<button class="optin_submit" ng-click="ctrl.subscribe()">Submit</button>
+	</div>
+</div>

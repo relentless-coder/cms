@@ -1,0 +1,74 @@
+@import '../../_base.scss';
+
+.optin_wrapper {
+	width: 70%;
+	padding: 1rem;
+	margin: 1rem auto;
+	display: flex;
+	border: none;
+	box-shadow: 2px 2px 2px black, -2px -2px 2px black;
+	border-radius: 2px;
+	flex-direction: column;
+	align-items: center;
+	.intro_wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		p {
+			color: $second_color;
+			font-weight: 900;
+			text-align: center;
+			font-size: 1.5rem;
+		}
+	}
+	.form {
+		display: flex;
+		justify-content: space-around;
+		width: 100%;
+		.optin_name, .optin_email {
+			display: flex;
+			width: 45%;
+			margin-bottom: 2rem;
+			flex-direction: column;
+			input[type="text"].input_optin_name, input[type="email"].input_optin_email {
+				background: $third_color;
+				width: 100%;
+				border: none;
+				padding: 0.5rem 0.25rem;
+				color: black;
+				font: {
+					size: 1.3rem;
+					weight: 600;
+				}
+			}
+		}
+	}
+	.submit_optin_wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.optin_submit {
+			padding: 0.5rem 0.25rem;
+			cursor: pointer;
+			width: 10rem;
+			border: none;
+			margin-bottom: 1rem;
+			box-shadow: inset -3px 3px 3px -2px black, inset 3px -3px 3px -3px black;
+			background: $first_color;
+			transition: all 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			border-radius: 2px;
+			color: $second_color;
+			font: {
+				size: 1.5rem;
+				weight: 700;
+			}
+
+			&:hover {
+				background: $second_color;
+				color: black;
+				box-shadow: -3px 3px 3px -2px black, 3px 3px 3px -2px black, 0px -3px 3px -2px black;
+			}
+
+		}
+	}
+}
