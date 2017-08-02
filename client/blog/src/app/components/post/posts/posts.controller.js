@@ -1,15 +1,17 @@
-function postsController($localStorage){
+function postsController($localStorage, postsFactory) {
   const ctrl = this;
-  ctrl.$onInit = function(){
-    if($localStorage.user){
-      ctrl.posts = $localStorage.user.posts;
-      ctrl.posts.forEach((el)=>{
-        el.comments.forEach((comment)=>{
-          comment.replyVisible = false;
-        })
-      })
-    }
+  ctrl.$onInit = function() {
+
+    postsFactory.getPosts().then((data) => {
+      ctrl.posts = data.data.posts;
+      console.log(ctrl.posts);
+    })
+
+
+
   }
 }
 
-export {postsController}
+export {
+  postsController
+}
