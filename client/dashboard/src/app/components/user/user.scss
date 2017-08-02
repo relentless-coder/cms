@@ -118,3 +118,45 @@
 		}
 	}
 }
+
+.profile_filler {
+	display: flex;
+	flex-direction: column;
+	.name_profession {
+		display: flex;
+		margin: 0.5rem 0;
+		justify-content: space-between;
+		.name_filler, .profession_filler {
+			display: flex;
+			flex-direction: column;
+			background: $third_color;
+		}
+	}
+
+	.about_you_filler {
+		display: flex;
+		flex-direction: column;
+		margin: 3rem 0rem;
+		background: $third_color;
+	}
+
+	.social_profiles {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 1.5rem;
+		.github, .twitter {
+			display: flex;
+			flex-direction: column;
+			background: $third_color;
+		}
+	}
+
+	.save_profile {
+		display: flex;
+		margin-top: 5rem;
+		justify-content: center;
+		button {
+			background: $third_color;
+		}
+	}
+}
