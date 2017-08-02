@@ -6,7 +6,7 @@ import User from '../models/user.model';
 import Subscriber from '../models/subscriber.model';
 import { decode } from '../config/jwt.token.js'
 
-var notifs = [];
+let notifs = [];
 
 const app = express();
 
