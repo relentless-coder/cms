@@ -1,5 +1,5 @@
 node_modules/
-client/dashboard/dist/css
-client/dashboard/dist/js
-client/blog/dist/css
-client/blog/dist/js
+client/dashboard/dist/css/styles.css
+client/dashboard/dist/js/app.js
+client/blog/dist/css/styles.css
+client/blog/dist/js/app.js
