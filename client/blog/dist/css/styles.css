@@ -81,6 +81,63 @@
       margin-left: 5px; }
     .nav-wrapper .nav .nav-item:last-child {
       margin-right: 5px; }
+.optin_wrapper {
+  width: 70%;
+  padding: 1rem;
+  margin: 1rem auto;
+  display: flex;
+  border: none;
+  box-shadow: 2px 2px 2px black, -2px -2px 2px black;
+  border-radius: 2px;
+  flex-direction: column;
+  align-items: center; }
+  .optin_wrapper .intro_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .optin_wrapper .intro_wrapper p {
+      color: #77a0d6;
+      font-weight: 900;
+      text-align: center;
+      font-size: 1.5rem; }
+  .optin_wrapper .form {
+    display: flex;
+    justify-content: space-around;
+    width: 100%; }
+    .optin_wrapper .form .optin_name, .optin_wrapper .form .optin_email {
+      display: flex;
+      width: 45%;
+      margin-bottom: 2rem;
+      flex-direction: column; }
+      .optin_wrapper .form .optin_name input[type="text"].input_optin_name, .optin_wrapper .form .optin_name input[type="email"].input_optin_email, .optin_wrapper .form .optin_email input[type="text"].input_optin_name, .optin_wrapper .form .optin_email input[type="email"].input_optin_email {
+        background: #adadad;
+        width: 100%;
+        border: none;
+        padding: 0.5rem 0.25rem;
+        color: black;
+        font-size: 1.3rem;
+        font-weight: 600; }
+  .optin_wrapper .submit_optin_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .optin_wrapper .submit_optin_wrapper .optin_submit {
+      padding: 0.5rem 0.25rem;
+      cursor: pointer;
+      width: 10rem;
+      border: none;
+      margin-bottom: 1rem;
+      box-shadow: inset -3px 3px 3px -2px black, inset 3px -3px 3px -3px black;
+      background: #2a3d5b;
+      transition: all 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+      border-radius: 2px;
+      color: #77a0d6;
+      font-size: 1.5rem;
+      font-weight: 700; }
+      .optin_wrapper .submit_optin_wrapper .optin_submit:hover {
+        background: #77a0d6;
+        color: black;
+        box-shadow: -3px 3px 3px -2px black, 3px 3px 3px -2px black, 0px -3px 3px -2px black; }
 .home {
   display: flex;
   width: 70%;
@@ -215,8 +272,7 @@
       font-size: 1.32rem;
       color: #adadad;
       padding: 0.5rem 1rem;
-      line-height: 1.73rem;
-      font-weight: 600; }
+      line-height: 1.73rem; }
 .new_comment_wrapper {
   display: flex;
   flex-direction: column;
@@ -278,6 +334,7 @@
     background: #77a0d6;
     color: #2a3d5b;
     font-size: 2rem;
+    cursor: pointer;
     font-weight: bold;
     padding: 0.5rem; }
   .new_comment_wrapper .new_comment {
