@@ -1,7 +1,7 @@
 @import '../../_base.scss';
 
 .optin_wrapper {
-	width: 70%;
+	width: 95%;
 	padding: 1rem;
 	margin: 1rem auto;
 	display: flex;
@@ -69,6 +69,17 @@
 				box-shadow: -3px 3px 3px -2px black, 3px 3px 3px -2px black, 0px -3px 3px -2px black;
 			}
 
+		}
+	}
+}
+
+@media only screen and (max-width: 768px){
+	.optin_wrapper {
+		& .form {
+			flex-direction: column;
+			& .optin_name, & .optin_email {
+				width: 95%;
+			}
 		}
 	}
 }
