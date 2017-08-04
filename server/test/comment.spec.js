@@ -68,21 +68,43 @@ describe('Comment', (done) => {
     })
 
     it('should get us all the comments', (done) => {
-
-        api.get('/admin/comment')
-            .set('authorization', `Bearer ${token}`)
-            .end((err, rec) => {
-                if (err) {
-                    console.log(err);
-                }
-                rec.should.have.status(200);
-                rec.body.data.should.be.an('array');
-                rec.body.data[rec.body.data.length - 1].post.should.have.property('title');
-                rec.body.data[rec.body.data.length - 1].post.should.not.equal(null);
-                done()
+        api.post(`/${url}/comment`)
+            .send({
+                author: {
+                    name: "La La",
+                    email: "lala@lamai.com"
+                },
+                comment: "This is a test comment",
+                post: postId
+            })
+            .end((err, res) => {
+                api.post(`/${url}/comment`)
+                    .send({
+                        author: {
+                            name: "Cha Cha",
+                            email: "chacha@lamai.com"
+                        },
+                        comment: "This is another test comment",
+                        post: postId
+                    })
+                    .end((err, res) => {
+                        api.get('/admin/comment')
+                            .set('authorization', `Bearer ${token}`)
+                            .end((err, rec) => {
+                                if(err){
+                                    console.log(err);
+                                }
+                                rec.should.have.status(200);
+                                rec.body.data.should.be.an('array');
+                                rec.body.data[rec.body.data.length - 1].post.should.have.property('title');
+                                rec.body.data[rec.body.data.length - 1].post.should.not.equal(null);
+                                done()
+                            })
+                    })
             })
     })
 })
+
 function getUrl(title) {
     return title.replace(/ /g, '-')
 }
