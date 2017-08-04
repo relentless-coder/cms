@@ -56,3 +56,56 @@ body {
   color: black;
   font-weight: 500;
 }
+
+@media only screen and (min-width: 1980px) {
+	.root {
+		width: 1200px;
+	}
+}
+
+@media  only screen and (max-width: 1280px) {
+  .root {
+    max-width: 70%;
+  }
+
+  .fixed_nav {
+    left: 10%;
+    right: 10%;
+  }
+}
+
+@media only screen and (max-width: 980px){
+  .root {
+    max-width: 80%;
+  }
+}
+
+@media only screen and (max-width: 800px){
+  .root {
+    max-width: 90%;
+  }
+
+  .fixed_nav {
+    left: 5%;
+    right: 5%;
+  }
+}
+
+@media only screen and (max-width: 480px){
+  .root {
+    max-width: 95%;
+  }
+
+  html {
+    font-size: 12px;
+  }
+
+  .fixed_nav {
+    left: 0;
+    right: 0;
+  }
+
+  .zero_height {
+    margin-top: -30rem;
+  }
+}
