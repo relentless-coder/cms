@@ -212,3 +212,53 @@
         }
     }
 }
+
+@media only screen and (max-width: 980px) {
+    .new_comment_wrapper {
+        & .name-wrapper, & .email-wrapper, & .new_comment, & .comment_post {
+            width: 50%;
+        }
+
+        & .new_comment:focus, & .new_comment:valid {
+            width: 70%;
+        }
+    }
+
+    .comment_wrapper .comment {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .new_comment_wrapper {
+        & .name-wrapper, & .email-wrapper, & .new_comment, & .comment_post {
+            width: 60%;
+        }
+
+        & .new_comment:focus, & .new_comment:valid {
+            width: 80%;
+        }
+    }
+
+    .comment_wrapper .comment {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .new_comment_wrapper {
+        & .name-wrapper, & .email-wrapper, & .new_comment, & .comment_post {
+            width: 60%;
+        }
+
+        & .new_comment:focus, & .new_comment:valid {
+            width: 80%;
+        }
+    }
+
+    .comment_wrapper .comment {
+        width: 80%;
+    }
+}
+
+
