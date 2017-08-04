@@ -2,12 +2,12 @@
 
 .home {
     display: flex;
-    width: 70%;
+    max-width: 100%;
     margin: 0 auto;
     font-size: 1.57rem;
     flex-direction: column;
     color: $third-color;
     line-height: 1.73rem;
-    font-weight: 600;
+    padding: 0rem 0.25rem;
     font-size: 1.32rem;
 }
