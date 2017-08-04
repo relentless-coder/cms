@@ -24,8 +24,7 @@ router.get('/admin/comment', (req, res) => {
 	if (!req.headers.authorization) {
 		res.status(401).json({ message: "You are not logged in" })
 	}
-	const token = req.headers.authorization.split(' ')[1];
-	const payload = decode(token, 'inav');
+	const payload = decode(req);
 	if (payload._id) {
 		Comment.find({}).populate({ path: 'post', model: 'Post', select: 'title' }).exec((err, comments) => {
 			if (err || !comments) {
@@ -59,8 +58,7 @@ router.get('/admin/comment/:id', (req, res) => {
 		res.status(401).json({ message: "You are not logged in" })
 	}
 
-	const token = req.headers.authorization.split(' ')[1];
-	const payload = decode(token, 'inav');
+	const payload = decode(req);
 	if (payload._id) {
 		Comment.findOne({ _id: req.params.id }).populate({ path: 'post', model: 'Post', select: 'title' }).exec((err, foundComment) => {
 			if (err || !foundComment) {
@@ -150,8 +148,7 @@ router.post('/:url/comment', (req, res) => {
 
 router.post('/comment/:commentId', (req, res) => {
 	if (req.headers.authorization) {
-		const token = req.headers.authorization.split(' ')[1];
-		const payload = decode(token, 'inav');
+		const payload = decode(req);
 		User.findById(payload._id, (err, foundUser) => {
 			const author = {
 				name: foundUser.name,
