@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import http from 'http';
+import compression from 'compression';
 import lusca from 'lusca';
 import morgan from 'morgan';
 import event from 'events';
@@ -48,6 +49,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     next();
 });
+app.use(compression())
 app.use(logger);
 app.use(bodyParser.urlencoded({
     extended: true
