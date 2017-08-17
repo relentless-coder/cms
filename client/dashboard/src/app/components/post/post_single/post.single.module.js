@@ -6,14 +6,14 @@ import {postUpdateFactory, postUpdateFactoryFunc} from './post.update.factory';
 
 export const postSingle = angular.module('postSingle', [uiRouter, 'ui.tinymce'])
 .component(postSingleComponent, postSingleOptions)
-.config(function($stateProvider){
+.config(['$stateProvider', function($stateProvider){
   var editState = {
     url: '/admin/edit/:url',
     name: 'edit',
     component: postSingleComponent
   }
   $stateProvider.state(editState);
-})
+}])
 .factory(postSingleFactory, ['$http', postSingleFactoryFunc])
 .factory(postUpdateFactory, ['$http', postUpdateFactoryFunc])
 .name
