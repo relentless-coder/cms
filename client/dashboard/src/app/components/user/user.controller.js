@@ -14,6 +14,7 @@ function userController(Upload, userFactory, $localStorage){
   };
 
   ctrl.editUser = function(){
+    delete ctrl.user._id;
     Upload.upload({
       url: '/admin/user',
       data: {file: ctrl.profile, user: ctrl.user},
