@@ -16,5 +16,5 @@ export const user = angular.module('user', [uiRouter, ngFile, 'ngStorage'])
   }
   $stateProvider.state(profileState)
 }])
-.factory(userFactory, ['$http', userFactoryFunc])
+.factory(userFactory, ['$http', '$localStorage', userFactoryFunc])
 .name
