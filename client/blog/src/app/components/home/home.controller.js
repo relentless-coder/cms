@@ -1,8 +1,9 @@
-function homeController($localStorage){
+function homeController(userFactory, $localStorage){
   const ctrl = this;
-  ctrl.$onInit = function(){
-    
-      ctrl.about = $localStorage.user.about;
+  ctrl.$onInit = function(){  
+      userFactory.getUserInfo().then((data)=>{
+        ctrl.about = data.data.user.about;
+      });
   }
 }
 
