@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const extractTextPlugin = require('extract-text-webpack-plugin');
+const PROD = process.env.NODE_ENV === 'production'
 
 const cmsConfiguration = {
     entry: {
@@ -24,8 +25,7 @@ const cmsConfiguration = {
         filename: 'js/[name].js',
         path: path.join(__dirname, '/client', '/dashboard', '/dist')
     },
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
+    plugins: PROD ? [new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor', minChunks: function (module) {
                 return module.context && module.context.indexOf('node_modules') !== -1;
             }
@@ -35,8 +35,19 @@ const cmsConfiguration = {
             $: 'jquery',
             jQuery: 'jquery'
         }),
-        new webpack.optimize.UglifyJsPlugin()
-    ]
+            new webpack.optimize.UglifyJsPlugin()
+          ] : [
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor', minChunks: function (module) {
+                    return module.context && module.context.indexOf('node_modules') !== -1;
+                }
+            }),
+            new extractTextPlugin("css/styles.css"),
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery'
+            }),
+          ]
 };
 
 const blogConfiguration = {
@@ -59,16 +70,22 @@ const blogConfiguration = {
         filename: 'js/[name].js',
         path: path.join(__dirname, '/client', '/blog', '/dist')
     },
-    plugins: [
+    plugins: PROD ? [new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor', minChunks: function (module) {
+            return module.context && module.context.indexOf('node_modules') !== -1;
+        }
+    }),
+    new extractTextPlugin("css/styles.css"),
+        new webpack.optimize.UglifyJsPlugin()
+      ] : [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor', minChunks: function (module) {
                 return module.context && module.context.indexOf('node_modules') !== -1;
             }
         }),
-        new extractTextPlugin('css/styles.css'),
-        new webpack.optimize.UglifyJsPlugin()        
+        new extractTextPlugin("css/styles.css"),
         
-    ]
+      ]
 };
 
 module.exports = [cmsConfiguration, blogConfiguration];
