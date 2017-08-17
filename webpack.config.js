@@ -34,7 +34,8 @@ const cmsConfiguration = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
-        })
+        }),
+        new webpack.optimize.UglifyJsPlugin()
     ]
 };
 
@@ -64,7 +65,9 @@ const blogConfiguration = {
                 return module.context && module.context.indexOf('node_modules') !== -1;
             }
         }),
-        new extractTextPlugin('css/styles.css')
+        new extractTextPlugin('css/styles.css'),
+        new webpack.optimize.UglifyJsPlugin()        
+        
     ]
 };
 
