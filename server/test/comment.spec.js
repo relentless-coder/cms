@@ -35,6 +35,9 @@ describe('Comment', (done) => {
                             .set('authorization', `Bearer ${token}`)
                             .send(post)
                             .end((err, res) => {
+                                if(err){
+                                    console.log(err)
+                                }
                                 postId = res.body.post._id;
                                 done()
                             })
@@ -62,6 +65,9 @@ describe('Comment', (done) => {
                 post: postId
             })
             .end((err, res) => {
+                if(err){
+                    console.log(err)
+                }
                 res.should.have.status(200);
                 done()
             })

@@ -31,6 +31,9 @@ describe('Post', () => {
                 api.post('/admin/login')
                     .send({ email: 'lespaulayush@mail.com', password: 'pass123' })
                     .end((err, res) => {
+                        if(err){
+                            console.log(err)
+                        }
                         token = res.body.token;
                         done()
                     })
@@ -52,6 +55,9 @@ describe('Post', () => {
             .set('authorization', `Bearer ${token}`)
             .send(post)
             .end((err, res) => {
+                if(err){
+                    console.log(err)
+                }
                 res.should.have.status(200);
                 res.body.should.have.property('post');
                 res.body.post.url.should.equal(url);
@@ -81,6 +87,9 @@ describe('Post', () => {
                                 .set('authorization', `Bearer ${token}`)
                                 .send(post)
                                 .end((err, res) => {
+                                    if(err){
+                                        console.log(err)
+                                    }
                                     done()
                                 })
                         })
@@ -103,6 +112,9 @@ describe('Post', () => {
                     title: "Updated Title"
                 })
                 .end((err, res)=>{
+                    if(err){
+                        console.log(err)
+                    }
                     res.should.have.status(200);
                     res.body.should.have.property('post');
                     res.body.post.title.should.equal('Updated Title');

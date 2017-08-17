@@ -22,7 +22,7 @@ describe('Admin User', () => {
                 password: 'pass123'
             })
             .end((err, res) => {
-                err ? done(err) : res.should.have.status(200);
+                err ? console.log(err) : res.should.have.status(200);
                 res.body.should.not.equal(null);
                 done()
             })
@@ -48,6 +48,9 @@ describe('Admin User', () => {
             api.post('/admin/login')
                 .send({ email: 'lespaulayush@mail.com', password: 'pass123' })
                 .end((err, res) => {
+                    if(err){
+                        console.log(err)
+                    }
                     res.should.have.status(200);
                     res.body.should.have.property('token');
                     res.body.should.have.property('user');
