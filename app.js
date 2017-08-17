@@ -29,13 +29,13 @@ const logger = morgan(':method :url :status - :response-time ms')
 const notifs = [];
 const environment = process.env.NODE_ENV || 'development';
 let url;
+
 if (environment === 'test') {
     url = 'mongodb://localhost/blog-test'
-} else if (environment === 'development') {
+} else if (environment === 'development' || environment === 'production') {
     url = 'mongodb://localhost/blog';
-} else if (environment === 'production') {
-    url = process.env.DATABASE_URL
 }
+
 mongoose.connect(url);
 const sanitizer = require('sanitize-html');
 // Add headers
