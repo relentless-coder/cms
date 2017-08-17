@@ -3,7 +3,6 @@ export const tokenFactoryFunc = function($localStorage){
   return {
     setToken: function(value){
       $localStorage.token = value;
-      console.log($localStorage.token);
     },
     getToken: function(){
       return $localStorage.token;
