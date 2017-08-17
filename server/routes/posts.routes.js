@@ -63,10 +63,16 @@ router.post('/post', (req, res) => {
       Post.findOne({ url: req.body.url })
         .then((foundPost) => {
           User.findById(payload._id)
-            .then((err, user) => {
+            .then((user) => {
               user.posts.push(foundPost._id);
-              user.save();
-              res.status(200).json({ message: 'Post created successfully', post: foundPost })
+              user.save((err, success)=>{
+                if(err){
+                  console.log(err)
+                } else {
+                console.log('post saved')
+                res.status(200).json({ message: 'Post created successfully', post: foundPost })              
+                }
+              });
             })
         });
     }).catch((err) => {
