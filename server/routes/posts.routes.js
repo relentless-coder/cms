@@ -2,11 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import fs from 'fs';
-import nodemailer from 'nodemailer';
+import mailer from 'nodemailer';
 import Post from '../models/post.model';
-import User from '../models/user.model'
+import User from '../models/user.model';
+import Subscriber from '../models/subscriber.model';
 import { decode } from '../config/jwt.token.js';
-import {config} from '../config/package-config';
+import { config } from '../config/package-config';
 
 
 const sanitizer = require('sanitize-html');
@@ -14,6 +15,16 @@ const sanitizeOpt = {
   allowedTags: ['img', 'p', 'pre', 'code'],
   allowedSchemes: ['data', 'http']
 }
+
+let transport = mailer.createTransport({
+  host: config.host,
+  port: config.port,
+  secure: true,
+  auth: {
+    user: config.mailUser,
+    pass: config.mailPass
+  }
+})
 
 const app = express();
 
@@ -47,21 +58,20 @@ router.post('/post', (req, res) => {
   const payload = decode(req);
   req.body.content = sanitizer(req.body.content, sanitizeOpt);
   req.body.url = req.body.title.replace(/ /g, '-');
-  Post.create(req.body, (err, data) => {
-    err ? console.log(err) : Post.findOne({ url: req.body.url }, (err, foundPost) => {
-      User.findById(payload._id, (err, user) => {
-        if (err || !user) {
-          res.status(500).json({ message: err })
-        } else {
-          user.posts.push(foundPost._id);
-          user.save();
-          res.status(200).json({ message: 'Post created successfully', post: foundPost })
-
-        }
-
-      })
+  Post.create(req.body)
+    .then((data) => {
+      Post.findOne({ url: req.body.url })
+        .then((foundPost) => {
+          User.findById(payload._id)
+            .then((err, user) => {
+              user.posts.push(foundPost._id);
+              user.save();
+              res.status(200).json({ message: 'Post created successfully', post: foundPost })
+            })
+        });
+    }).catch((err) => {
+      res.status(500).json({ message: 'Oh, oh. I couldn\'t create your post' })
     });
-  });
 });
 
 // Get route for showing the full blog post
