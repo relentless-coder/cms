@@ -8,9 +8,9 @@ import './root.scss'
 
 angular.module('cms', [sidebar, components, uiRouter, 'ngStorage'])
 .component(rootComponentName, rootComponent)
-.config(($locationProvider, $stateProvider)=>{
+.config(['$locationProvider', '$stateProvider', function($locationProvider, $stateProvider){
   $locationProvider.html5Mode(true);
-})
+}])
 .run([tokenFactory, '$http', function(tokenFactory, $http){
   if(tokenFactory.findToken()){
     const token = tokenFactory.getToken();
