@@ -5,5 +5,5 @@ import './optin.scss'
 
 export const optin = angular.module('optin', [])
 .component(optinComponent, optinComponentOptions)
-.factory(optinFactory, optinFactoryFunction)
+.factory(optinFactory, ['$http', optinFactoryFunction])
 .name
