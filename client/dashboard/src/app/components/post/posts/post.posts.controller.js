@@ -1,9 +1,5 @@
-import {getPosts, getPostsFunc} from './post.posts.factory';
-
 export function allPostsController(getPosts, $state, tokenFactory){
   const ctrl = this;
-  console.log(ctrl);
-  console.log(this);
   ctrl.$onInit = function(){
    if(tokenFactory.findToken()){
      ctrl.isLoggedIn = true;
