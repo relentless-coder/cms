@@ -95,3 +95,47 @@ describe('Admin User', () => {
 
     })
 })
+
+describe('New User', ()=>{
+    let len;
+    beforeEach((done)=>{
+        api.post('/admin/new')
+            .send({
+                email: 'lespaulayush@sham.com',
+                password: 'pass123'
+            })
+            .end((err, res) => {
+                User.find({})
+                    .then((data)=>{
+                        len = data.length;
+                        done()
+                    })
+                
+            })
+    })
+
+    afterEach((done)=>{
+        User.remove({})
+            .then((data)=>{
+                done()
+            }).catch((err)=>{
+                console.log(err)
+            })
+    })
+
+    it('should not create new admin', function(done){
+        api.post('/admin/new')
+            .send({
+                email: 'lespaulayush@cam.com',
+                password: 'pass123'
+            })
+            .end((err, res) => {
+                res.should.have.status(403);
+                User.find({})
+                    .then((data)=>{
+                        data.length.should.equal(len);
+                        done()
+                    })
+            })
+    })
+})
