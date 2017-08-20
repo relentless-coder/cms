@@ -17,7 +17,9 @@ export const encode = function(payload) {
 }
 
 export const decode = function(req) {
-
+  if(!req.headers.authorization){
+    throw new Error('No token found')
+  } else {
   const token = req.headers.authorization.split(' ')[1];
   const segments = token.split('.')
   if (segments.length !== 3) {
@@ -33,6 +35,7 @@ export const decode = function(req) {
   } else {
     throw new Error('Invalid token');
   }
+}
 }
 
 function base64encode(str) {
