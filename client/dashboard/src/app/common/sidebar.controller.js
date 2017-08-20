@@ -33,6 +33,8 @@ function sidebarController(tokenFactory, $state, $rootScope, notifsFactory) {
        $('.notification_count').removeClass('hide');
       }
       console.log(data);
+    }).catch((err)=>{
+      console.log(err)
     })
   }
 
