@@ -4,6 +4,7 @@ import 'ngstorage';
 import {loginFactory, loginFactoryFunc} from './login.factory';
 import {tokenFactory, tokenFactoryFunc} from './token.factory';
 import {loginComponent, loginOptions} from './login.component';
+import './login.scss';
 
 export const login = angular.module('login', [uiRouter, 'ngStorage'])
 .config(['$stateProvider', function($stateProvider){
