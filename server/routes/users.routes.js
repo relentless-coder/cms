@@ -10,8 +10,6 @@ import { config } from '../config/package-config';
 
 let notifs = [];
 
-const app = express();
-
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -144,6 +142,16 @@ router.post('/subscribe', (req, res) => {
 	}).catch((err) => {
 		res.status(500).json({ message: err })
 	})
+})
+
+router.put('/unsubscribe', (req, res)=>{
+	Subscriber.remove({'email': req.body.email})
+				.then((success)=>{
+					res.status(200).json({message: 'Subscriber Removed'})
+				})
+				.catch((err)=>{
+					res.status(500).json({message: err})
+				})
 })
 
 export default router;
