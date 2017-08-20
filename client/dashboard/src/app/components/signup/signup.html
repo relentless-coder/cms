@@ -1,0 +1,5 @@
+<div class="signup_wrapper">
+    <div class="signup" ng-if="!ctrl.isLoggedIn"><input type="email" ng-model="ctrl.user.email" class="email" placeholder="Your email address"><input type="password"
+            ng-model="ctrl.user.password" class="password" placeholder="Your password" ng-disable="!ctrl.user.email">
+        <button ng-click="ctrl.signupUser()" ng-disabled="!ctrl.user.password">Signup</button></div>
+</div>
