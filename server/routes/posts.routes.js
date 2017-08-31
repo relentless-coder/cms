@@ -44,7 +44,7 @@ const upload = multer({ storage: storage });
 
 router.get('/post', (req, res) => {
   Post.find({}, (err, allPosts) => {
-    err ? res.json(null) : res.json({
+    err ? res.status(404).json({message: err}) : res.status(200).json({
       posts: allPosts
     });
   });
@@ -60,21 +60,7 @@ router.post('/post', (req, res) => {
   req.body.url = req.body.title.replace(/ /g, '-');
   Post.create(req.body)
     .then((data) => {
-      Post.findOne({ url: req.body.url })
-        .then((foundPost) => {
-          User.findById(payload._id)
-            .then((user) => {
-              user.posts.push(foundPost._id);
-              user.save((err, success)=>{
-                if(err){
-                  console.log(err)
-                } else {
-                console.log('post saved')
-                res.status(200).json({ message: 'Post created successfully', post: foundPost })              
-                }
-              });
-            })
-        });
+      res.status(200).json({ message: 'Post created successfully'})
     }).catch((err) => {
       res.status(500).json({ message: 'Oh, oh. I couldn\'t create your post' })
     });
