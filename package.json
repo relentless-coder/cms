@@ -1,7 +1,7 @@
 {
   "name": "cms",
   "version": "1.0.0",
-  "description": "An attempt to build my own blog",
+  "description": "CMS+Blog application",
   "main": "app.js",
   "scripts": {
     "build-dev": "webpack",
