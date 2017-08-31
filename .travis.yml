@@ -9,3 +9,15 @@ script:
  - npm start &
  - sleep 25
  - npm test
+deploy:
+ provider: codedeploy
+ access_key_id: "AKIAJFWLUZZ7D5N3RM6Q"
+ secret_access_key: "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"
+ bucket: "S3 Bucket"
+ revision_type: github
+ key: Blog.zip
+ application: Blog
+ deployment_group: Ayush-Bahuguna
+ region: us-east-2
+after_deploy:
+ - ./build.sh
