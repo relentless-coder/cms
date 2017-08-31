@@ -118,11 +118,11 @@ router.post('/contact', (req, res) => {
 		text: req.body.message
 	}
 
-	transporter.sendMail(options, (err, success)=>{
-		if(err){
-			res.status(500).json({message: err})
+	transporter.sendMail(options, (err, success) => {
+		if (err) {
+			res.status(500).json({ message: err })
 		} else {
-			res.status(200).json({message: 'Query submitted'})
+			res.status(200).json({ message: 'Query submitted' })
 		}
 	})
 })
@@ -148,14 +148,14 @@ router.post('/subscribe', (req, res) => {
 	})
 })
 
-router.put('/unsubscribe', (req, res)=>{
-	Subscriber.remove({'email': req.body.email})
-				.then((success)=>{
-					res.status(200).json({message: 'Subscriber Removed'})
-				})
-				.catch((err)=>{
-					res.status(500).json({message: err})
-				})
+router.put('/unsubscribe', (req, res) => {
+	Subscriber.remove({ 'email': req.body.email })
+		.then((success) => {
+			res.status(200).json({ message: 'Subscriber Removed' })
+		})
+		.catch((err) => {
+			res.status(500).json({ message: err })
+		})
 })
 
 export default router;
