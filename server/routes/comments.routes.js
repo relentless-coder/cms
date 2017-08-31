@@ -15,7 +15,7 @@ const router = express.Router();
 	88      88ooooo    88         8P      88    88 88  88  88 88  88  88 88ooooo    88    `8bo.   
 	88  ooo 88~~~~~    88         8b      88    88 88  88  88 88  88  88 88~~~~~    88      `Y8b. 
 	88. ~8~ 88.        88         Y8b  d8 `8b  d8' 88  88  88 88  88  88 88.        88    db   8D 
-	 Y888P   Y88888P    YP          `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP Y88888P    YP    `8888Y' 
+	 Y888P   Y88888P   YP          `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP Y88888P    YP    `8888Y' 
 																								
 								
 */
@@ -48,7 +48,7 @@ router.get('/admin/comment', (req, res) => {
 	88      88ooooo    88         8P      88    88 88  88  88 88  88  88 88ooooo 88V8o 88    88    
 	88  ooo 88~~~~~    88         8b      88    88 88  88  88 88  88  88 88~~~~~ 88 V8o88    88    
 	88. ~8~ 88.        88         Y8b  d8 `8b  d8' 88  88  88 88  88  88 88.     88  V888    88    
-	 Y888P  Y88888P     YP          `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP Y88888P VP   V8P    YP    
+	 Y888P  Y88888P    YP          `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP Y88888P VP   V8P    YP    
 																								
 																																																													
 */
