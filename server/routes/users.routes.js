@@ -29,6 +29,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
+const returnNotifs = function returnNotifs(value) {
+	notifs.push(value)
+}
+
 let transporter = mailer.createTransport({
 	host: config.host,
 	port: config.port,
@@ -155,9 +159,5 @@ router.put('/unsubscribe', (req, res)=>{
 })
 
 export default router;
-
-function returnNotifs(value) {
-	notifs.push(value)
-}
 
 export { returnNotifs }
