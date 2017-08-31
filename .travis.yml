@@ -18,6 +18,6 @@ deploy:
  key: Blog.zip
  application: Blog
  deployment_group: Ayush-Bahuguna
- region: us-east-2
+ region: us-east-2a
 after_deploy:
  - ./build.sh
