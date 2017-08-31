@@ -60,7 +60,7 @@ router.post('/post', (req, res) => {
   req.body.url = req.body.title.replace(/ /g, '-');
   Post.create(req.body)
     .then((data) => {
-      res.status(200).json({ message: 'Post created successfully'})
+      res.status(200).json({ message: 'Post created successfully', post: data})
     }).catch((err) => {
       res.status(500).json({ message: 'Oh, oh. I couldn\'t create your post' })
     });
