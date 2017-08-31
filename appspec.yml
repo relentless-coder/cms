@@ -5,5 +5,5 @@ files:
    destination: /var/www/cms
 hooks:
  AfterInstall:
-  - location: build.sh
+  - location: ./build.sh
     timeout: 100
