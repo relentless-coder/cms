@@ -3,3 +3,7 @@ os: linux
 files:
  - source: /
    destination: /var/www/cms
+hooks:
+ AfterInstall:
+  - location: build.sh
+    timeout: 100
