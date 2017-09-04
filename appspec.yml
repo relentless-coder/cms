@@ -6,4 +6,4 @@ files:
 hooks:
  AfterInstall:
   - location: build.sh
-    timeout: 100
+    timeout: 200
