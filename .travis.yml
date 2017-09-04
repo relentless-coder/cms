@@ -1,21 +1,23 @@
 language: node_js
 node_js:
- - "7.10.0"
+- 7.10.0
 services:
- - mongodb
+- mongodb
 env:
- - PORT=6655 IP="localhost" NODE_ENV="test"
-script: 
- - npm start &
- - sleep 25
- - npm test
+- PORT=6655 IP="localhost" NODE_ENV="test"
+script:
+- npm start &
+- sleep 25
+- npm test
 deploy:
- provider: codedeploy
- access_key_id: " AKIAJQHTTPENBUNI2PEQ"
- secret_access_key: "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"
- revision_type: github
- application: Blog
- deployment_group: Ayush-Bahuguna
- region: us-east-2
+  provider: codedeploy
+  access_key_id:
+    secure: gFOobq7TCe4Jc9pr5q7gUlEuQmJEFs4cAmSSx7nDJf7zfGJSta8aeR4fqvmYW/z5eI0l8evbHKW/tV6h6loagry8WAVMaLFNk3Mc5qUbKAcYjK+LGvIVu9mpngk0OmL+xDbJVn11P1aoYLru1pKkUUkmh7zhMmzbWFlAkKhEkF7Z5A9wASmxrW9fW2EPQD6M+JqitPRMheV6mKzeLNZL+QonEBNLIFJ+xfeQLKzwBGD8rCufcYB9biuXVaouV4wUaqTfCDtZ6rMX2yvEPmR38o5+N5UFhDUoHT6UqVZH8cPiFNaMEzBGqQdTevcG5E58GjJ6x+Ke69QcpXmmjkdf3vhTAKFytcoUskQkmX7u3m+mU1aIX052agmyElIbPNvv3I01TNZaswEOZPDPMV3Uu8Qrip5tskZvVefREqYWa+29YhnOV28KGj45CmUQP57x0vW00JqRfTSpA04cnJpSeXTD4cusmwVr7JyWOhQBSdee5Holv7sQz9gZYGdJjsGjjX08+O6ZIQyvoJyClNgGobKg9RD1DgZnA5Y7XDdMcyisEXH5h4Du+8Eey5JDPzg+Ku1u0m1cx29YEUhLU1pB+lJwgHao43/xFDW25QytZgg97F/e3gtfk7R7CrXDvDYNScsKa3w9tvF9QAa6F4TuzfNxvZIgspCkX9lX7VQSEi4=
+  secret_access_key:
+    secure: z05onmVAmeDN1ltvybOTDuwbNDPbl57ydXsPyS97LpOVfMFLhJoXs5GVO5wL5cupdPsWDBcizecASjDtYneSB2RJ2Y0j+Wp3QMTQly8Pfz5l+T4YNz8phPaROFbL3E/H6UcICWYqLoCyvE8srIcdZPR//8hjWYxkURs13icfWL4H7TkNWVYVkqKTLHQc7GLEPfSnAKGylRBQO/1tA2Zeb595pKTZTiC2dYQUoGfyAIPYHJKhiRFnLBKTDy+liQ0ruQHy8ji+E+xlDUt3bbWfk+qTnCNvJO1emodhuGJg/89E9dXTOBU4xAELIQ9/xZaOoTBNNAigSejGzrEKQ8oy5BOKjKTKCuBRCSvEhD+2CY2uHO1Ek3Xnre/ZASYf2WRuuAbFleYPuL+kvoST1Ko5nOYD/TdgUFT9BNqwr9T7aL3NVke8V7nm8937YwteRlJo6ExHaGKLWaZf3EGQ7A6utAr0rI+rngrEMYqQuhTY5Ppd1zQTuzN4Y0P+RGtNSAu+qG4MpiIHy8hQVaPVwB4Ybi47CLNy7RQRRpD4CERqV+HItJEkABnxIgtJIfA6afkg71yMM5uYA8B5O/na7RY+MAhnYEBtiYKTLfmrNIikiYaceJziz/AKZdnR0o3Z8EtiZoc7hJxXByGJkfRomYyVrtNyZ8Ad6kit9nwmfJsYMXQ=
+  revision_type: github
+  application: Blog
+  deployment_group: Ayush-Bahuguna
+  region: us-east-2
 after_deploy:
- - ./build.sh
+- "./build.sh"
