@@ -11,8 +11,8 @@ script:
  - npm test
 deploy:
  provider: codedeploy
- access_key_id: " AKIAI2RWDASE7EDJGTXQ"
- secret_access_key: "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"
+ access_key_id: " AKIAJQHTTPENBUNI2PEQ"
+ secret_access_key: "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"
  revision_type: github
  application: Blog
  deployment_group: Ayush-Bahuguna
