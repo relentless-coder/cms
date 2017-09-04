@@ -11,11 +11,9 @@ script:
  - npm test
 deploy:
  provider: codedeploy
- access_key_id: "AKIAJFWLUZZ7D5N3RM6Q"
- secret_access_key: "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"
- bucket: "S3 Bucket"
+ access_key_id: " AKIAI2RWDASE7EDJGTXQ"
+ secret_access_key: "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"
  revision_type: github
- key: Blog.zip
  application: Blog
  deployment_group: Ayush-Bahuguna
  region: us-east-2
