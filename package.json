@@ -8,7 +8,7 @@
     "build-prod": "webpack -p",
     "test": "node node_modules/.bin/mocha ./server/test  --require ./server/test/testHelper.js --reporter spec --timeout 10000 --compilers js:babel-core/register",
     "start": "npm run build-dev && babel-node app.js myApp --presets es2015,stage-2 && nodemon --watch cms/client",
-    "serve": "npm run build-prod && babel-node app.js myApp --presets es2015,stage-2 && nodemon --watch cms/client",
+    "serve": "babel-node app.js myApp --presets es2015,stage-2",
     "stop": "pkill --signal SIGNIT myApp"
   },
   "author": "Ayush Bahuguna",
