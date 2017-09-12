@@ -11,9 +11,10 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Comment'
   }],
+  draft: Boolean,
   created: {
     type: Date,
-    default: Date.now
+    default: new Date()
   },
   url: String
 });
