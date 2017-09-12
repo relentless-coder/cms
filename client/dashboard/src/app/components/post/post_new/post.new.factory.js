@@ -2,9 +2,8 @@ export const thisPost = 'thisPost'
 
 export const thisPostFunc = function($http){
   return {
-    createPost: function(value){
-      console.log(value);
-      return $http.post('/post', value)
+    createPost: function(value, query){
+      return $http.post(`/post?draft=${query}`, value)
     }
   }
 }
