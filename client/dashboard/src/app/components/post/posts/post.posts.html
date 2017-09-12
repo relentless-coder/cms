@@ -1,5 +1,16 @@
 <div class="all-posts" ng-if="ctrl.isLoggedIn">
-  <div class="post-item" ng-repeat="post in ctrl.posts">
+  <div class="toggle_buttons">
+    <h2 id="published" toggle-post>Published</h2>
+    <h2 id="draft" toggle-post>Draft</h2>
+  </div>
+  <div class="post-item published" ng-repeat="post in ctrl.posts.published">
+    <h1>Hello Published</h1>
+    <h2 class="post-item-title">{{post.title}}</h2>
+    <p class="post-item-content" ng-bind-html="post.content"></p>
+    <a ui-sref="edit({url: post.url })" class="post-item-more">Read More</a>
+  </div>
+  <div class="post-item draft hide" ng-repeat="post in ctrl.posts.draft">
+    <h1>Hello Draft</h1>
     <h2 class="post-item-title">{{post.title}}</h2>
     <p class="post-item-content" ng-bind-html="post.content"></p>
     <a ui-sref="edit({url: post.url })" class="post-item-more">Read More</a>
