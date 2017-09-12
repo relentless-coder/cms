@@ -1,7 +1,10 @@
-<div class="post-field">
-    <input type="text" ng-model="ctrl.post.title">
-    <textarea name="image" style="visibility: hidden" ui-tinymce="ctrl.tinymceOptions" rows="5" id="editorContent" ng-model="ctrl.post.content" cols="80">{{ctrl.post.content}}</textarea>
+<div class="post_field">
+    <input type="text" class="new_title"  ng-model="ctrl.post.title" placeholder="Post Title">
+    <textarea name="image" style="visibility: hidden" ui-tinymce="ctrl.tinymceOptions" rows="30" id="editorContent" ng-model="ctrl.post.content" cols="80">{{ctrl.post.content}}</textarea>
 
     <p>{{ctrl.post.content}}</p>
-    <button ng-click="ctrl.createPost(ctrl.post)">Submit</button>
+    <div class="new_post_buttons">
+        <button ng-click="ctrl.createPost(ctrl.post, true)">Draft</button>
+        <button ng-click="ctrl.createPost(ctrl.post, false)">Publish</button>
+    </div>
 </div>
