@@ -1,5 +1,5 @@
 <div id="edit-post">
   <input type="text" ng-model="ctrl.post.title">
   <textarea name="image" style="visibility: hidden" ui-tinymce="ctrl.tinymceOptions" rows="5" id="editorContent" ng-model="ctrl.post.content" cols="80">{{ctrl.post.content}}</textarea>
-  <button ng-click="ctrl.updatePost(ctrl.post.url, ctrl.post)">Save</button>
+  <button ng-click="ctrl.updatePost(ctrl.post.url, ctrl.post)">Update</button>
 </div>
