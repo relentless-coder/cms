@@ -8,10 +8,9 @@ export function allPostsController(getPosts, $state, tokenFactory){
       $state.go('login');
     };
     getPosts.allPosts().then((data)=>{
-      ctrl.posts = data.data.posts;
-      console.log(ctrl.posts);
+      ctrl.posts = data.data;
     }, (err)=>{
-      console.log(err.status, err.message);
+      console.log(err.status, err.error.message);
     })
   }
 }
