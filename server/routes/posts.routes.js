@@ -26,8 +26,6 @@ let transport = mailer.createTransport({
   }
 })
 
-const app = express();
-
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -43,11 +41,31 @@ const upload = multer({ storage: storage });
 // Home page route
 
 router.get('/post', (req, res) => {
-  Post.find({}, (err, allPosts) => {
-    err ? res.status(404).json({message: err}) : res.status(200).json({
-      posts: allPosts
-    });
-  });
+  
+  const sortPosts = (posts) =>{
+    let data = {
+      draft: [],
+      published: []
+    };
+    posts.forEach((el)=>{
+      if(el.draft === true){
+        console.log('got him');
+        data.draft.push(el)
+      } else {
+        data.published.push(el)
+      }
+    })
+
+    console.log(data);
+
+    res.status(200).json(data)
+  }
+
+  Post.find({})
+    .then(sortPosts)
+    .catch((err)=>{
+      res.status(500).json({err: {code: 500, message: 'There is something wrong, please try again or contact our support.', devErr: err}})
+    })
 });
 
 // Post route to submit new posts
@@ -58,6 +76,7 @@ router.post('/post', (req, res) => {
   const payload = decode(req);
   req.body.content = sanitizer(req.body.content, sanitizeOpt);
   req.body.url = req.body.title.replace(/ /g, '-');
+  req.body.draft = req.query.draft;
   Post.create(req.body)
     .then((data) => {
       res.status(200).json({ message: 'Post created successfully', post: data})
@@ -84,6 +103,7 @@ router.put('/post/:url', (req, res) => {
     res.status(401).json({ message: 'You are not logged in' })
   }
   const payload = decode(req);
+  req.body.draft = req.query.draft;
   Post.update({ url: req.params.url }, req.body, (err, foundPost) => {
     if (err) {
       res.status(422).json({ message: err });
