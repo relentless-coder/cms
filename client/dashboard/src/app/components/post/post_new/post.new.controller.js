@@ -23,7 +23,7 @@ function postNewController(thisPost, $http){
   file_picker_types: 'image',
   // and here's our custom image picker
   file_picker_callback: function(cb, value, meta) {
-    var input = document.createElement('input');
+    let input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
 
@@ -34,15 +34,15 @@ function postNewController(thisPost, $http){
        once you do not need it anymore.
     */
     input.onchange = function() {
-      var file = this.files[0];
+      let file = this.files[0];
 
       /*
       Note: Now we need to register the blob in TinyMCEs image blob
       registry.
       */
-      var id = 'blobid' + (new Date()).getTime();
-      var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-      var blobInfo = blobCache.create(id, file);
+      let id = 'blobid' + (new Date()).getTime();
+      let blobCache = tinymce.activeEditor.editorUpload.blobCache;
+      let blobInfo = blobCache.create(id, file);
       blobCache.add(blobInfo);
 
       // call the callback and populate the Title field with the file name
@@ -55,9 +55,8 @@ function postNewController(thisPost, $http){
   ctrl.postImage = false;
   ctrl.post = {};
   ctrl.heading = 'Create A New Post';
-  ctrl.createPost = function(value){
-    thisPost.createPost(value).then((data)=>{
-      console.log(`After blog post the response is`, data);
+  ctrl.createPost = function(value, query){
+    thisPost.createPost(value, query).then((data)=>{
     }, (err)=>{
       console.log(err.status);
     })
