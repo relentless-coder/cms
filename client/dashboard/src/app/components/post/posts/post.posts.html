@@ -1,7 +1,7 @@
 <div class="all-posts" ng-if="ctrl.isLoggedIn">
   <div class="toggle_buttons">
-    <h2 id="published" toggle-post>Published</h2>
-    <h2 id="draft" toggle-post>Draft</h2>
+    <h2 id="published" class="toggle_button left active" toggle-post>Published</h2>
+    <h2 id="draft" class="toggle_button right" toggle-post>Draft</h2>
   </div>
   <div class="post-item published" ng-repeat="post in ctrl.posts.published">
     <h1>Hello Published</h1>
