@@ -1,0 +1,36 @@
+@import '../../../_colors';
+
+.all-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: auto;
+  & .toggle_buttons {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin: 1rem auto;
+    & .toggle_button {
+      padding: 1rem;
+      margin: 0;
+      transition: all 0.4s linear;
+      cursor: pointer;
+      font: {
+        size: 1.8rem;
+        weight: 900;
+      }
+
+      &.active {
+        border-bottom: 2px solid black;
+      }
+
+      &.active.left {
+        box-shadow: 5px 5px 5px 1px black;
+      }
+
+      &.active.right {
+        box-shadow: -5px 5px 5px 1px black;
+      }
+    }
+  }
+}
