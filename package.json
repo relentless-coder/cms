@@ -6,9 +6,9 @@
   "scripts": {
     "build-dev": "webpack",
     "build-prod": "webpack -p",
-    "test": "node node_modules/.bin/mocha ./server/test  --require ./server/test/testHelper.js --reporter spec --timeout 10000 --compilers js:babel-core/register",
-    "start": "npm run build-dev && babel-node app.js myApp --presets es2015,stage-2 && nodemon --watch cms/client",
-    "serve": "babel-node app.js myApp --presets es2015,stage-2",
+    "test": "node node_modules/.bin/nyc node_modules/.bin/mocha ./server/test  --require ./server/test/testHelper.js --reporter spec --timeout 10000 --compilers js:babel-core/register",
+    "start": "npm run build-dev && node_modules/.bin/nodemon --watch client/ --watch server/ app.js myApp --exec babel-node --presets es2015,stage-2",
+    "serve": "node server.js myApp",
     "stop": "pkill --signal SIGNIT myApp"
   },
   "author": "Ayush Bahuguna",
@@ -58,6 +58,8 @@
     "mocha": "^3.4.2",
     "morgan": "^1.8.2",
     "node-sass": "^4.5.3",
+    "nodemon": "^1.12.1",
+    "nyc": "^11.2.1",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.1",
     "webpack": "^2.3.1"
