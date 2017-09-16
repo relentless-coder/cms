@@ -8,6 +8,16 @@ body {
   font-family: Helvetica;
 }
 
+a {
+  color: $second_color;
+  font-weight: 700;
+}
+
+a:hover {
+  color: black;
+  background: $third_color;
+}
+
 *{
   box-sizing: border-box;
 }
