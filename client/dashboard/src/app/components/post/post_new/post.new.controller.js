@@ -1,6 +1,6 @@
 import {thisPost, thisPostFunc} from './post.new.factory';
 
-function postNewController(thisPost, $http){
+function postNewController(thisPost, $http, $state){
   'ngInject';
   const ctrl = this;
 
@@ -57,6 +57,7 @@ function postNewController(thisPost, $http){
   ctrl.heading = 'Create A New Post';
   ctrl.createPost = function(value, query){
     thisPost.createPost(value, query).then((data)=>{
+      $state.go('home')
     }, (err)=>{
       console.log(err.status);
     })
