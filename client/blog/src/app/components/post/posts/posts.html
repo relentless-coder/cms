@@ -1,6 +1,6 @@
 <div class="posts">
   <div class="post" ng-repeat="post in ctrl.posts">
-    <a ui-sref="articles.single({url: post.url})">{{post.title}}</a>
+    <a ui-sref="articles.single({url: post.url})" class="home-blog-post-title">{{post.title}}</a>
   </div>
 </div>
 <div ui-view></div>
