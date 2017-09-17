@@ -27,13 +27,9 @@ function userController(Upload, userFactory, $localStorage){
   };
 
   ctrl.$onInit = function init() {
-    if($localStorage.user){
-      ctrl.user = $localStorage.user;
-    } else {
       userFactory.getUser().then((data)=>{
-        console.log(data);
+        ctrl.user = data.data.user;
       })
-    }
   }
 }
 
