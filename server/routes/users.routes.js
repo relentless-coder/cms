@@ -33,6 +33,14 @@ const returnNotifs = function returnNotifs(value) {
 	notifs.push(value)
 }
 
+const returnSubscribers = () => {
+	return Subscriber.find({}).then((data) => {
+		return data
+	}).catch((err) => {
+		throw new Error(`The error at returnSubscribers is ${err}`)
+	})
+}
+
 let transporter = mailer.createTransport({
 	host: config.host,
 	port: config.port,
@@ -157,6 +165,51 @@ router.put('/unsubscribe', (req, res) => {
 			res.status(500).json({ message: err })
 		})
 })
+
+router.post('/news', (req, res) => {
+	let { subj, content } = req.body;
+	
+	const createOptions = (to) => {
+		let options = {
+			from: 'contact@ayushbahuguna.com',
+			to: to,
+			subject: subj,
+			html: content,
+			priority: 'high'
+		}
+
+		return options
+	}
+
+	const setupMail = (data) => {
+		let emails = [];
+		let emailStr = '';
+		data.forEach((el) => {
+			emails.push(el.email)
+		})
+
+		let mails = [];
+		emails.forEach((el) => {
+			mails.push(new Promise((resolve, reject) => { transporter.sendMail(createOptions(el), (err, info) => { if (err) { reject(err) } else if (info) { resolve(info) } }) }))
+		})
+
+		return Promise.all(mails);
+
+	}
+
+	const sendResponse = (data) => {
+		res.status(200).json({ message: 'Newsletter sent succesfully' })
+	}
+
+	const handleError = (err) => {
+		throw new Error(`The error at handleError is ${err}`)
+		res.status(500).json({ message: 'We are facing some issue currently, please try again' })
+	}
+
+	returnSubscribers().then(setupMail).then(sendResponse).catch(handleError)
+
+})
+
 
 export default router;
 
