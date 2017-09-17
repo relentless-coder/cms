@@ -8,12 +8,12 @@ body {
   font-family: Helvetica;
 }
 
-a {
+a:not(.home-blog-post-title) {
   color: $second_color;
   font-weight: 700;
 }
 
-a:hover {
+a:not(.home-blog-post-title):hover {
   color: black;
   background: $third_color;
 }
