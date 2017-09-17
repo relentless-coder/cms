@@ -13,7 +13,7 @@ function sidebarController(tokenFactory, $state, $rootScope, notifsFactory) {
     span.appendChild(text);
     document.getElementById('comments').appendChild(span);
   })
-  ctrl.items = [{ name: 'Home', icon: 'home', status: 'home' }, { name: 'New Post', icon: 'note_add', status: 'new' }, { name: 'Profile', icon: 'person', status: 'profile' }];
+  ctrl.items = [{ name: 'Home', icon: 'home', status: 'home' }, { name: 'New Post', icon: 'note_add', status: 'new' }, { name: 'Profile', icon: 'person', status: 'profile' }, { name: 'Newsletter', icon: 'mail', status: 'newsletter' }];
   ctrl.logout = function () {
     tokenFactory.deleteToken();
     ctrl.isLoggedIn = tokenFactory.findToken();
