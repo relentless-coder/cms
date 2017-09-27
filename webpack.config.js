@@ -6,7 +6,7 @@ const PROD = process.env.NODE_ENV === 'production'
 const cmsConfiguration = {
     entry: {
         app: './client/dashboard/src/app/root.module.js',
-        vendor: 'angular'
+        vendor: ['angular', 'angular-ui-router', 'ng-file-upload', 'angular-sanitize', 'ngstorage']
     },
     module: {
         loaders: [{
@@ -38,9 +38,7 @@ const cmsConfiguration = {
             new webpack.optimize.UglifyJsPlugin()
           ] : [
             new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor', minChunks: function (module) {
-                    return module.context && module.context.indexOf('node_modules') !== -1;
-                }
+                name: 'vendor'
             }),
             new extractTextPlugin("css/styles.css"),
             new webpack.ProvidePlugin({
@@ -53,7 +51,7 @@ const cmsConfiguration = {
 const blogConfiguration = {
     entry: {
         app: './client/blog/src/app/root.module.js',
-        vendor: 'angular'
+        vendor: ['angular', 'angular-ui-router', 'ng-file-upload', 'angular-sanitize', 'ngstorage']        
     },
     module: {
         loaders: [{
