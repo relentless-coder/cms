@@ -1,4 +1,3 @@
-import angular from 'angular';
 import {optinComponent, optinComponentOptions} from './optin.component'
 import {optinFactory, optinFactoryFunction} from './optin.factory'
 import './optin.scss'

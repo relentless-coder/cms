@@ -1,7 +1,8 @@
 <div class="single_post_wrapper">
   <div class="single_post">
     <h1 class="single_post_heading" ng-bind-html="sm.post.title"></h1>
-    <p class="single_post_content" ng-bind-html="sm.post.content"></p>
+    <div class="single_post_content" ng-bind-html="sm.post.content">
+    </div>
   </div>
 </div>
 <optin ng-if="sm.post"></optin>

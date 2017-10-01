@@ -1,4 +1,3 @@
-import angular from 'angular'
 import {home} from './home/home.module'
 import {contact} from './contact/contact.module'
 import {post} from './post/post.module'

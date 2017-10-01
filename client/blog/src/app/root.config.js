@@ -1,4 +1,4 @@
-function appConfig($stateProvider, $locationProvider, hljsServiceProvider) {
+function appConfig($stateProvider, $locationProvider) {
   const homeState = {
     name: 'home',
     url: '/',
@@ -22,10 +22,6 @@ function appConfig($stateProvider, $locationProvider, hljsServiceProvider) {
 
   $stateProvider.state(homeState).state(contactState).state(singlePostState).state(postsState);
   $locationProvider.html5Mode(true);
-  hljsServiceProvider.setOptions({
-    // replace tab with 2 spaces
-    tabReplace: '  '
-  });
 }
 
 export {appConfig}

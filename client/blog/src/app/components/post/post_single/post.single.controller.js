@@ -1,24 +1,22 @@
-function postSingleController(postSingleFactory, $stateParams, $rootScope){
+function postSingleController(postSingleFactory, $stateParams, $rootScope) {
   const ctrl = this;
-  ctrl.$onInit = function(){
+  ctrl.$onInit = function () {
     document.querySelector('.header').classList.add('zero_height')
     document.querySelector('.posts').classList.add('hide');
-    setTimeout(function(){
-        document.querySelector('.nav-wrapper').classList.add('fixed_nav')
+    setTimeout(function () {
+      document.querySelector('.nav-wrapper').classList.add('fixed_nav')
     }, 500)
-    postSingleFactory.getPost($stateParams.url).then((data)=>{
-      console.log(data);
+    postSingleFactory.getPost($stateParams.url).then((data) => {
       ctrl.post = data.data.post;
-      ctrl.post.comments.forEach(el => el.replyVisible = false)
+      ctrl.post.comments.forEach(el => el.replyVisible = false);
     })
   }
 
-  $rootScope.$on('commented', ()=>{
-    postSingleFactory.getPost($stateParams.url).then((data)=>{
-      console.log(data);
+  $rootScope.$on('commented', () => {
+    postSingleFactory.getPost($stateParams.url).then((data) => {
       ctrl.post = data.data.post;
     })
   })
 }
 
-export {postSingleController}
+export { postSingleController }

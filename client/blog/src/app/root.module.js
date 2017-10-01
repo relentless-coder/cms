@@ -1,15 +1,12 @@
-import angular from 'angular';
-import uiRouter from 'angular-ui-router';
 import {header} from './common/header/header.module';
 import {navbar} from './common/navbar/navbar.module';
 import {optin} from './common/optin/optin.module'
 import {components} from './components/components.module'
 import {rootComponentName, rootComponent} from './root.component';
+import {appConfig} from './root.config';
 import './root.scss';
 
-angular.module('blog', [uiRouter, header, navbar, optin, components])
+angular.module('blog', [header, navbar, optin, components, 'ui.router', 'ngFileUpload','ngSanitize', 'ngStorage'])
 .component(rootComponentName, rootComponent)
-.config(['$stateProvider', '$locationProvider', ($stateProvider, $locationProvider)=>{
-  $locationProvider.html5Mode(true);
-}])
+.config(['$stateProvider', '$locationProvider', appConfig])
 .name;

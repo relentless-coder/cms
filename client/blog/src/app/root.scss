@@ -38,6 +38,29 @@ a:not(.home-blog-post-title):hover {
   left: 20%;
 }
 
+pre code .js-func {
+  color: green;
+}
+
+pre code .js-var {
+  color: blue;
+}
+
+pre code .js-method {
+  color: goldenrod;
+}
+
+pre {
+  background: black;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+pre code {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .root {
     display: flex;
     max-width: 60%;
