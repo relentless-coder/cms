@@ -1,4 +1,3 @@
-import angular from 'angular';
 import {postNewController} from './post.new.controller'
 
 export const postNewOptions = {
@@ -7,4 +6,4 @@ export const postNewOptions = {
   controllerAs: 'ctrl'
 }
 
-export const postNewComponent = 'postNew';
+export const postNewComponent = 'postNewComponent';

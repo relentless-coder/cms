@@ -1,7 +1,6 @@
 import {thisPost, thisPostFunc} from './post.new.factory';
 
 function postNewController(thisPost, $http, $state){
-  'ngInject';
   const ctrl = this;
 
   ctrl.tinymceOptions = {

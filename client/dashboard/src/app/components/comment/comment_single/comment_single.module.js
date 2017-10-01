@@ -9,12 +9,4 @@ import './comment_single.scss';
 export const comment_single = angular.module('comment_single', [uiRouter])
 .component(singleCommentComponent, singleCommentComponentOptions)
 .factory(singleCommentFactory, ['$http', singleCommentFactoryFunction])
-.config(['$stateProvider', ($stateProvider)=>{
-	const singleState = {
-		name: 'comments.comment',
-		url: '/:id',
-		component: singleCommentComponent
-	}
-	$stateProvider.state(singleState);
-}])
 .name;

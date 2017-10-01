@@ -7,4 +7,4 @@ export const newsletterOptions = {
   controllerAs: 'ctrl'
 }
 
-export const newsletterComponent = 'newsLeterComponent';
+export const newsletterComponent = 'newsletterComponent';
