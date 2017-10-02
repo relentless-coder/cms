@@ -5,9 +5,14 @@ function highlightDirective(hljsService, $window) {
       scope.$watch(attrs.singlePostContent, function (content) {
         if (content) {
           element.html(content);
-          console.log(element.find('pre')[0]);
+          let codeBlocks = element.find('code');
+          console.log(codeBlocks);
           let service = $window.hljs || hljsService;
-          service.highlightBlock(element.find('code')[0]);        
+          for(let key in codeBlocks){
+            if(codeBlocks[key]){
+              service.highlightBlock(codeBlocks[key]);              
+            }
+          }
         }else {
           element.html('');
         }
