@@ -9,6 +9,7 @@ function postSingleController(postSingleFactory, $stateParams, $rootScope) {
     postSingleFactory.getPost($stateParams.url).then((data) => {
       ctrl.post = data.data.post;
       ctrl.post.comments.forEach(el => el.replyVisible = false);
+      ctrl.content = ctrl.post.content;
     })
   }
 
