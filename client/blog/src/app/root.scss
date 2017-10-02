@@ -18,6 +18,10 @@ a:not(.home-blog-post-title):hover {
   background: $third_color;
 }
 
+.social-wrapper > a:hover {
+  background: transparent;
+}
+
 *{
   box-sizing: border-box;
 }
