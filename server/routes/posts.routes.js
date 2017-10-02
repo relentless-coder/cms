@@ -61,7 +61,7 @@ router.get('/post', (req, res) => {
     res.status(200).json(data)
   }
 
-  Post.find({})
+  Post.find({}).sort({'created': -1})
     .then(sortPosts)
     .catch((err)=>{
       res.status(500).json({err: {code: 500, message: 'There is something wrong, please try again or contact our support.', devErr: err}})
