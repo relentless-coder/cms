@@ -4,13 +4,9 @@
     <h2 id="draft" class="toggle_button right" toggle-post>Draft</h2>
   </div>
   <div class="post-item published" ng-repeat="post in ctrl.posts.published">
-    <h2 class="post-item-title">{{post.title}}</h2>
-    <p class="post-item-content" ng-bind-html="post.content"></p>
-    <a ui-sref="edit({url: post.url })" class="post-item-more">Read More</a>
+    <h2 class="post-item-title" ui-sref="edit({url: post.url })">{{post.title}}</h2>
   </div>
   <div class="post-item draft hide" ng-repeat="post in ctrl.posts.draft">
-    <h2 class="post-item-title">{{post.title}}</h2>
-    <p class="post-item-content" ng-bind-html="post.content"></p>
-    <a ui-sref="edit({url: post.url })" class="post-item-more">Read More</a>
+    <h2 class="post-item-title" ui-sref="edit({url: post.url })">{{post.title}}</h2>
   </div>
 </div>
