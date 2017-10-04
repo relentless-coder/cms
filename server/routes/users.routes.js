@@ -190,10 +190,10 @@ router.post('/news', (req, res) => {
 
 		let mails = [];
 		emails.forEach((el) => {
-			mails.push(new Promise((resolve, reject) => { transporter.sendMail(createOptions(el), (err, info) => { if (err) { reject(err) } else if (info) { resolve(info) } }) }))
+			 transporter.sendMail(createOptions(el), (err, info) => { if (err) { console.log(err) } else if (info) { return true } }) 
 		})
 
-		return Promise.all(mails);
+		return true;
 
 	}
 
