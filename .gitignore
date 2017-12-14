@@ -1,3 +1,4 @@
 node_modules/
 client/dashboard/dist/
 client/blog/dist/
+start.sh
