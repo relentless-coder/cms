@@ -25,7 +25,7 @@ router.post('/admin/login', (req, res, next) => {
     } else {
       const userObj = user.toObject();
       delete userObj.password;
-      console.log(`User is ${userObj}`);
+      delete userObj.email;
       let token = encode(userObj);
       return res.status(200).json({
         token: token,
