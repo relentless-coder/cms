@@ -16,6 +16,11 @@ const postSchema = new Schema({
     type: Date,
     default: new Date()
   },
+  meta: {
+    keywords: Array,
+    description: String,
+    author: {type: String, default: 'Ayush Bahuguna | Full Stack Javascript Developer'}
+  },
   url: String
 });
 export default mongoose.model('Post', postSchema);
