@@ -41,25 +41,6 @@ const returnSubscribers = () => {
 	})
 }
 
-let transporter = mailer.createTransport({
-	host: config.host,
-	port: config.port,
-	secure: true, // secure:true for port 465, secure:false for port 587
-	auth: {
-		user: config.mailUser,
-		pass: config.mailPass
-	}
-});
-
-transporter.verify(function (error, success) {
-	if (error) {
-		console.log(error);
-	} else {
-		console.log('Server is ready to take our messages');
-	}
-});
-
-
 router.get('/admin/user', (req, res) => {
 	if (!req.headers.authorization) {
 		res.status(401).json({ message: 'You are not logged in' })
@@ -68,7 +49,7 @@ router.get('/admin/user', (req, res) => {
 	const payload = decode(req);
 
 	if (payload._id) {
-		User.findById(payload._id)
+		User.findById(payload._id, '-password -salt')
 			.populate({ path: 'posts', model: 'Post' })
 			.exec((err, user) => {
 				err ? console.log(err) : res.status(200).json({ user: user })
