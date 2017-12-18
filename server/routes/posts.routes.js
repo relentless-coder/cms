@@ -8,23 +8,13 @@ import User from '../models/user.model';
 import Subscriber from '../models/subscriber.model';
 import { decode } from '../config/jwt.token.js';
 import { config } from '../config/package-config';
-
+import { transport } from '../config/mailer.config';
 
 const sanitizer = require('sanitize-html');
 const sanitizeOpt = {
   allowedTags: ['img', 'p', 'pre', 'code'],
   allowedSchemes: ['data', 'http']
 }
-
-let transport = mailer.createTransport({
-  host: config.host,
-  port: config.port,
-  secure: true,
-  auth: {
-    user: config.mailUser,
-    pass: config.mailPass
-  }
-})
 
 const router = express.Router();
 
