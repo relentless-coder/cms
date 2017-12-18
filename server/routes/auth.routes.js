@@ -23,13 +23,10 @@ router.post('/admin/login', (req, res, next) => {
       return res.status(404).json(info);
 
     } else {
-      const userObj = user.toObject();
-      delete userObj.password;
-      delete userObj.email;
-      let token = encode(userObj);
+      let payload = {_id: user._id}
+      let token = encode(payload);
       return res.status(200).json({
-        token: token,
-        user: userObj
+        token: token
       });
     }
 
