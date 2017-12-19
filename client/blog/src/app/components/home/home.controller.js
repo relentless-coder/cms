@@ -1,4 +1,4 @@
-function homeController(userFactory, $localStorage){
+function homeController(userFactory, $localStorage, $rootScope){
   const ctrl = this;
   ctrl.$onInit = function(){  
       userFactory.getUserInfo().then((data)=>{

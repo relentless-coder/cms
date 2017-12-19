@@ -1,15 +1,13 @@
 <div class="new_comment_wrapper">
   <h2 class="new_comment_header">Leave a comment</h2>
-  <div class="name-wrapper">
-    <input type="text" id="name" class="new_name" ng-model="cm.comment.author.name" required>
-    <label for="name">Name</label>
+  <div class="comment_form_wrapper">
+    <div class="name_email_wrapper">
+      <input type="text" id="name" class="new_name" ng-model="cm.comment.author.name" required placeholder="Your name">
+      <input type="text" id="email" class="new_email" ng-model="cm.comment.author.email" required placeholder="Your email">
+    </div>
+    <textarea name="" id="comment" class="new_comment" cols="10" rows="5" ng-model="cm.comment.comment" required placeholder="Your comment"></textarea>
+    <button ng-click="cm.postComment()" class="comment_post">Submit</button>
   </div>
-  <div class="email-wrapper">
-    <input type="text" id="email" class="new_email" ng-model="cm.comment.author.email" required>
-    <label for="email">Email</label>
-  </div>
-  <textarea name="" id="comment" class="new_comment" cols="10" rows="5" ng-model="cm.comment.comment" required placeholder="Your comment"></textarea>
-  <button ng-click="cm.postComment()" class="comment_post">Submit</button>
 </div>
 
 <div class="comment_wrapper">
@@ -26,12 +24,12 @@
     <button show-reply collapsed="comment.replyVisible" class="s_reply" ng-if="!comment.replyVisible">Reply</button>
     <div class="new_comment_wrapper" ng-show="comment.replyVisible">
       <div class="name-wrapper reply">
-      <input type="text" id="reply_name" class="new_name" ng-model="cm.reply.author.name" required>
-      <label for="reply_name">Name</label>
+        <input type="text" id="reply_name" class="new_name" ng-model="cm.reply.author.name" required>
+        <label for="reply_name">Name</label>
       </div>
       <div class="email-wrapper reply">
-      <input type="text" id="reply_email" class="new_email" ng-model="cm.reply.author.email" required>
-      <label for="reply_email">Email</label>
+        <input type="text" id="reply_email" class="new_email" ng-model="cm.reply.author.email" required>
+        <label for="reply_email">Email</label>
       </div>
       <textarea name="" id="comment" cols="10" rows="5" class="new_comment reply" ng-model="cm.reply.comment" required></textarea>
       <div class="reply_buttons_wrapper">
