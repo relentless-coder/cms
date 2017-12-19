@@ -1,13 +1,16 @@
 @import '../../_base.scss';
 
 .optin_wrapper {
-	width: 95%;
+	width: 65%;
 	padding: 1rem;
 	margin: 1rem auto;
 	display: flex;
 	border: none;
-	box-shadow: 2px 2px 2px black, -2px -2px 2px black;
+	margin-top: -70px;
+	position: relative;	
+	box-shadow: 2px 2px 2px $third-color, -2px -2px 2px $third-color;
 	border-radius: 2px;
+	background: $first-color;
 	flex-direction: column;
 	align-items: center;
 	.intro_wrapper {
@@ -16,9 +19,8 @@
 		align-items: center;
 		p {
 			color: $second_color;
-			font-weight: 900;
 			text-align: center;
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 		}
 	}
 	.form {
@@ -31,14 +33,13 @@
 			margin-bottom: 2rem;
 			flex-direction: column;
 			input[type="text"].input_optin_name, input[type="email"].input_optin_email {
-				background: $third_color;
+				background: $fifth-color;
 				width: 100%;
 				border: none;
-				padding: 0.5rem 0.25rem;
+				padding: 1rem 0.5rem;
 				color: black;
 				font: {
 					size: 1.3rem;
-					weight: 600;
 				}
 			}
 		}
@@ -53,20 +54,19 @@
 			width: 10rem;
 			border: none;
 			margin-bottom: 1rem;
-			box-shadow: inset -3px 3px 3px -2px black, inset 3px -3px 3px -3px black;
-			background: $first_color;
+			background: $third-color;
 			transition: all 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 			border-radius: 2px;
-			color: $second_color;
+			color: $second-color;
 			font: {
 				size: 1.5rem;
 				weight: 700;
 			}
 
 			&:hover {
-				background: $second_color;
+				background: $sixth-color;
 				color: black;
-				box-shadow: -3px 3px 3px -2px black, 3px 3px 3px -2px black, 0px -3px 3px -2px black;
+				box-shadow: -3px 3px 3px -2px $third-color, 3px 3px 3px -2px $third-color, 0px -3px 3px -2px $third-color;
 			}
 
 		}
