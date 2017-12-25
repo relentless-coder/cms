@@ -4,8 +4,8 @@ export const commentFactoryFunc = function($http){
     postComment: function(url, value){
       return $http.post(`/${url}/comment`, value)
     },
-    reply: function(url, id, value){
-      return $http.post(`/${url}/comment/${id}`, value)
+    reply: function(id, value){
+      return $http.post(`/comment/${id}`, value)
     }
   }
 }
