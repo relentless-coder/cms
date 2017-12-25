@@ -10,31 +10,31 @@
   </div>
 </div>
 
-<div class="comment_wrapper">
-  <h2 class="comment_header">Comments on {{cm.post.title}}</h2>
+<div class="comment_wrapper" ng-if="cm.post.comments.length > 0">
+  <h2 class="comment_header">Comments</h2>
   <div class="comment" ng-repeat="comment in cm.post.comments">
-    <h3 class="comment_name">{{comment.author.name}}</h3>
-    <a href="" ng-href="mailto:{{comment.author.email}}" class="comment_email">{{comment.author.email}}</a>
-    <p ng-bind-html="comment.comment" class="comment_content"></p>
+    <div class="parent_comment_wrapper">
+      <h3 class="comment_name">{{comment.author.name}}</h3>
+      <a href="" ng-href="mailto:{{comment.author.email}}" class="comment_email">{{comment.author.email}}</a>
+      <p ng-bind-html="comment.comment" class="comment_content"></p>
+    </div>
     <div ng-repeat="ab in comment.comments" class="reply_comment">
       <h3 class="comment_name">{{ab.author.name}}</h3>
-      <a href="" class="comment_email" ng-hre="mailto:{{ab.author.email}}"></a>
+      <a href="" class="comment_email" ng-hre="mailto:{{ab.author.email}}">{{ab.author.email}}</a>
       <p ng-bind-html="ab.comment" class="comment_content"></p>
     </div>
-    <button show-reply collapsed="comment.replyVisible" class="s_reply" ng-if="!comment.replyVisible">Reply</button>
-    <div class="new_comment_wrapper" ng-show="comment.replyVisible">
-      <div class="name-wrapper reply">
-        <input type="text" id="reply_name" class="new_name" ng-model="cm.reply.author.name" required>
-        <label for="reply_name">Name</label>
-      </div>
-      <div class="email-wrapper reply">
-        <input type="text" id="reply_email" class="new_email" ng-model="cm.reply.author.email" required>
-        <label for="reply_email">Email</label>
-      </div>
-      <textarea name="" id="comment" cols="10" rows="5" class="new_comment reply" ng-model="cm.reply.comment" required></textarea>
-      <div class="reply_buttons_wrapper">
-        <button ng-click="cm.re(comment._id)" class="submit_reply">Submit</button>
-        <button hide-reply collapsed="comment.replyVisible" class="cancel_reply">Cancel</button>
+    <button show-reply scroll-to-reply collapsed="comment.replyVisible" class="s_reply" ng-if="!comment.replyVisible">Reply</button>
+    <div class="reply_comment_wrapper" ng-show="comment.replyVisible">
+      <div class="comment_form_wrapper reply">
+        <div class="name_email_wrapper reply">
+          <input type="text" id="reply_name" class="new_name" placeholder="Your name" ng-model="cm.reply.author.name" required>
+          <input type="text" id="reply_email" class="new_email" placeholder="Your email" ng-model="cm.reply.author.email" required>
+        </div>
+        <textarea name="" id="comment" cols="10" rows="5" class="new_comment reply" ng-model="cm.reply.comment" required></textarea>
+        <div class="reply_buttons_wrapper">
+          <button ng-click="cm.re(comment._id)" class="submit_reply">Submit</button>
+          <button hide-reply collapsed="comment.replyVisible" class="cancel_reply">Cancel</button>
+        </div>
       </div>
 
     </div>
