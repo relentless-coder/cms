@@ -1,10 +1,9 @@
-function postsController($localStorage, postsFactory) {
+function postsController($localStorage, postsFactory, $rootScope) {
   const ctrl = this;
   ctrl.$onInit = function() {
 
     postsFactory.getPosts().then((data) => {
-      ctrl.posts = data.data.published;
-      console.log(ctrl.posts);
+      $rootScope.posts = data.data.published;
     })
 
   }
