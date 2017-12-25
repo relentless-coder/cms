@@ -10,6 +10,7 @@ function postSingleController(postSingleFactory, $stateParams, $rootScope) {
       ctrl.post = data.data.post;
       ctrl.post.comments.forEach(el => el.replyVisible = false);
       ctrl.content = ctrl.post.content;
+      $rootScope.meta = ctrl.post.meta;
     })
   }
 
