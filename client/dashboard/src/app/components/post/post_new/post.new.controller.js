@@ -26,12 +26,6 @@ function postNewController(thisPost, $http, $state){
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
 
-    /* Note: In modern browsers input[type="file"] is functional without
-       even adding it to the DOM, but that might not be the case in some older
-       or quirky browsers like IE, so you might want to add it to the DOM
-       just in case, and visually hide it. And do not forget do remove it
-       once you do not need it anymore.
-    */
     input.onchange = function() {
       let file = this.files[0];
 
@@ -53,10 +47,13 @@ function postNewController(thisPost, $http, $state){
 }
   ctrl.postImage = false;
   ctrl.post = {};
+  ctrl.meta = {};
   ctrl.heading = 'Create A New Post';
-  ctrl.createPost = function(value, query){
-    thisPost.createPost(value, query).then((data)=>{
-      $state.go('home')
+  ctrl.createPost = function(query){
+    ctrl.meta.keywords = ctrl.meta.keywords.split(',');
+    ctrl.post.meta = ctrl.meta;
+    thisPost.createPost(ctrl.post, query).then((data)=>{
+      $state.go('home');
     }, (err)=>{
       console.log(err.status);
     })
