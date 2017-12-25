@@ -1,5 +1,4 @@
 @import "../../../_base";
-
 .new_comment_wrapper {
     display: flex;
     flex-direction: column;
@@ -12,8 +11,8 @@
     }
     & .comment_form_wrapper {
         background: $first-color;
-        box-shadow: 2px 2px 2px $third-color, -2px -2px 2px $third-color;
-        border-radius: 2px;
+        box-shadow: $box-shadow;
+        border-radius: 3px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -23,18 +22,19 @@
         & .name_email_wrapper {
             width: 80%;
             margin: 1.5rem 0rem;
-            & .new_name, & .new_email {
-            border: none;
-            color: black;
-            width: 100%;
-            margin: 0.7rem 0;
-            padding: 1rem 0.5rem;
-            background: $fifth-color;
-    
-            font-size: 1.32rem;
+            display: flex;
+            justify-content: space-between;
+            & .new_name,
+            & .new_email {
+                border: none;
+                color: black;
+                width: 45%;
+                margin: 0.7rem 0;
+                padding: 1rem 0.5rem;
+                background: $fifth-color;
+                font-size: 1.32rem;
             }
         }
-
         & .new_comment {
             padding: 0.5rem;
             resize: none;
@@ -49,7 +49,6 @@
             }
         }
     }
-
     & .comment_post {
         width: 30%;
         border: none;
@@ -58,7 +57,7 @@
         cursor: pointer;
         margin-bottom: 1.5rem;
         padding: 0.5rem;
-        
+        box-shadow: $box-shadow;
         background: $third-color;
         transition: all 1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
         border-radius: 2px;
@@ -67,47 +66,11 @@
             size: 1.5rem;
             weight: 900;
         }
-
         &:hover {
             background: $sixth-color;
-            color: black;
-            box-shadow: -3px 3px 3px -2px $third-color, 3px 3px 3px -2px $third-color, 0px -3px 3px -2px $third-color;
         }
     }
-
-
-    & .name-wrapper.reply, & .email-wrapper.reply, & .new_comment.reply {
-      width: 100%;
-    }
-
-    & .new_comment.reply:focus, & .new_comment.reply:valid  {
-      width: 140%;
-    }
-    & .reply_buttons_wrapper {
-      display: flex;
-      width: 60%;
-      justify-content: space-between;
-      & .submit_reply {
-        border: none;
-        border-radius: 5px;
-        background: $second-color;
-        color: $first-color;
-        font-size: 1rem;
-        font-weight: bold;
-        padding: 0.1rem 0.5rem;
-      }
-
-      & .cancel_reply {
-        border: none;
-        border-radius: 5px;
-        background: $third-color;
-        color: black;
-        font-size: 1rem;
-        font-weight: bold;
-        padding: 0.1rem 0.5rem;
-      }
-    }
-  }
+}
 
 .comment_wrapper {
     display: flex;
@@ -120,67 +83,162 @@
     }
     & .comment {
         display: flex;
-        width: 60%;
+        width: 45%;
         margin: 1rem 0;
         flex-direction: column;
         align-items: flex-start;
-
-        & .comment_name {
-          font: {
-            size: 1.48rem;
-            color: black;
-          }
-          margin-bottom: 0.1rem;
+        & .parent_comment_wrapper {
+            display: flex;
+            margin: 0.5rem 0;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 5px;
+            box-shadow: $box-shadow;
+            align-items: flex-start;
+            & .comment_name {
+                font: {
+                    size: 1.48rem;
+                    color: black;
+                }
+                margin: 0;
+            }
+            & .comment_email {
+                font: {
+                    size: 1rem;
+                }
+                color: $second-color;
+            }
+            & .comment_content {
+                font: {
+                    size: 1.28rem;
+                    weight: 600;
+                }
+                color: $third-color;
+            }
         }
-        & .comment_email {
-          font: {
-            size: 1rem;
-          }
-          color: $second-color;
+        & .reply_comment_wrapper {
+            width: 100%;
+            max-width: 100%;
+            margin-top: 1.5rem;
+            & .comment_form_wrapper.reply {
+                background: $first-color;
+                box-shadow: $box-shadow;
+                border-radius: 3px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                max-width: 100%;
+                justify-content: center;
+                & .name_email_wrapper.reply {
+                    width: 90%;
+                    margin: 1.5rem 0rem;
+                    display: flex;
+                    justify-content: space-between;
+                    & .new_name,
+                    & .new_email {
+                        border: none;
+                        color: $second-color;
+                        width: 45%;
+                        margin: 0.7rem 0;
+                        padding: 1rem 0.5rem;
+                        background: $fifth-color;
+                        font-size: 1.32rem;
+                    }
+                }
+                & .new_comment.reply {
+                    padding: 0.5rem;
+                    resize: none;
+                    width: 90%;
+                    color: $second-color;
+                    border: 2px solid $third-color;
+                    margin-bottom: 1.5rem;
+                    background: $fifth-color;
+                    font: {
+                        size: 1.32rem;
+                        family: inherit;
+                    }
+                }
+                & .reply_buttons_wrapper {
+                    width: 45%;
+                    display: flex;
+                    margin-bottom: 1.5rem;
+                    justify-content: space-between;
+                    & .submit_reply, & .cancel_reply {
+                        border: none;
+                        border-radius: 2px;
+                        width: 40%;
+                        background: $third-color;
+                        color: $second-color;
+                        font-size: 1.3rem;
+                        font-weight: bold;
+                        padding: 0.5rem;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
-        & .comment_content {
-          font: {
-            size: 1.28rem;
-            weight: 600;
-          }
-          color: $third-color;
-        }
-
         & .reply_comment {
-          border-left: 4px solid $second-color;
-          padding-left: 1rem;
-          align-self: flex-start;
-          margin: 0.5rem 0;
-          display: flex;
-          flex-direction: column;
-          & .comment_name {
-            margin-top: 0;
-            padding-top: 0;
-          }
+            display: flex;
+            margin: 0.5rem 0;
+            border-left: 0.6rem solid $third-color;
+            flex-direction: column;
+            justify-content: center;
+            background: $first-color;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 5px;
+            box-shadow: $box-shadow;
+            align-items: flex-start;
+            & .comment_name {
+                font: {
+                    size: 1.48rem;
+                    color: black;
+                }
+                margin: 0;
+            }
+            & .comment_email {
+                font: {
+                    size: 1rem;
+                }
+                color: $second-color;
+            }
+            & .comment_content {
+                font: {
+                    size: 1.28rem;
+                    weight: 600;
+                }
+                color: $third-color;
+            }
         }
         & .s_reply {
-          border: none;
-          border-radius: 5px;
-          background: $third-color;
-          color: black;
-          font-size: 1rem;
-          font-weight: bold;
-          padding: 0.1rem 0.5rem;
+            border: none;
+            border-radius: 5px;
+            background: $third-color;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 0.1rem 0.5rem;
         }
     }
 }
 
 @media only screen and (max-width: 980px) {
     .new_comment_wrapper {
-        & .name-wrapper, & .email-wrapper, & .new_comment, & .comment_post {
+        & .name-wrapper,
+        & .email-wrapper,
+        & .new_comment,
+        & .comment_post {
             width: 50%;
         }
-
-        & .new_comment:focus, & .new_comment:valid {
+        & .new_comment:focus,
+        & .new_comment:valid {
             width: 70%;
         }
     }
-
     .comment_wrapper .comment {
         width: 70%;
     }
@@ -188,15 +246,17 @@
 
 @media only screen and (max-width: 768px) {
     .new_comment_wrapper {
-        & .name-wrapper, & .email-wrapper, & .new_comment, & .comment_post {
+        & .name-wrapper,
+        & .email-wrapper,
+        & .new_comment,
+        & .comment_post {
             width: 60%;
         }
-
-        & .new_comment:focus, & .new_comment:valid {
+        & .new_comment:focus,
+        & .new_comment:valid {
             width: 80%;
         }
     }
-
     .comment_wrapper .comment {
         width: 80%;
     }
@@ -204,18 +264,18 @@
 
 @media only screen and (max-width: 360px) {
     .new_comment_wrapper {
-        & .name-wrapper, & .email-wrapper, & .new_comment, & .comment_post {
+        & .name-wrapper,
+        & .email-wrapper,
+        & .new_comment,
+        & .comment_post {
             width: 60%;
         }
-
-        & .new_comment:focus, & .new_comment:valid {
+        & .new_comment:focus,
+        & .new_comment:valid {
             width: 80%;
         }
     }
-
     .comment_wrapper .comment {
         width: 80%;
     }
 }
-
-
