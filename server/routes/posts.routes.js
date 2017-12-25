@@ -31,30 +31,36 @@ const upload = multer({ storage: storage });
 // Home page route
 
 router.get('/post', (req, res) => {
-  
-  const sortPosts = (posts) =>{
+
+  const getPosts = () => {
+    let query = {};
+    if (req.query && req.query.search) {
+      query = {
+        $text: { $search: req.query.search }
+      }
+    }
+    return Post.find(query).sort({ created: -1 })
+  }
+
+  const sortPosts = (posts) => {
     let data = {
       draft: [],
       published: []
     };
-    posts.forEach((el)=>{
-      if(el.draft === true){
-        console.log('got him');
+    posts.forEach((el) => {
+      if (el.draft === true) {
         data.draft.push(el)
       } else {
         data.published.push(el)
       }
     })
 
-    console.log(data);
-
     res.status(200).json(data)
   }
 
-  Post.find({}).sort({'created': -1})
-    .then(sortPosts)
-    .catch((err)=>{
-      res.status(500).json({err: {code: 500, message: 'There is something wrong, please try again or contact our support.', devErr: err}})
+  getPosts().then(sortPosts)
+    .catch((err) => {
+      res.status(500).json({ err: { code: 500, message: 'There is something wrong, please try again or contact our support.', devErr: err } })
     })
 });
 
@@ -69,7 +75,7 @@ router.post('/post', (req, res) => {
   req.body.draft = req.query.draft;
   Post.create(req.body)
     .then((data) => {
-      res.status(200).json({ message: 'Post created successfully', post: data})
+      res.status(200).json({ message: 'Post created successfully', post: data })
     }).catch((err) => {
       res.status(500).json({ message: 'Oh, oh. I couldn\'t create your post' })
     });
