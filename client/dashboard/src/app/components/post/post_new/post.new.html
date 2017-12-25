@@ -1,8 +1,13 @@
 <div class="post_field">
     <input type="text" class="new_title"  ng-model="ctrl.post.title" placeholder="Post Title">
     <textarea name="image" style="visibility: hidden" ui-tinymce="ctrl.tinymceOptions" rows="30" id="editorContent" ng-model="ctrl.post.content" cols="80">{{ctrl.post.content}}</textarea>
+    <div class="seo_block">
+        <input type="text" class="author_name" placeholder="Author" ng-model="ctrl.meta.author">
+        <textarea name="" id="" cols="30" rows="5" placeholder="Write a short description" ng-model="ctrl.meta.description"></textarea>
+        <input type="text" class="keywords" placeholder="Enter keywords separated by a comma" ng-model="ctrl.meta.keywords">
+    </div>
     <div class="new_post_buttons">
-        <button ng-click="ctrl.createPost(ctrl.post, true)">Draft</button>
-        <button ng-click="ctrl.createPost(ctrl.post, false)">Publish</button>
+        <button ng-click="ctrl.createPost(true)">Draft</button>
+        <button ng-click="ctrl.createPost(false)">Publish</button>
     </div>
 </div>
