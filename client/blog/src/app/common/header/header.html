@@ -1,8 +1,9 @@
 <div class="header">
-  <div class="profile-wrapper"><img alt="" ng-src="{{ctrl.user.profileImage}}"></div>
+  <div class="profile-wrapper" ng-style="{'background': 'url(' + ctrl.user.profileImage + ')', 'background-size': 'cover', 'background-repeat': 'no-repeat'}"><img alt="" ng-src="{{ctrl.user.profileImage}}"></div>
   <div class="name-wrapper">
     <h2 class="name">{{ctrl.user.name}}</h2>
     <h2 class="job">{{ctrl.user.profession}}</h2>
+    <p class="description">{{$root.meta.description}}</p>
   </div>
   <div class="social-wrapper">
     <a ng-href="https://www.github.com/{{ctrl.user.github}}">
