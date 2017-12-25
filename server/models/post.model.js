@@ -23,4 +23,7 @@ const postSchema = new Schema({
   },
   url: String
 });
+
+postSchema.index({title: 'text', category: 'text', description: 'text'}, {name: 'Post Search Index', weights: {title: 15, category: 10, description: 5}})
+
 export default mongoose.model('Post', postSchema);
