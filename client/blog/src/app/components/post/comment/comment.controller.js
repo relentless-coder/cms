@@ -20,8 +20,8 @@ function commentController($stateParams, commentFactory, $rootScope){
     })
   }
 
-  ctrl.re = function(value){
-    commentFactory.reply($stateParams.url,  value, ctrl.reply).then((data)=>{
+  ctrl.re = function(id){
+    commentFactory.reply(id, ctrl.reply).then((data)=>{
       ctrl.reply = {};
       $rootScope.$emit('commented');
     })
