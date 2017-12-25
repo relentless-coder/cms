@@ -53,7 +53,6 @@ describe('Admin User', () => {
                     }
                     res.should.have.status(200);
                     res.body.should.have.property('token');
-                    res.body.should.have.property('user');
                     done()
                 })
         })
