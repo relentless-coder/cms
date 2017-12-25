@@ -81,6 +81,10 @@ const blogConfiguration = {
                 return module.context && module.context.indexOf('node_modules') !== -1;
             }
         }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        }),
         new extractTextPlugin("css/styles.css"),
         
       ]
