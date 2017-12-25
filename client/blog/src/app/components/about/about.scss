@@ -1,0 +1,19 @@
+@import "../../_base";
+
+.home {
+    display: flex;
+    width: 75%;
+    max-width: 100%;
+    margin: 0 auto;    
+    margin-top: 4rem;
+    background: $first-color;
+    box-shadow: $box-shadow;
+    padding: 1rem;
+    max-width: 100%;
+    font-size: 1.57rem;
+    flex-direction: column;
+    color: $second-color;
+    line-height: 1.6rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.32rem;
+}
