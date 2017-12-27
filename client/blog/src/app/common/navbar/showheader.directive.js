@@ -5,14 +5,14 @@ function showHeader() {
             element.on('click', function () {
                 if (!$('.nav-wrapper.fixed_nav').length) {
                     $('html, body').animate({
-                        scrollTop: $('.view-section').offset().top - 60
+                        scrollTop: $('.home').offset().top - 64
                     }, 1100);
                     $('.profile-wrapper, .name-wrapper, .social-wrapper').animate({
                         opacity: 0
                     }, 1200, () => {
                         $('.header').addClass('hide');
                         $('html, body').scrollTop(0);
-                        $('.nav-wrapper').addClass('.fixed_nav')
+                        $('.nav-wrapper').addClass('fixed_nav')
                     })
                 }
             })

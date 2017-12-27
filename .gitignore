@@ -3,3 +3,4 @@ client/dashboard/dist/
 client/blog/dist/
 uploads/
 start.sh
+.nyc_output/

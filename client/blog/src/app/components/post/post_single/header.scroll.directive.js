@@ -3,7 +3,7 @@ function scrollHide($window, $document) {
         restrict: 'A',
         link: function (scope, element, attrs) {
             $document.on('scroll', ()=>{
-                if($window.scrollY > 900){
+                if($window.scrollY > 500){
                     angular.element(element).addClass('hide')
                     angular.element(document.querySelector('.single_post_content_wrapper')).addClass('no_z_index')
                 } else {

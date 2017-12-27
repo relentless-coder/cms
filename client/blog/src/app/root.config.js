@@ -27,7 +27,7 @@ function appConfig($stateProvider, $locationProvider) {
     component: 'postsComponent'
   }
 
-  $stateProvider.state(aboutState).state(contactState).state(singlePostState).state(postsState);
+  $stateProvider.state(homeState).state(aboutState).state(contactState).state(singlePostState).state(postsState);
   $locationProvider.html5Mode(true);
 }
 
