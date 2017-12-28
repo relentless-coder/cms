@@ -3,7 +3,7 @@ function headerController(userFactory, $localStorage, $state){
 
   ctrl.$onInit = function(){
        console.log("hello world");
-       if($state.current.name === 'home' || $state.current.name === 'about'){
+       if($state.current.name === '' || $state.current.name === 'about'){
          $('.header').removeClass('hide')
        }
        userFactory.getUserInfo().then((data)=>{
