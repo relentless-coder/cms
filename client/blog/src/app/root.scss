@@ -1,6 +1,7 @@
 @import "./_base";
 
 html {
+  height: auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,12 +10,12 @@ html {
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: black;
+  min-height: 100vh;
+  height: auto;
   font-family: 'Roboto', sans-serif;
-  overflow: hidden;
 }
 
 .social-wrapper > a:hover {
@@ -58,9 +59,13 @@ body {
     flex-direction: column;
 }
 
-.view-section {
+.no_flow {
+  overflow-y: hidden;
+}
+
+.so_flow {
   overflow-y: scroll;
-  height: 100vh;  
+  height: 100vh;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
