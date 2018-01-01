@@ -4,5 +4,5 @@ import './navbar.scss';
 
 export const navbar = angular.module('navbar', [])
 .component(navComponent, navComponentOptions)
-.directive('showHeader', showHeader)
+.directive('showHeader', ['$timeout', showHeader])
 .name;
