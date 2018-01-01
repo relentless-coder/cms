@@ -1,7 +1,6 @@
 @import "../../../_base";
 
 .single_post_wrapper {
-    margin-top: 100px;
     & .single_post {
         display: flex;
         max-width: 100%;
@@ -10,11 +9,13 @@
         & .heading_wrapper {
             width: 100%;
             background: $second-color;
-            position: fixed;
             z-index: 0;
+            position: fixed;
             padding: 0 10px;
-            height: 500px;
-            top: 60px;
+            height: 540px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             & .single_post_heading {
                 color: $first-color;
                 font-size: 4rem;
@@ -50,7 +51,7 @@
 
                         & a {
                           color: $second-color;
-                          text-decoration: underline;  
+                          text-decoration: underline;
                         }
                 }
         }
