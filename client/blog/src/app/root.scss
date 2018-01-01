@@ -60,6 +60,14 @@ body {
     flex-direction: column;
 }
 
+.view-section {
+  opacity: 0;
+}
+
+.opaque {
+  opacity: 1;
+}
+
 .no_flow {
   overflow-y: hidden;
 }
