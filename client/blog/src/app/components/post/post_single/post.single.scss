@@ -57,3 +57,27 @@
         }
     }
 }
+
+@media only screen and (max-width: 960px){
+	.single_post_wrapper {
+    & .single_post {
+      & .single_post_content_wrapper {
+        & .single_post_content {
+          width: 85%;
+        }
+      }
+    }
+	}
+}
+
+@media only screen and (max-width: 960px){
+	.single_post_wrapper {
+    & .single_post {
+      & .single_post_content_wrapper {
+        & .single_post_content {
+          width: 95%;          
+        }
+      }
+    }
+	}
+}

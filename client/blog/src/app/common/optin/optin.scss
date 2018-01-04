@@ -7,7 +7,7 @@
 	display: flex;
 	border: none;
 	margin-top: -70px;
-	position: relative;	
+	position: relative;
 	box-shadow: $box-shadow;
 	border-radius: 3px;
 	background: $first-color;
@@ -72,13 +72,14 @@
 	}
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 960px){
 	.optin_wrapper {
-		& .form {
-			flex-direction: column;
-			& .optin_name, & .optin_email {
-				width: 95%;
-			}
-		}
+		width: 75%;
 	}
+}
+
+@media only screen and (max-width: 720px) {
+  .optin_wrapper {
+    width: 85%;
+  }
 }
