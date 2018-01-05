@@ -70,12 +70,24 @@
 	}
 }
 
-@media only screen and (max-width: 960px){
+@media only screen and (max-width: 720px){
 	.single_post_wrapper {
     & .single_post {
       & .single_post_content_wrapper {
         & .single_post_content {
-          width: 95%;          
+          width: 95%;
+        }
+      }
+    }
+	}
+}
+
+@media only screen and (max-width: 480px){
+	.single_post_wrapper {
+    & .single_post {
+      & .single_post_content_wrapper {
+        & .single_post_content {
+          width: 100%;
         }
       }
     }

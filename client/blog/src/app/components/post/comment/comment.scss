@@ -243,3 +243,12 @@
         width: 65%;
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .new_comment_wrapper {
+        width: 100%;
+    }
+    .comment_wrapper .comment {
+        width: 95%;
+    }
+}

@@ -63,3 +63,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 720px) {
+  .nav-wrapper {
+    .nav {
+      width: 65%;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .nav-wrapper {
+    .nav {
+      width: 75%;
+    }
+  }
+}

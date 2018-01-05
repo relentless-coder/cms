@@ -10,17 +10,17 @@
     justify-content: space-around;
     .profile-wrapper {
         width: 150px;
-        opacity: 1;                
+        opacity: 1;
         height: 150px;
         img {
             max-width: 100%;
-            visibility: hidden;            
+            visibility: hidden;
         }
     }
     .name-wrapper {
         display: flex;
         flex-direction: column;
-        opacity: 1;        
+        opacity: 1;
         color: #000;
         align-items: center;
         justify-content: center;
@@ -29,7 +29,7 @@
             margin-top: 0;
             color: $first-color;
         }
-        & .job {            
+        & .job {
             font-size: 1.5rem;
             font-weight: 900;
             color: $first-color;
@@ -48,7 +48,7 @@
     }
     .social-wrapper {
         display: flex;
-        opacity: 1;                
+        opacity: 1;
         align-items: center;
         justify-content: space-between;
         & a {
@@ -73,8 +73,22 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 720px) {
     .header {
-        flex-direction: column;
+        & .name-wrapper {
+          & .description {
+            width: 55%;
+          }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .header {
+        & .name-wrapper {
+          & .description {
+            width: 75%;
+          }
+        }
     }
 }
