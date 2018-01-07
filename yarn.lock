@@ -3316,12 +3316,6 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-lusca@^1.4.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/lusca/-/lusca-1.5.1.tgz#fef49b21054400cb7f5fef1d77d4bd25bfc3d131"
-  dependencies:
-    tsscmp "^1.0.5"
-
 macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
@@ -5439,10 +5433,6 @@ tryit@^1.0.1:
 tryor@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/tryor/-/tryor-0.1.2.tgz#8145e4ca7caff40acde3ccf946e8b8bb75b4172b"
-
-tsscmp@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/tsscmp/-/tsscmp-1.0.5.tgz#7dc4a33af71581ab4337da91d85ca5427ebd9a97"
 
 tty-browserify@0.0.0:
   version "0.0.0"
