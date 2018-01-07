@@ -2,7 +2,8 @@ function showHeader($timeout) {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
-            element.on('click', function () {
+            element.on('click', function (e) {
+                e.preventDefault();
                 if (!$('.nav-wrapper.fixed_nav').length) {
                     $('html,body').animate({
                         scrollTop: $('.nav-wrapper').offset().top
