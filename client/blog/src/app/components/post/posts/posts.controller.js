@@ -1,4 +1,4 @@
-function postsController($localStorage, postsFactory, $rootScope, $state) {
+function postsController($localStorage, postsFactory, $rootScope) {
   const ctrl = this;
   ctrl.$onInit = function() {
     if(!$('.view-section').hasClass('opaque')){
