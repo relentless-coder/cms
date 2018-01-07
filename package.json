@@ -17,7 +17,7 @@
     "angular": "^1.6.3",
     "angular-sanitize": "^1.6.3",
     "angular-ui-router": "1.0",
-    "angular-ui-tinymce": "^0.0.18",
+    "angular-ui-tinymce": "^0.0.19",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.17.0",
     "compression": "^1.7.0",

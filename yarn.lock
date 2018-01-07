@@ -108,9 +108,9 @@ angular-ui-router@1.0:
   dependencies:
     "@uirouter/core" "5.0.3"
 
-angular-ui-tinymce@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/angular-ui-tinymce/-/angular-ui-tinymce-0.0.18.tgz#98b3b13d7a489d8dbaf01ef13799dc6457f0f690"
+angular-ui-tinymce@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/angular-ui-tinymce/-/angular-ui-tinymce-0.0.19.tgz#6a613675a1265e415c9c21944053ac9bab9578e9"
 
 angular@^1.6.3:
   version "1.6.6"
