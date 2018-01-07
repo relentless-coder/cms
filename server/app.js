@@ -12,17 +12,17 @@ import LocalStrategy from 'passport-local';
 import multer from 'multer';
 import fs from 'fs';
 import passportLocalMongoose from 'passport-local-mongoose';
-import postRoutes from './server/routes/posts.routes';
-import commentRoutes from './server/routes/comments.routes';
-import authRoutes from './server/routes/auth.routes';
-import userRoutes from './server/routes/users.routes';
-import seedDb from './seed';
+import postRoutes from './routes/posts.routes';
+import commentRoutes from './routes/comments.routes';
+import authRoutes from './routes/auth.routes';
+import userRoutes from './routes/users.routes';
+import seedDb from '../seed';
 import {
     passportConfig
-} from './server/config/passport.config';
+} from './config/passport.config';
 import {
     socketFunction
-} from './server/config/socket.io.config';
+} from './config/socket.io.config';
 import path from 'path';
 const logger = morgan(':method :url :status - :response-time ms')
 const notifs = [];
@@ -55,7 +55,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(session({
-    secret: "I don't know really",
+    secret: 'Blog session',
     resave: false,
     saveUninitialized: false
 }))
@@ -64,20 +64,20 @@ app.use(postRoutes);
 app.use(commentRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
-app.use(express.static(path.join(__dirname, '/client')))
-app.use(express.static(path.join(__dirname, 'node_modules')))
-app.use(express.static(path.join(__dirname, 'uploads')))
+app.use(express.static(path.join(process.env.PWD, '/client')))
+app.use(express.static(path.join(process.env.PWD, 'node_modules')))
+app.use(express.static(path.join(process.env.PWD, 'uploads')))
 
 const adminRoutes = ['/admin/', '/admin/:var', '/admin/edit/:var'];
 adminRoutes.forEach(function(url) {
     app.get(url, (req, res) => {
-        res.sendFile(path.join(__dirname, '/client', '/dashboard', '/index.html'));
+        res.sendFile(path.join(process.env.PWD, '/client', '/dashboard', '/index.html'));
     })
 })
 const blogRoutes = ['/', '/articles', '/articles/:url', '/contact', '/about'];
 blogRoutes.forEach(el => {
     app.get(el, (req, res) => {
-        res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
+        res.sendFile(path.join(process.env.PWD, '/client', '/blog', '/blog.html'));
     })
 })
 
