@@ -2,7 +2,6 @@ function headerController(userFactory, $localStorage, $state){
   const ctrl = this;
 
   ctrl.$onInit = function(){
-       console.log("hello world");
        if($state.current.name === '' || $state.current.name === 'about'){
          $('.header').removeClass('hide')
        }
