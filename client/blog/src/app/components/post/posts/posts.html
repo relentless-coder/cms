@@ -1,5 +1,5 @@
 <div class="posts">
-  <div class="post" ng-repeat="post in $root.posts">
+  <div class="post" ng-cloak="" ng-repeat="post in $root.posts">
     <a ui-sref="articles.single({url: post.url})" class="home-blog-post-title">{{post.title}}</a>
   </div>
 </div>
