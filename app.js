@@ -74,7 +74,7 @@ adminRoutes.forEach(function(url) {
         res.sendFile(path.join(__dirname, '/client', '/dashboard', '/index.html'));
     })
 })
-const blogRoutes = ['/', '/articles', '/articles/:url', '/contact'];
+const blogRoutes = ['/', '/articles', '/articles/:url', '/contact', '/about'];
 blogRoutes.forEach(el => {
     app.get(el, (req, res) => {
         res.sendFile(path.join(__dirname, '/client', '/blog', '/blog.html'));
