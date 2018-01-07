@@ -5,6 +5,7 @@ function postSingleController(postSingleFactory, postUpdateFactory, $stateParams
     ctrl.$onInit = function(){
       postSingleFactory.getSinglePost($stateParams.url).then((data)=>{
         ctrl.post = data.data.post;
+        ctrl.post.meta.keywords = ctr.post.meta.keywords.join(',')
       }, (err)=>{
         console.log(err);
     })
@@ -58,9 +59,10 @@ function postSingleController(postSingleFactory, postUpdateFactory, $stateParams
   }
 }
 
-  ctrl.updatePost = function(url, value){
-    postUpdateFactory.updatePost(url, value).then((data)=>{
-      postSingleFactory.getSinglePost(url).then((data)=>{
+  ctrl.updatePost = function(){
+    ctrl.post.meta.keywords = ctrl.post.meta.keywords.split(',')
+    postUpdateFactory.updatePost(ctrl.post.url, ctrl.post).then((data)=>{
+      postSingleFactory.getSinglePost(ctrl.post.url).then((data)=>{
         ctrl.post = data.data.post[0];
       })
     }, (err)=>{
