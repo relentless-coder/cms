@@ -6,7 +6,7 @@ const PROD = process.env.NODE_ENV === 'production'
 const cmsConfiguration = {
     entry: {
         app: './client/dashboard/src/app/root.module.js',
-        vendor: ['angular', 'angular-ui-router', 'ng-file-upload', 'angular-sanitize', 'ngstorage']
+        vendor: ['angular', 'angular-ui-router', 'ng-file-upload', 'angular-sanitize', 'ngstorage', 'angular-ui-tinymce']
     },
     module: {
         loaders: [{
@@ -51,7 +51,7 @@ const cmsConfiguration = {
 const blogConfiguration = {
     entry: {
         app: './client/blog/src/app/root.module.js',
-        vendor: ['angular', 'angular-ui-router', 'ng-file-upload', 'angular-sanitize', 'ngstorage']        
+        vendor: ['angular', 'angular-ui-router', 'ng-file-upload', 'angular-sanitize', 'ngstorage']
     },
     module: {
         loaders: [{
@@ -86,7 +86,7 @@ const blogConfiguration = {
             jQuery: 'jquery'
         }),
         new extractTextPlugin("css/styles.css"),
-        
+
       ]
 };
 
