@@ -3,7 +3,6 @@ function showHeader($timeout) {
         restrict: 'A',
         link: function (scope, element, attrs) {
             element.on('click', function (e) {
-                e.preventDefault();
                 if (!$('.nav-wrapper.fixed_nav').length) {
                     $('html,body').animate({
                         scrollTop: $('.nav-wrapper').offset().top
@@ -16,6 +15,7 @@ function showHeader($timeout) {
                 } else {
                   $('.view-section').addClass('opaque');
                 }
+                return false
             })
         }
     }
