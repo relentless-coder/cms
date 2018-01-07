@@ -5,9 +5,11 @@
   flex-direction: column;
   align-items: center;
   margin-top: 6rem;
+  padding: 1rem;
 
   & .new_comment_header {
       font-size: 2rem;
+      padding: 1rem;
   }
   & .contact_form {
       display: flex;
@@ -77,5 +79,29 @@
               family: inherit;
           }
       }
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .contact_wrapper {
+        & .contact_form {
+            width: 65%;
+        }
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .contact_wrapper {
+        & .contact_form {
+            width: 80%;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .contact_wrapper {
+        & .contact_form {
+            width: 95%;
+        }
     }
 }

@@ -38,7 +38,7 @@
                         color: $second-color;
                         line-height: 1.73rem;
                         background: $first-color;
-                        padding: 5px 20px;
+                        padding: 1rem;
                         position: relative;
                         border-radius: 3px;
                         box-shadow: $box-shadow;
@@ -61,7 +61,7 @@
 @media only screen and (max-width: 960px){
 	.single_post_wrapper {
     & .single_post {
-      & .single_post_content_wrapper {
+      & .heading_wrapper {
         & .single_post_content {
           width: 85%;
         }
@@ -85,10 +85,14 @@
 @media only screen and (max-width: 480px){
 	.single_post_wrapper {
     & .single_post {
-      & .single_post_content_wrapper {
-        & .single_post_content {
-          width: 100%;
+      & .heading_wrapper {
+        height: 500px;
+        & .single_post_heading {
+          font-size: 3rem;
         }
+      }
+      & .single_post_content_wrapper {
+        margin-top: 650px;
       }
     }
 	}
