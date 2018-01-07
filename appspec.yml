@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
  - source: /
-   destination: /var/www/cms
+   destination: /home/ubuntu/cms
 hooks:
  AfterInstall:
   - location: build.sh
