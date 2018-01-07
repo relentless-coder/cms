@@ -1,3 +1,3 @@
-cd /var/www/cms
+cd /home/ubuntu/cms
 sudo yarn install
-npm run build-prod
+yarn run build-prod
