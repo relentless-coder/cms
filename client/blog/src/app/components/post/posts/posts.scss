@@ -8,9 +8,11 @@
     width: 75%;
     margin: 0 auto;
     margin-top: 6rem;
+    margin-bottom: 2rem;
     background: $first-color;
     box-shadow: $box-shadow;
     border-radius: 5px;
+    padding: 1rem;
     & .post {
         display: flex;
         flex-direction: column;
@@ -20,6 +22,7 @@
             color: $second-color;
             font-size: 1.57rem;
             font-weight: bold;
+            text-decoration: none;
         }
         & h1 {
             color: black;
@@ -36,11 +39,5 @@
 @media only screen and (max-width: 720px) {
   .posts {
     width: 95%;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .posts {
-    width: 100%;
   }
 }
