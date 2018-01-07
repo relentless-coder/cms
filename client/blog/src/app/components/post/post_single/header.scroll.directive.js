@@ -8,7 +8,6 @@ function scrollHide($window, $document) {
                     angular.element(document.querySelector('.single_post_content_wrapper')).addClass('no_z_index')
 
                 } else if ($window.scrollY <= 900 && $(element).hasClass('hide')) {
-
                     angular.element(element).removeClass('hide')
                     angular.element(document.querySelector('.single_post_content_wrapper')).removeClass('no_z_index');
                 }
