@@ -14,7 +14,10 @@ function appConfig($stateProvider, $locationProvider) {
   const singlePostState = {
     name: 'articles.single',
     url: '/:url',
-    component: 'postSingleComponent'
+    component: 'postSingleComponent',
+    onExit: ()=>{
+      $('.posts').removeClass('hide')
+    }
   }
   const postsState = {
     name: 'articles',
