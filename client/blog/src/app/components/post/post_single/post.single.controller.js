@@ -8,6 +8,7 @@ function postSingleController(postSingleFactory, $stateParams, $rootScope) {
       ctrl.content = ctrl.post.content;
       ctrl.post.meta.keywords = ctrl.post.meta.keywords.join(',');
       $rootScope.meta = ctrl.post.meta;
+      $rootScope.meta.title = `${ctrl.post.title} | Ayush Bahuguna`;
     })
   }
 
