@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import http from 'http';
 import compression from 'compression';
-import lusca from 'lusca';
 import morgan from 'morgan';
 import event from 'events';
 import io from 'socket.io';
@@ -68,18 +67,6 @@ app.use(userRoutes);
 app.use(express.static(path.join(__dirname, '/client')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
 app.use(express.static(path.join(__dirname, 'uploads')))
-app.use(lusca({
-    csrf: true,
-    xframe: 'SAMEORIGIN',
-    p3p: 'ABCDEF',
-    hsts: {
-        maxAge: 31536000,
-        includeSubDomains: true,
-        preload: true
-    },
-    xssProtection: true,
-    nosniff: true
-}));
 
 const adminRoutes = ['/admin/', '/admin/:var', '/admin/edit/:var'];
 adminRoutes.forEach(function(url) {
