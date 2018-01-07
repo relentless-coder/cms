@@ -4,12 +4,11 @@ function showHeader($timeout) {
         link: function (scope, element, attrs) {
             element.on('click', function (e) {
                 if (!$('.nav-wrapper.fixed_nav').length) {
-                    $('html,body').animate({
-                        scrollTop: $('.nav-wrapper').offset().top
-                    }, 'slow', ()=>{
+                    $('.header').animate({
+                        opacity: 0
+                    }, 500, ()=>{
                       $('.header').addClass('hide');
                       $('.nav-wrapper').addClass('fixed_nav')
-                      $('html').scrollTop(0);
                       $('.view-section').addClass('opaque');
                     });
                 } else {
